@@ -137,9 +137,9 @@ export default function Home({
         </p>
         <p>
           Entering a BUMPS event includes automatic entry into the overall
-          series standings. Riders accumulate points in up to three races, and
-          those entering more than three races are scored based on their best
-          three results.
+          series standings. Riders accumulate points in up to four races, and
+          those entering more than four races are scored based on their best
+          four results.
         </p>
         <p>
           Each event will continue to be run by an independent organizer, and
@@ -154,13 +154,21 @@ export default function Home({
       >
         <h2>Points System</h2>
         <p>
-          The points scale is set for each race by the slope of the line
-          intersecting the fastest and average finish times for that race; where
-          the fastest rider earns 100 points and the average finish time
-          receives 50 points. Any finish time twice the average less the fastest
-          time, or slower, will receive one point. Scoring Equation: Your points
-          = 100 – 50* [(Your Time – Fastest Time) / ( Average Time – Fastest
-          Time)].
+          The point system for each race is determined by the slope of a line
+          that intersects the fastest and average finish times. The fastest
+          rider earns 100 points, and the average finish time earns 50 points.
+          If a rider finishes with a time that is twice the average time or
+          slower, they will receive one point. To calculate your points, use
+          this equation:
+        </p>
+        <p>
+          Points = 100 - 50 * [(Your Time - Fastest Time) / (Average Time -
+          Fastest Time)].
+        </p>
+        <p>
+          This equation takes into account your finishing time, the fastest
+          time, and the average time to determine the number of points you will
+          receive.
         </p>
         <p className="italic">
           Example: In a race where the fastest time is 1:00 and the average
@@ -177,11 +185,11 @@ export default function Home({
           Each event will utilize its own timing system to determine category
           winners and distribute event-specific awards. The results of each race
           will subsequently be incorporated into the BUMPS scoring system, with
-          the best three race scores counting towards each rider&apos;s total.
+          the best four race scores counting towards each rider&apos;s total.
           Participation in any of the series events automatically qualifies
           racers for the BUMPS series.
         </p>
-        <h3>Categories</h3>
+        <h3>Categories*</h3>
         <p>
           Male: Overal, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
           75-79, 80+
