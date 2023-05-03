@@ -14,6 +14,7 @@ interface Event {
   title: string;
   date: string;
   registration: string;
+  results: string;
   coverPhoto: {
     url: string;
   };
@@ -89,9 +90,15 @@ export default function Home({
               <h3 className="hill-title">{event.title}</h3>
               <p className="hill-date">{format(parseISO(event.date), "PP")}</p>
               <div className="hill-buttons mt-2 md:mt-4 lg:mt-8">
-                <a target="_blank" rel="noopener" href={event.registration}>
-                  Register
-                </a>
+                {event.results ? (
+                  <a target="_blank" rel="noopener" href={event.results}>
+                    Results
+                  </a>
+                ) : (
+                  <a target="_blank" rel="noopener" href={event.registration}>
+                    Register
+                  </a>
+                )}
               </div>
             </div>
           </div>
