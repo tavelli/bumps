@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --brand-main: #f28e08;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,9 +20,63 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    to bottom,
+    transparent,
+    rgb(var(--background-start-rgb))
+  )
+  rgb(var(--background-end-rgb));
+}
+
+h1 {
+  letter-spacing: 15px;
+}
+
+.hill-wrapper {
+  border-bottom:4px solid #1a1718 ;
+}
+
+.hill-wrapper  img {
+  position: absolute;
+  top: 0;
+}
+
+.hill-photo {
+  padding-top: calc(530 / 2000 * 100%);
+}
+
+.hill-buttons,
+.hill-header{
+  color: #fff;
+}
+
+.hill-header {
+  position: absolute;
+  padding-left: 1rem;
+  
+}
+
+.hill-title {
+  font-size: clamp(24px, 6vw, 72px);
+  text-shadow: 1px 1px 3px #444;
+}
+
+.hill-date {
+  font-size: clamp(12px, 3vw, 24px);
+  text-shadow: 1px 1px 3px #444;
+}
+.hill-buttons {
+ 
+}
+.hill-buttons a {
+  
+  display: inline-block;
+  background-color: var(--brand-main);
+  padding: 0.25rem;
+  border: 1px solid #1a1718;
+  border-radius: 0;
+  font-size: 12px;
+  font-size: clamp(10px, 2vw, 16px);
+  text-transform: uppercase;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  border-radius: 5px;
 }
