@@ -17,6 +17,10 @@
   }
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -65,8 +69,7 @@ nav a {
 
 .hill-wrapper {
   border-bottom:4px solid #1a1718;
-  /* border-left:4px solid #1a1718;
-  border-right:4px solid #1a1718; */
+  background: #1a1718;
 }
 
 .hill-wrapper  img {
@@ -98,9 +101,7 @@ nav a {
   font-size: clamp(12px, 3vw, 24px);
   text-shadow: 1px 1px 3px #444;
 }
-.hill-buttons {
- 
-}
+
 .hill-buttons a {
   display: inline-block;
   background-color: var(--brand-main);
