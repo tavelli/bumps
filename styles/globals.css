@@ -31,14 +31,32 @@ h1 {
   letter-spacing: 15px;
 }
 
+.body-text {
+  font-family: monospace;
+}
+
+.body-text p {
+  margin-bottom: 1rem;
+}
+
+.body-text a {
+  color:var(--brand-main)
+}
+
+.body-text h2 {
+  font-weight: bold;
+  font-size: clamp(22px, 3vw, 36px);
+  margin-bottom: 1rem;
+}
+
 .hill-listing> .hill-wrapper:first-child {
   border-top:4px solid #1a1718;
 }
 
 .hill-wrapper {
   border-bottom:4px solid #1a1718;
-  border-left:4px solid #1a1718;
-  border-right:4px solid #1a1718;
+  /* border-left:4px solid #1a1718;
+  border-right:4px solid #1a1718; */
 }
 
 .hill-wrapper  img {
@@ -74,10 +92,9 @@ h1 {
  
 }
 .hill-buttons a {
-  
   display: inline-block;
   background-color: var(--brand-main);
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
   border: 1px solid #1a1718;
   border-radius: 0;
   font-size: 12px;
