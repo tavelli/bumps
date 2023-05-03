@@ -31,6 +31,16 @@ h1 {
   letter-spacing: 15px;
 }
 
+nav {
+  max-width: 700px;
+    margin: 0 auto;
+}
+nav a {
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: var(--brand-main);
+}
+
 .body-text {
   font-family: monospace;
 }
@@ -94,7 +104,7 @@ h1 {
 .hill-buttons a {
   display: inline-block;
   background-color: var(--brand-main);
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.75rem;
   border: 1px solid #1a1718;
   border-radius: 0;
   font-size: 12px;
