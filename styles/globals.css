@@ -31,8 +31,12 @@ h1 {
   letter-spacing: 15px;
 }
 
+.hill-listing:first-child {
+  border-top:4px solid #1a1718;
+}
+
 .hill-wrapper {
-  border-bottom:4px solid #1a1718 ;
+  border-bottom:4px solid #1a1718;
 }
 
 .hill-wrapper  img {
@@ -72,11 +76,11 @@ h1 {
   display: inline-block;
   background-color: var(--brand-main);
   padding: 0.25rem;
-  border: 1px solid #1a1718;
+  border: 2px solid #1a1718;
   border-radius: 0;
   font-size: 12px;
   font-size: clamp(10px, 2vw, 16px);
   text-transform: uppercase;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  border-radius: 5px;
+  
 }
