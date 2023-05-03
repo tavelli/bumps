@@ -102,7 +102,8 @@ nav a {
   text-shadow: 1px 1px 3px #444;
 }
 
-.hill-buttons a {
+.hill-buttons a,
+.hill-buttons .pending {
   display: inline-block;
   background-color: var(--brand-main);
   padding: 0.25rem 0.75rem;
@@ -112,5 +113,8 @@ nav a {
   font-size: clamp(10px, 2vw, 16px);
   text-transform: uppercase;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  
+}
+
+.hill-buttons .pending {
+  background-color: #444;
 }

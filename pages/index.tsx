@@ -104,10 +104,12 @@ export default function Home({
                   <a target="_blank" rel="noopener" href={event.results}>
                     Results
                   </a>
-                ) : (
+                ) : event.registration ? (
                   <a target="_blank" rel="noopener" href={event.registration}>
                     Register
                   </a>
+                ) : (
+                  <span className="pending">Planned</span>
                 )}
               </div>
             </div>
