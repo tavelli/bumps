@@ -31,6 +31,11 @@ body {
   rgb(var(--background-end-rgb));
 }
 
+main {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 h1 {
   letter-spacing: 15px;
 }
@@ -64,11 +69,11 @@ nav a {
 }
 
 .hill-listing> .hill-wrapper:first-child {
-  border-top:4px solid #1a1718;
+  border-top:5px solid #1a1718;
 }
 
 .hill-wrapper {
-  border-bottom:4px solid #1a1718;
+  border-bottom:5px solid #1a1718;
   background: #1a1718;
 }
 
