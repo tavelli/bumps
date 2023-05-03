@@ -2,10 +2,11 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/image";
 
 import { Righteous } from "next/font/google";
-import { format, parse, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 import { request } from "../lib/datocms";
 import bumpsLogo from "../public/bumps-logo.png";
+import Head from "next/head";
 
 interface HomepageQuery {
   allEvents: Event[];
@@ -53,6 +54,15 @@ export default function Home({
     <main
       className={`justify-between md:p-8 lg:p-10 min-h-screen ${righteous.className}`}
     >
+      <Head>
+        <title>Bike Up the Mountain Point Series (BUMPS)</title>
+        <meta
+          name="description"
+          content="Yearlong
+          competition featuring some of the most challenging and
+          well-established cycling hill climb events in the Northeast USA"
+        />
+      </Head>
       <header className="flex flex-col items-center pb-8 md:pb-16 pt-8 md:pt-0">
         <Image
           src={bumpsLogo}
@@ -63,7 +73,7 @@ export default function Home({
         <h1 className="sr-only">BUMPS</h1>
         <p className="text-xl sr-only">Bike Up the Mountain Points Series</p>
       </header>
-      <nav className="nav grid gap-4 md:grid-cols-3 pb-8 pt-8 justify-items-center">
+      <nav className="nav grid gap-4 md:grid-cols-3 pb-16 pt-8 justify-items-center">
         <a href="#overview">Overview</a>
         <a href="#points">Points System</a>
         <a
@@ -78,7 +88,7 @@ export default function Home({
         {data.allEvents.reverse().map((event) => (
           <div key={event.title} className="relative hill-wrapper">
             <div className="hill-photo">
-              <img
+              <Image
                 src={event.coverPhoto.url}
                 className=""
                 alt={event.title}
