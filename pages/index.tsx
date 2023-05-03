@@ -68,7 +68,7 @@ export default function Home({
           src={bumpsLogo}
           alt="Bike up Mountain Point Series Logo"
           width={250}
-          className="pl-8 pr-8 md:pl-0 md:pr-0"
+          className="pl-4 pr-4 md:pl-0 md:pr-0"
         />
         <h1 className="sr-only">BUMPS</h1>
         <p className="text-xl sr-only">Bike Up the Mountain Points Series</p>
