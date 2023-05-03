@@ -56,6 +56,7 @@ nav a {
 
 .body-text p {
   margin-bottom: 1rem;
+  max-width: 900px;
 }
 
 .body-text a {

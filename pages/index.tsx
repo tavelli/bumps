@@ -127,7 +127,7 @@ export default function Home({
       </section>
       <section
         id="overview"
-        className="prose body-text mt-0 p-8 md:p-0 md:mt-12"
+        className="prose body-text mt-0 p-8 md:p-0 md:mt-12 md:text-lg"
       >
         <h2>Overview</h2>
         <p>
@@ -144,11 +144,14 @@ export default function Home({
         <p>
           Each event will continue to be run by an independent organizer, and
           event formats and prizes will continue to be determined independently.
-          BUMPS simply wants to bring added acknowledgment to riders who enjoy
-          the challenge of climbing.
+          BUMPS aims to bring additional acknowledgment to riders who enjoy the
+          challenge of climbing.
         </p>
       </section>
-      <section id="points" className="prose body-text mt-0 p-8 md:p-0 md:mt-12">
+      <section
+        id="points"
+        className="prose body-text mt-0 p-8 md:p-0 md:mt-12 md:text-lg"
+      >
         <h2>Points System</h2>
         <p>
           The points scale is set for each race by the slope of the line
