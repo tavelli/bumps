@@ -90,36 +90,40 @@ export default function Home({
         </a>
       </nav>
       <section className="hill-listing">
-        {data.allEvents.reverse().map((event) => (
-          <div key={event.title} className="relative hill-wrapper">
-            <div className="hill-photo">
-              <Image
-                src={event.coverPhoto.url}
-                className=""
-                alt={event.title}
-                width={2000}
-                height={530}
-              />
-            </div>
-            <div className="hill-header top-1 md:top-4 lg:top-6">
-              <h3 className="hill-title">{event.title}</h3>
-              <p className="hill-date">{format(parseISO(event.date), "PP")}</p>
-              <div className="hill-buttons mt-2 md:mt-4 lg:mt-8">
-                {event.results ? (
-                  <a target="_blank" rel="noopener" href={event.results}>
-                    Results
-                  </a>
-                ) : event.registration ? (
-                  <a target="_blank" rel="noopener" href={event.registration}>
-                    Register
-                  </a>
-                ) : (
-                  <span className="pending">Planned</span>
-                )}
+        {data.allEvents
+          .sort((a, b) => a.date.localeCompare(b.date))
+          .map((event) => (
+            <div key={event.title} className="relative hill-wrapper">
+              <div className="hill-photo">
+                <Image
+                  src={event.coverPhoto.url}
+                  className=""
+                  alt={event.title}
+                  width={2000}
+                  height={530}
+                />
+              </div>
+              <div className="hill-header top-1 md:top-4 lg:top-6">
+                <h3 className="hill-title">{event.title}</h3>
+                <p className="hill-date">
+                  {format(parseISO(event.date), "PP")}
+                </p>
+                <div className="hill-buttons mt-2 md:mt-4 lg:mt-8">
+                  {event.results ? (
+                    <a target="_blank" rel="noopener" href={event.results}>
+                      Results
+                    </a>
+                  ) : event.registration ? (
+                    <a target="_blank" rel="noopener" href={event.registration}>
+                      Register
+                    </a>
+                  ) : (
+                    <span className="pending">Planned</span>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </section>
       <section
         id="overview"
