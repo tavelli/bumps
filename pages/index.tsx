@@ -74,12 +74,17 @@ export default function Home({
         <p className="text-xl sr-only">Bike Up the Mountain Points Series</p>
       </header>
       <nav className="nav grid gap-4 md:grid-cols-3 pb-16 pt-8 justify-items-center">
-        <a href="#overview">Overview</a>
-        <a href="#points">Points System</a>
+        <a href="#overview" className="md:text-lg lg:text-xl">
+          Overview
+        </a>
+        <a href="#points" className="md:text-lg lg:text-xl">
+          Points System
+        </a>
         <a
           target="_blank"
           rel="noopener"
           href="https://www.road-results.com/BUMPS"
+          className="md:text-lg lg:text-xl"
         >
           Series Results
         </a>
