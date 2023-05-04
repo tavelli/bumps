@@ -153,31 +153,28 @@ export default function Home({
       >
         <h2>Points System</h2>
         <p>
-          The point system for each race is determined by the slope of a line
-          that intersects the fastest and average finish times. The fastest
-          rider earns 100 points, and the average finish time earns 50 points.
-          If a rider finishes with a time that is twice the average time or
-          slower, they will receive one point. To calculate your points, use
-          this equation:
+          We use a unique formula that takes into account your finishing time,
+          the fastest time, and the average time to determine the number of
+          points you will receive for each event. The fastest rider earns 100
+          points, and the average finish time earns 50 points. If a rider
+          finishes with a time that is twice the average time or slower, they
+          will receive one point.
         </p>
         <p>
+          The scoring system prioritizes fast times, similar to a time trial,
+          over your finishing position.
+        </p>
+        <p>
+          To calculate your points, use this equation:
+          <br />
           Points = 100 - 50 * [(Your Time - Fastest Time) / (Average Time -
-          Fastest Time)].
-        </p>
-        <p>
-          This equation takes into account your finishing time, the fastest
-          time, and the average time to determine the number of points you will
-          receive.
+          Fastest Time)]
         </p>
         <p className="italic">
           Example: In a race where the fastest time is 1:00 and the average
           finish time is 1:30: Finishing in 1:15 earns 75 points, 1:30 earns 50
           points, 1:45 earns 25 points, and finish times of 2:00 or slower earn
           one point.
-        </p>
-        <p>
-          The scoring system prioritizes fast times, similar to a time trial,
-          over your finishing position.
         </p>
 
         <p>
@@ -188,7 +185,7 @@ export default function Home({
           Participation in any of the series events automatically qualifies
           racers for the BUMPS series.
         </p>
-        <h3>Categories*</h3>
+        <h3 className="bold">Categories</h3>
         <p>
           Male: Overal, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
           75-79, 80+
@@ -215,7 +212,6 @@ export default function Home({
           >
             road-results.com/BUMPS
           </a>
-          .
         </p>
       </section>
     </main>
