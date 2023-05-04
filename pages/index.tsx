@@ -51,9 +51,7 @@ export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <main
-      className={`justify-between md:p-8 lg:p-10 min-h-screen ${righteous.className}`}
-    >
+    <main className={`justify-between  min-h-screen ${righteous.className}`}>
       <Head>
         <title>Bike Up the Mountain Point Series (BUMPS)</title>
         <meta
@@ -63,7 +61,7 @@ export default function Home({
           well-established cycling hill climb events in the Northeast USA"
         />
       </Head>
-      <header className="flex flex-col items-center pb-8 md:pb-16 pt-8 md:pt-0">
+      <header className="flex flex-col items-center md:p-8 lg:p-10 ">
         <Image
           src={bumpsLogo}
           alt="Bike up Mountain Point Series Logo"
@@ -127,19 +125,20 @@ export default function Home({
       </section>
       <section
         id="overview"
-        className="prose body-text mt-0 p-8 md:p-0 md:mt-12 md:text-lg"
+        className="prose body-text mt-0 p-8 md:mt-12 md:text-lg"
       >
         <h2>Overview</h2>
         <p>
           BUMPS, short for Bike Up the Mountain Points Series, is a yearlong
           competition featuring some of the most challenging and
-          well-established hill climb events in the Northeast United States.
+          well-established cycling hill climb events in the Northeast United
+          States.
         </p>
         <p>
           Entering a BUMPS event includes automatic entry into the overall
-          series standings. Riders accumulate points in up to four races, and
-          those entering more than four races are scored based on their best
-          four results.
+          series standings. Riders accumulate points in up to three races, and
+          those entering more than three races are scored based on their best
+          three results.
         </p>
         <p>
           Each event will continue to be run by an independent organizer, and
@@ -150,7 +149,7 @@ export default function Home({
       </section>
       <section
         id="points"
-        className="prose body-text mt-0 p-8 md:p-0 md:mt-12 md:text-lg"
+        className="prose body-text mt-0 p-8 md:mt-12 md:text-lg"
       >
         <h2>Points System</h2>
         <p>
@@ -185,7 +184,7 @@ export default function Home({
           Each event will utilize its own timing system to determine category
           winners and distribute event-specific awards. The results of each race
           will subsequently be incorporated into the BUMPS scoring system, with
-          the best four race scores counting towards each rider&apos;s total.
+          the best three race scores counting towards each rider&apos;s total.
           Participation in any of the series events automatically qualifies
           racers for the BUMPS series.
         </p>

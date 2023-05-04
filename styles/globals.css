@@ -116,7 +116,7 @@ nav a {
   border: 1px solid #1a1718;
   border-radius: 0;
   font-size: 12px;
-  font-size: clamp(10px, 2vw, 16px);
+  font-size: clamp(10px, 2vw, 18px);
   text-transform: uppercase;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
