@@ -61,7 +61,7 @@ export default function Home({
           well-established cycling hill climb events in the Northeast USA"
         />
       </Head>
-      <header className="flex flex-col items-center md:p-8 lg:p-10 ">
+      <header className="flex flex-col items-center pt-4 md:p-8 lg:p-10 ">
         <Image
           src={bumpsLogo}
           alt="Bike up Mountain Point Series Logo"
@@ -91,14 +91,18 @@ export default function Home({
         {data.allEvents
           .sort((a, b) => a.date.localeCompare(b.date))
           .map((event) => (
-            <div key={event.title} className="relative hill-wrapper">
+            <div
+              key={event.title}
+              className="relative hill-wrapper mb-2 md:mb-4"
+            >
               <div className="hill-photo">
                 <Image
                   src={event.coverPhoto.url}
                   className=""
                   alt={event.title}
-                  width={2000}
-                  height={530}
+                  fill={true}
+                  sizes="(max-width: 768px) 100vw,
+              (max-width: 1440px) 1440px"
                 />
               </div>
               <div className="hill-header top-1 md:top-4 lg:top-6">

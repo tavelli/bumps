@@ -69,13 +69,9 @@ nav a {
   margin-bottom: 1rem;
 }
 
-.hill-listing> .hill-wrapper:first-child {
-  border-top:5px solid #1a1718;
-}
-
 .hill-wrapper {
-  border-bottom:5px solid #1a1718;
   background: #1a1718;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .hill-wrapper  img {
@@ -110,6 +106,8 @@ nav a {
 
 .hill-buttons a,
 .hill-buttons .pending {
+  color: #fef5ea;
+  letter-spacing: 1px;
   display: inline-block;
   background-color: var(--brand-main);
   padding: 0.25rem 0.75rem;
