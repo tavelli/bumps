@@ -153,7 +153,7 @@ export default function Home({
       </section>
       <section
         id="points"
-        className="prose body-text mt-0 p-8 md:mt-12 md:text-lg"
+        className="prose body-text mt-0 p-8 md:mt-6 md:text-lg"
       >
         <h2>Points System</h2>
         <p>
@@ -216,6 +216,21 @@ export default function Home({
           >
             road-results.com/BUMPS
           </a>
+        </p>
+      </section>
+      <section className="prose body-text mt-0 p-8 md:mt-6 md:text-lg">
+        <h2>Sponsors</h2>
+        <p>
+          Thanks to{" "}
+          <a target="_blank" rel="noopener" href="https://pjammcycling.com/">
+            PJAMM Cycling
+          </a>{" "}
+          for helping promote the series and providing photography for Ascutney,
+          Mt. Washington, Greylock and Allen Clark events!
+        </p>
+        <p>
+          Interested in sponsoring the BUMPS series? Drop us a line at
+          info@bumpshillclimb.com!
         </p>
       </section>
     </main>
