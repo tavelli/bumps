@@ -56,9 +56,7 @@ export default function Home({
         <title>Bike Up the Mountain Point Series (BUMPS)</title>
         <meta
           name="description"
-          content="Yearlong
-          competition featuring some of the most challenging and
-          well-established cycling hill climb events in the Northeast USA"
+          content="A cycling hillclimb series featuring some of the most iconic climbs in the Northeast USA."
         />
       </Head>
       <header className="flex flex-col items-center pt-4 md:p-8 lg:p-10 ">
@@ -69,8 +67,11 @@ export default function Home({
           className="pl-4 pr-4 md:pl-0 md:pr-0"
           priority
         />
-        <h1 className="sr-only">BUMPS</h1>
-        <p className="text-xl sr-only">Bike Up the Mountain Points Series</p>
+        <h1 className="sr-only">Bike Up the Mountain Points Series (BUMPS)</h1>
+        <p className="text-xl sr-only">
+          A cycling hillclimb series featuring some of the most iconic climbs in
+          the Northeast USA.
+        </p>
       </header>
       <nav className="nav grid gap-4 md:grid-cols-3 pb-16 pt-8 justify-items-center">
         <a href="#overview" className="md:text-lg lg:text-xl">
