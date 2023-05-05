@@ -30,24 +30,19 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-
-        {process.env.INCLUDE_ANALYTICS && (
-          <>
-            <Script
-              src="https://www.googletagmanager.com/gtag/js?id=G-68R4PHKHGQ"
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-68R4PHKHGQ"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
               
                 gtag('config', 'G-68R4PHKHGQ');
               `}
-            </Script>
-          </>
-        )}
+        </Script>
       </body>
     </Html>
   );
