@@ -147,10 +147,9 @@ export default function Home({
           three results.
         </p>
         <p>
-          Each event will continue to be run by an independent organizer, and
-          event formats and prizes will continue to be determined independently.
-          BUMPS aims to bring additional acknowledgment to riders who enjoy the
-          challenge of climbing.
+          Each event is run by an independent organizer. Event formats and
+          prizes are determined independently. BUMPS aims to bring additional
+          acknowledgment to riders who enjoy the challenge of climbing.
         </p>
       </section>
       <section
