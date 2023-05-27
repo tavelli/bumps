@@ -26,6 +26,7 @@ const HOMEPAGE_QUERY = `query Events {
       date
       title
       registration
+      results
       coverPhoto {
         url
       }
