@@ -83,7 +83,7 @@ nav a {
 @media screen and (min-width: 40em){
   .hill-wrapper {
     opacity: .95;
-    background: #1a1718;
+     background: #1a1718; 
     border: 2px solid transparent;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     transition: box-shadow 0.3s ease-in-out;
@@ -153,5 +153,5 @@ nav a {
 }
 
 .hill-buttons .results {
-  background-color: #1a1718;
+  background-color: #c17106;
 }
