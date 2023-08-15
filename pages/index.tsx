@@ -77,7 +77,7 @@ export default function Home({
             priority
           />
         </a>
-        <h3 className="p-4 text-sm md:text-md text-gray-500">presented by</h3>
+        <h3 className="p-4 text-sm md:text-md text-gray-500">Presented by</h3>
       </section>
       <nav className="nav grid gap-4 md:grid-cols-3 pb-12 pt-12 justify-items-center">
         <a href="#overview" className="md:text-lg lg:text-xl">
