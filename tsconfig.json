@@ -18,6 +18,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/datocms.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "app/lib/datocms.js"],
   "exclude": ["node_modules"]
 }

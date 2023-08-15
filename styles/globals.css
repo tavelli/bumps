@@ -69,19 +69,39 @@ nav a {
   margin-bottom: 1rem;
 }
 
-.hill-wrapper {
-  opacity: .95;
-  /* background: #1a1718; */
-  border: 2px solid transparent;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: box-shadow 0.3s ease-in-out;
+.presented-by {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
 }
 
-.hill-wrapper:hover {
-  opacity: 1;
-  border: 2px solid var(--brand-main);
-  box-shadow: none;
+.presented-by h3{
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  color: #fff;
 }
+
+@media screen and (min-width: 40em){
+  .hill-wrapper {
+    opacity: .95;
+     background: #1a1718; 
+    border: 2px solid transparent;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transition: box-shadow 0.3s ease-in-out;
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  
+  .hill-link:hover .hill-wrapper {
+    opacity: 1;
+    border: 2px solid var(--brand-main);
+    box-shadow: none;
+  }
+}
+
+.hill-link:hover .hill-wrapper a {
+  text-decoration: underline;
+}
+
 
 .hill-wrapper  img {
   position: absolute;
@@ -133,5 +153,5 @@ nav a {
 }
 
 .hill-buttons .results {
-  background-color: #1a1718;
+  background-color: #c17106;
 }
