@@ -128,7 +128,7 @@ nav a {
   text-shadow: 1px 1px 3px #444;
 }
 
-.hill-date {
+.hill-subtitle {
   font-size: clamp(12px, 3vw, 24px);
   text-shadow: 1px 1px 3px #444;
 }

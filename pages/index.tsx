@@ -17,6 +17,7 @@ interface HomepageQuery {
 const HOMEPAGE_QUERY = `query Events {
     allEvents {
       date
+      location
       title
       registration
       results

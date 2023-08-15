@@ -6,6 +6,7 @@ import { format, parseISO } from "date-fns";
 export interface HillclimbEvent {
   title: string;
   date: string;
+  location: string;
   registration: string;
   results: string;
   note: string;
@@ -32,7 +33,9 @@ export const Hillclimb: FunctionComponent<Props> = ({ event }) => (
     </div>
     <div className="hill-header top-1 md:top-4 lg:top-6">
       <h3 className="hill-title">{event.title}</h3>
-      <p className="hill-date">{format(parseISO(event.date), "PP")}</p>
+      <p className="hill-subtitle">{format(parseISO(event.date), "PP")}</p>
+      <p className="hill-subtitle hidden lg:block">{event.location}</p>
+
       <div className="hill-buttons mt-2 md:mt-4 lg:mt-8">
         {event.results ? (
           <a
