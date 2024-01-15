@@ -173,7 +173,7 @@ export default function Home({
             Each event will utilize its own timing system to determine category
             winners and distribute event-specific awards. The results of each
             race will subsequently be incorporated into the BUMPS scoring
-            system, with the best three race scores counting towards each
+            system, with the best <b>four</b> race scores counting towards each
             rider&apos;s total. Participation in any of the series events
             automatically qualifies racers for the BUMPS series.
           </p>
