@@ -215,9 +215,9 @@ export default function Home({
         >
           <h2>Prizes</h2>
           <p>
-            As part of this year's sponsorship{" "}
+            As part of this year&apos;s sponsorship{" "}
             <a href="https://cyclinghero.cc/">CyclingHero</a> will award a free
-            trip to the winner of both the men's and women's overall
+            trip to the winner of both the men&apos;s and women&apos;s overall
             categories!! <p></p>
             These trips are valued at approximately <strong>$2,000</strong> per
             person and include airport pickup and return, accommodations and
