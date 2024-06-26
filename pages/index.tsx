@@ -79,12 +79,15 @@ export default function Home({
         </a>
         <h3 className="p-4 text-sm md:text-md text-gray-500">Presented by</h3>
       </section>
-      <nav className="nav grid gap-4 md:grid-cols-3 pb-12 pt-12 justify-items-center">
+      <nav className="nav grid gap-4 md:grid-cols-4 pb-12 pt-12 justify-items-center">
         <a href="#overview" className="md:text-lg lg:text-xl">
           Overview
         </a>
         <a href="#points" className="md:text-lg lg:text-xl">
           Points System
+        </a>
+        <a href="#prizes" className="md:text-lg lg:text-xl">
+          Prizes
         </a>
         <a
           target="_blank"
@@ -204,6 +207,22 @@ export default function Home({
             >
               road-results.com/BUMPS
             </a>
+          </p>
+        </section>
+        <section
+          className="prose body-text mt-0 p-8 md:mt-6 md:text-lg"
+          id="prizes"
+        >
+          <h2>Prizes</h2>
+          <p>
+            As part of this year&apos;s sponsorship{" "}
+            <a href="https://cyclinghero.cc/">CyclingHero</a> will award a free
+            trip to the winner of both the men&apos;s and women&apos;s overall
+            categories!! <p></p>
+            These trips are valued at approximately <strong>$2,000</strong> per
+            person and include airport pickup and return, accommodations and
+            breakfasts, routes, use of a Hammerhead computer, luggage transfers,
+            and daily road support as needed.
           </p>
         </section>
         <section className="prose body-text mt-0 p-8 md:mt-6 md:text-lg">
