@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from "react";
+import React, {FunctionComponent} from "react";
 import Image from "next/image";
 
-import { format, parseISO } from "date-fns";
+import {format, parseISO} from "date-fns";
 
 export interface HillclimbEvent {
   title: string;
@@ -18,7 +18,7 @@ type Props = {
   event: HillclimbEvent;
 };
 
-export const Hillclimb: FunctionComponent<Props> = ({ event }) => (
+export const Hillclimb: FunctionComponent<Props> = ({event}) => (
   <div className="relative hill-wrapper mb-4 md:mb-6">
     <div className="hill-photo">
       <Image
@@ -43,7 +43,7 @@ export const Hillclimb: FunctionComponent<Props> = ({ event }) => (
           >
             Results
           </a>
-        ) : event.registration ? (
+        ) : event.registration && !event.note ? (
           <a target="_blank" rel="noopener" href={event.registration}>
             Register
           </a>
