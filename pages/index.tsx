@@ -1,14 +1,14 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import {GetStaticProps, InferGetStaticPropsType} from "next";
 import Image from "next/image";
 import Head from "next/head";
 
-import { Righteous } from "next/font/google";
+import {Righteous} from "next/font/google";
 
-import { request } from "../app/lib/datocms";
+import {request} from "../app/lib/datocms";
 import bumpsLogo from "../public/bumps-logo.png";
 import cyclingHeroLogo from "../public/cycling-hero-orange.svg";
 
-import { Hillclimb, HillclimbEvent } from "@/app/components/HillclimbEvent";
+import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
 
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
@@ -21,12 +21,19 @@ const HOMEPAGE_QUERY = `query Events {
       registration
       results
       note
+      category
+      gradient
+      distance
+      elevationGain
+      aiCoverPhoto {
+        url
+      }
       coverPhoto {
         url
       }
     }
 }`;
-export const getStaticProps: GetStaticProps<{ data: HomepageQuery }> = async (
+export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
   context
 ) => {
   const data = await request({
@@ -36,11 +43,11 @@ export const getStaticProps: GetStaticProps<{ data: HomepageQuery }> = async (
     excludeInvalid: true,
   });
   return {
-    props: { data },
+    props: {data},
   };
 };
 
-const righteous = Righteous({ weight: "400", subsets: ["latin"] });
+const righteous = Righteous({weight: "400", subsets: ["latin"]});
 
 export default function Home({
   data,

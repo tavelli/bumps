@@ -9,7 +9,14 @@ export interface HillclimbEvent {
   registration: string;
   results: string;
   note: string;
+  category: string;
+  gradient: number;
+  distance: number;
+  elevationGain: number;
   coverPhoto: {
+    url: string;
+  };
+  aiCoverPhoto: {
     url: string;
   };
 }
