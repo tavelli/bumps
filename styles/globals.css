@@ -24,6 +24,8 @@ html {
 body {
   color: rgb(var(--foreground-rgb));
   background: #0f0101;
+  color: #fff;
+  font-size: 16px;
 }
 
 main {
@@ -35,6 +37,60 @@ h1 {
   letter-spacing: 15px;
 }
 
+.disabled-link {
+  padding: 12px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.button-link {
+  display: inline-block;
+  padding: 12px;
+  background: #fff;
+  color: #000;
+  text-transform: uppercase;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.button-link:hover,
+.button-link:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.section-heading {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 19px;
+  font-family: var(--font-unitea-sans-bold);
+  letter-spacing: 3px;
+}
+
+.subsection-heading {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.callout-heading {
+  font-size: 32px;
+  line-height: 38px;
+}
+
+.callout-heading-sm {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.subcategory-heading {
+  font-size: 24px;
+  line-height: 32px;
+}
+
 nav {
   max-width: 700px;
   margin: 0 auto;
@@ -43,6 +99,16 @@ nav a {
   text-transform: uppercase;
   text-decoration: underline;
   /* color: var(--brand-main); */
+}
+
+.bumps-main-header {
+  background-image: url("../public/bumps-hero-bg.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 606px;
+
+  color: #fff;
 }
 
 .body-text {
@@ -58,12 +124,6 @@ nav a {
   color: var(--brand-main);
 }
 
-.body-text h2 {
-  font-weight: bold;
-  font-size: clamp(22px, 3vw, 36px);
-  margin-bottom: 1rem;
-}
-
 .presented-by {
   background: #fff;
   border-bottom: 1px solid #ddd;
@@ -76,77 +136,53 @@ nav a {
   color: #fff;
 }
 
-@media screen and (min-width: 40em) {
-  .hill-wrapper {
-    opacity: 0.95;
-    background: #1a1718;
-    border: 2px solid transparent;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    transition: box-shadow 0.3s ease-in-out;
-    margin-right: 1rem;
-    margin-left: 1rem;
-  }
+.content-wrapper {
+  padding: 2rem;
+}
 
-  .hill-link:hover .hill-wrapper {
-    opacity: 1;
-    border: 2px solid var(--brand-main);
-    box-shadow: none;
+@media only screen and (min-width: 1024px) {
+  .content-wrapper {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 830px;
   }
 }
 
-.hill-link:hover .hill-wrapper a {
-  text-decoration: underline;
+@media only screen and (min-width: 1500px) {
+  .content-wrapper {
+    max-width: 1200px;
+  }
 }
 
-.hill-wrapper img {
-  position: absolute;
-  top: 0;
+.hill-listing {
+  display: grid;
+  gap: 2rem;
 }
 
-.hill-photo {
-  padding-top: calc(530 / 2000 * 100%);
+@media only screen and (min-width: 1024px) {
+  .hill-listing {
+    grid-template-columns: repeat(2, auto);
+  }
 }
 
-.hill-buttons,
-.hill-header {
-  color: #fff;
+@media only screen and (min-width: 1500px) {
+  .hill-listing {
+    grid-template-columns: repeat(3, auto);
+  }
 }
 
-.hill-header {
-  position: absolute;
-  padding-left: 1rem;
+.hill-event {
+  width: 400px;
 }
 
-.hill-title {
-  font-size: clamp(24px, 6vw, 72px);
-  text-shadow: 1px 1px 3px #444;
-}
-
-.hill-date {
-  font-size: clamp(12px, 3vw, 32px);
-  text-shadow: 1px 1px 3px #444;
-}
-
-.hill-buttons a,
-.hill-buttons .pending {
-  color: #fef5ea;
-  letter-spacing: 1px;
-  display: inline-block;
-  background-color: var(--brand-main);
-  padding: 0.25rem 0.75rem;
-  border: 1px solid #1a1718;
-  border-radius: 0;
-  font-size: 12px;
-  font-size: clamp(10px, 2vw, 18px);
-  text-transform: uppercase;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-}
-
-.hill-buttons .pending {
-  background-color: #444;
-}
-
-.hill-buttons .results {
-  background-color: #c17106;
+.hill-category {
+  background-color: #cc3434;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
 }
