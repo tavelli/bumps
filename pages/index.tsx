@@ -59,49 +59,59 @@ export default function Home({
           content="A cycling hillclimb series featuring some of the most iconic climbs in the Northeast USA."
         />
       </Head>
+      <nav className="bumps-nav nav grid gap-4 grid-cols-4 pt-4 pb-4 justify-items-center">
+        <a href="#what">What is BUMPS?</a>
+        <a href="#events">Events</a>
+        <a href="#info">Scoring</a>
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://www.road-results.com/BUMPS"
+        >
+          Results
+        </a>
+      </nav>
       <header className="bumps-main-header flex flex-col items-center pt-4 ">
-        <nav className="nav grid gap-4 md:grid-cols-4 pb-32 pt-2 justify-items-center">
-          <a href="#what" className="">
-            Overview
-          </a>
-          <a href="#events" className="">
-            Points System
-          </a>
-          <a href="#info" className="">
-            Prizes
-          </a>
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://www.road-results.com/BUMPS"
+        <div
+          style={{
+            padding: "3rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <h1 className="section-heading italic bold pb-4 text-center">
+            Bike Up the Mountain Points Series
+          </h1>
+
+          <Image
+            src={bumpsLogoLetters}
+            alt="Bike up Mountain Point Series Logo"
+            width={400}
             className=""
-          >
-            Results
-          </a>
-        </nav>
+            priority
+          />
 
-        <Image
-          src={cyclingHeroLogo}
-          alt="Cycling Hero"
-          width={146}
-          className="pb-4"
-          priority
-        />
+          <Image
+            src={cyclingHeroLogo}
+            alt="Cycling Hero"
+            width={150}
+            className="pt-8"
+            priority
+          />
 
-        <Image
-          src={bumpsLogoLetters}
-          alt="Bike up Mountain Point Series Logo"
-          width={250}
-          className=""
-          priority
-        />
-        <h1 className="sr-only">Bike Up the Mountain Points Series (BUMPS)</h1>
-        <p className="uppercase text-lg pt-4">Hill Climb Series</p>
+          <p className="pt-14" style={{maxWidth: "340px", textAlign: "center"}}>
+            A yearlong competition featuring some of the most challenging and
+            well-established cycling hill climb events in the Northeast United
+            States.
+          </p>
+        </div>
       </header>
 
       <main>
         <div className="content-wrapper">
-          <section>
+          <section id="what">
             <div className="grid grid-cols-3 mt-16 gap-5">
               <div className="col-span-2">
                 <h2 className={`section-heading ${uniteaSansBold.className}`}>

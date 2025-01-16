@@ -102,13 +102,19 @@ nav a {
 }
 
 .bumps-main-header {
-  background-image: url("../public/bumps-hero-bg.webp");
+  background-image: url("../public/bumps-hero-photo-bg.webp");
+  background-color: #17201ca3;
+  background-blend-mode: overlay;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  min-height: 606px;
-
+  background-position: center center;
+  min-height: calc(100vh - 56px);
   color: #fff;
+  display: grid;
+}
+
+.bumps-nav {
+  background: #0f0101;
 }
 
 .body-text {
@@ -140,12 +146,20 @@ nav a {
   padding: 2rem;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 900px) {
   .content-wrapper {
     padding: 0;
     margin: 0 auto;
     max-width: 830px;
   }
+  .hill-listing {
+    grid-template-columns: repeat(2, auto);
+  }
+  .hill-event {
+    width: 400px;
+  }
+}
+@media only screen and (min-width: 1024px) {
 }
 
 @media only screen and (min-width: 1500px) {
@@ -160,9 +174,6 @@ nav a {
 }
 
 @media only screen and (min-width: 1024px) {
-  .hill-listing {
-    grid-template-columns: repeat(2, auto);
-  }
 }
 
 @media only screen and (min-width: 1500px) {
@@ -171,9 +182,9 @@ nav a {
   }
 }
 
-.hill-event {
+/* .hill-event {
   width: 400px;
-}
+} */
 
 .hill-category {
   background-color: #cc3434;

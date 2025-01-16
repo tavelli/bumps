@@ -37,6 +37,11 @@ export const Hillclimb: FunctionComponent<Props> = ({event}) => (
         src={event.aiCoverPhoto.url}
         className="rounded-lg"
         alt={event.title}
+        sizes="100vw"
+        style={{
+          width: "100%",
+          height: "auto",
+        }}
         width={400}
         height={200}
       />
