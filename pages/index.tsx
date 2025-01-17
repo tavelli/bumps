@@ -1,7 +1,7 @@
 import {GetStaticProps, InferGetStaticPropsType} from "next";
 import Image from "next/image";
 import Head from "next/head";
-
+import {uniteaSans} from "@/app/fonts";
 import {request} from "../app/lib/datocms";
 import bumpsLogoLetters from "../public/bumps-logo-letters.svg";
 import cyclingHeroLogo from "../public/cycling-hero-white.svg";
@@ -52,7 +52,7 @@ export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className={`justify-between  min-h-screen `}>
+    <div className={uniteaSans.className}>
       <Head>
         <title>Bike Up the Mountain Point Series (BUMPS)</title>
         <meta
