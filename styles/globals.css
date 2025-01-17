@@ -4,14 +4,13 @@
 
 html {
   scroll-behavior: smooth;
-  height: 100%;
 }
 
 body {
   background: #0f0101;
   color: #fff;
   font-size: 16px;
-  margin-bottom: 8rem;
+  margin-bottom: 3rem;
 }
 
 main {
@@ -62,6 +61,7 @@ h1 {
   transform: skew(-14deg);
   text-transform: uppercase;
   font-size: 18px;
+  line-height: 24px;
   font-weight: bold;
 }
 

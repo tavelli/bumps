@@ -5,6 +5,9 @@ import {uniteaSans} from "@/app/fonts";
 import {request} from "../app/lib/datocms";
 import bumpsLogoLetters from "../public/bumps-logo-letters.svg";
 import cyclingHeroLogo from "../public/cycling-hero-white.svg";
+import bumpsInfographic from "../public/infographic.svg";
+import bumpsOldLogo from "../public/bumps-old-logo.png";
+import bumpsJerseys from "../public/jserseys.png";
 
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
 
@@ -34,6 +37,9 @@ const HOMEPAGE_QUERY = `query Events {
       }
     }
 }`;
+
+const numberOfRaces = "four";
+
 export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
   context
 ) => {
@@ -83,8 +89,7 @@ export default function Home({
           <Image
             src={bumpsLogoLetters}
             alt="Bike up Mountain Point Series Logo"
-            width={400}
-            className=""
+            width={250}
             priority
           />
 
@@ -114,7 +119,7 @@ export default function Home({
       <main>
         <div className="content-wrapper">
           <section>
-            <div className="grid grid-cols-3 mt-16 gap-5">
+            <div className="grid md:grid-cols-3 mt-16 gap-5">
               <div className="col-span-2">
                 <h2 className={`section-heading`} id="what">
                   What is BUMPS?
@@ -134,7 +139,9 @@ export default function Home({
                   and prizes are determined independently.
                 </p>
               </div>
-              <div></div>
+              <div className="justify-self-center">
+                <Image src={bumpsInfographic} alt="" width={250} />
+              </div>
             </div>
           </section>
 
@@ -167,7 +174,16 @@ export default function Home({
               time or slower, they will receive one point.
             </p>
 
-            <div className="grid grid-cols-2 mt-8 gap-5">
+            <p className="text-lg pt-2">
+              Riders accumulate points in{" "}
+              <strong style={{color: "#ffd333"}}>
+                up to {numberOfRaces} races
+              </strong>
+              , and those entering more than {numberOfRaces} races are scored
+              based on their best {numberOfRaces} results.
+            </p>
+
+            <div className="grid md:grid-cols-2 mt-8 gap-5">
               <div>
                 <h3 className="subcategory-heading">Points System</h3>
                 <p className="pt-2 pb-2">
@@ -187,36 +203,19 @@ export default function Home({
                   Each event will utilize its own timing system to determine
                   category winners and distribute event-specific awards. The
                   results of each race will subsequently be incorporated into
-                  the BUMPS scoring system, with the best <b>four</b> race
-                  scores counting towards each rider&apos;s total. Participation
-                  in any of the series events automatically qualifies racers for
-                  the BUMPS series.
-                </p>
-              </div>
-              <div>
-                <h3 className="subcategory-heading">Sponsors</h3>
-                <p className="pt-2 pb-2">
-                  Interested in sponsoring the BUMPS series? Drop us a line at
-                  info@bumpshillclimb.com!
-                </p>
-              </div>
-            </div>
-          </section>
-          <section id="results" className="mt-16">
-            <div className="grid grid-cols-2 mt-8 gap-5">
-              <div>
-                <h3 className="subcategory-heading">Categories</h3>
-                <div className="callout-heading-sm pt-4">
+                  the BUMPS scoring system, with the best <b>{numberOfRaces}</b>{" "}
+                  race scores counting towards each rider&apos;s total.
                   Participation in any of the series events automatically
                   qualifies racers for the BUMPS series.
-                </div>
-                <p className="text-lg pt-2">
-                  Riders accumulate points in up to four races, and those
-                  entering more than four races are scored based on their best
-                  four results.
                 </p>
+              </div>
+              <div>
+                <h3 className="subcategory-heading">Categories</h3>
+
                 <div>
-                  <div className={`pt-2 `}>Male</div>
+                  <div className={`pt-2 `}>
+                    <em>Male</em>
+                  </div>
                   <div>
                     Overall, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
                     75-79, 80+
@@ -224,7 +223,9 @@ export default function Home({
                 </div>
 
                 <div>
-                  <div className={`pt-2 `}>Female</div>
+                  <div className={`pt-2 `}>
+                    <em>Female</em>
+                  </div>
                   <div>
                     Overall, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
                     75-79, 80+
@@ -241,6 +242,36 @@ export default function Home({
                   individual races may differ from that of the BUMPS series.
                 </p>
               </div>
+            </div>
+          </section>
+          <section id="results" className="mt-16">
+            <div className="grid md:grid-cols-2 mt-8 gap-5">
+              <div>
+                <h3 className="subcategory-heading">Sponsors</h3>
+                <p className="pt-2 pb-2">
+                  Interested in sponsoring the BUMPS series? Drop us a line at
+                  info@bumpshillclimb.com!
+                </p>
+              </div>
+              <div>
+                <Image src={bumpsJerseys} alt="Leader Jerseys" width={300} />
+              </div>
+            </div>
+          </section>
+          <section>
+            <div
+              className="flex flex-col justify-center items-center text-center"
+              style={{marginTop: "10rem"}}
+            >
+              <div>
+                <Image
+                  src={bumpsOldLogo}
+                  alt="Old Bumps logo"
+                  width={150}
+                  className="pb-2"
+                />
+              </div>
+              <div className="uppercase">since 2013</div>
             </div>
           </section>
         </div>
