@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
@@ -102,6 +103,7 @@ nav {
 nav a {
   text-transform: uppercase;
   text-decoration: underline;
+  font-weight: bold;
 }
 
 nav a:hover {

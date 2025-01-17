@@ -60,17 +60,6 @@ export default function Home({
           content="A cycling hillclimb series featuring some of the most iconic climbs in the Northeast USA."
         />
       </Head>
-      {/* <nav className="bumps-nav nav grid grid-cols-3 pt-4 pb-4 justify-items-center justify-between">
-        <a href="#events">Events</a>
-        <a href="#info">Info</a>
-        <a
-          target="_blank"
-          rel="noopener"
-          href="https://www.road-results.com/BUMPS"
-        >
-          Results
-        </a>
-      </nav> */}
       <header className="bumps-main-header flex flex-col items-center pt-4 relative">
         <div
           className="absolute"
@@ -80,7 +69,7 @@ export default function Home({
         </div>
         <div
           style={{
-            padding: "4rem",
+            padding: "3rem",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -101,19 +90,24 @@ export default function Home({
 
           <div className="heading-splash">Hill Climb Series</div>
 
-          <Image
-            src={cyclingHeroLogo}
-            alt="Cycling Hero"
-            width={150}
-            className="pt-8"
-            priority
-          />
+          <div className="pt-8 text-center">
+            <div className="uppercase text-sm">presented by</div>
+            <a href="https://cyclinghero.cc/" target="_blank" rel="noopener">
+              <Image
+                src={cyclingHeroLogo}
+                alt="Cycling Hero"
+                width={175}
+                className="pt-2"
+                priority
+              />
+            </a>
+          </div>
 
-          <p className="pt-14" style={{maxWidth: "340px", textAlign: "center"}}>
+          {/* <p className="pt-14" style={{maxWidth: "340px", textAlign: "center"}}>
             A yearlong competition featuring some of the most challenging and
             well-established cycling hill climb events in the Northeast United
             States.
-          </p>
+          </p> */}
         </div>
       </header>
 
