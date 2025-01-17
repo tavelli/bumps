@@ -1,7 +1,7 @@
 import {FunctionComponent} from "react";
 import Image from "next/image";
 import facebookLogo from "../../public/facebook.svg";
-import instagramLogo from "../../public/Instagram.svg";
+import instagramLogo from "../../public/instagram.svg";
 import bumpsLogo from "../../public/BUMPS-logo-small-arrow.svg";
 
 export const Navigation: FunctionComponent = () => (
