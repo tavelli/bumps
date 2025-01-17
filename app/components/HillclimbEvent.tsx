@@ -29,7 +29,7 @@ type Props = {
 export const Hillclimb: FunctionComponent<Props> = ({event}) => (
   <div className="mb-4 md:mb-6 hill-event">
     <div className="relative">
-      <div className="absolute top-5 right-5 hill-category">
+      <div className="absolute top-3 right-3 hill-category">
         <span>{event.category}</span>
       </div>
       <Image

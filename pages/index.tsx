@@ -165,7 +165,7 @@ export default function Home({
               The scoring system prioritizes fast times, similar to a time
               trial, over your finishing position.
             </div>
-            <p className="">
+            <p className="text-lg">
               We use a unique formula that takes into account your finishing
               time, the fastest time, and the average time to determine the
               number of points you will receive for each event. The fastest
