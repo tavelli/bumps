@@ -2,7 +2,6 @@ import React, {FunctionComponent} from "react";
 import Image from "next/image";
 
 import {format, parseISO} from "date-fns";
-import {uniteaSansBold} from "../fonts";
 
 export interface HillclimbEvent {
   title: string;
@@ -47,7 +46,7 @@ export const Hillclimb: FunctionComponent<Props> = ({event}) => (
       />
     </div>
     <div className="hill-header pt-2">
-      <div className={`font-bold text-lg ${uniteaSansBold.className}`}>
+      <div className={`font-bold text-lg `}>
         {event.distance} mi <span className="pl-2 pr-2">•</span>{" "}
         {event.elevationGain.toLocaleString("en-US", {
           maximumFractionDigits: 2,

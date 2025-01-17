@@ -7,7 +7,8 @@ import bumpsLogoLetters from "../public/bumps-logo-letters.svg";
 import cyclingHeroLogo from "../public/cycling-hero-white.svg";
 
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
-import {uniteaSansBold} from "@/app/fonts";
+
+import {Navigation} from "@/app/components/Navigation";
 
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
@@ -71,7 +72,13 @@ export default function Home({
           Results
         </a>
       </nav>
-      <header className="bumps-main-header flex flex-col items-center pt-4 ">
+      <header className="bumps-main-header flex flex-col items-center pt-4 relative">
+        <div
+          className="absolute"
+          style={{top: "0px", left: "0px", width: "100%"}}
+        >
+          <Navigation />
+        </div>
         <div
           style={{
             padding: "3rem",
@@ -92,6 +99,8 @@ export default function Home({
             className=""
             priority
           />
+
+          <div className="heading-splash">Hill Climb Series</div>
 
           <Image
             src={cyclingHeroLogo}
@@ -114,9 +123,7 @@ export default function Home({
           <section id="what">
             <div className="grid grid-cols-3 mt-16 gap-5">
               <div className="col-span-2">
-                <h2 className={`section-heading ${uniteaSansBold.className}`}>
-                  What is BUMPS?
-                </h2>
+                <h2 className={`section-heading`}>What is BUMPS?</h2>
                 <div className="callout-heading-sm pt-4">
                   BUMPS is a yearlong competition featuring some of the most
                   challenging and well-established cycling hill climb events in
@@ -136,10 +143,7 @@ export default function Home({
             </div>
           </section>
 
-          <h2
-            id="events"
-            className={`mt-16 section-heading ${uniteaSansBold.className}`}
-          >
+          <h2 id="events" className={`mt-16 section-heading`}>
             Events
           </h2>
           <div className="callout-heading pt-4"></div>
@@ -152,9 +156,7 @@ export default function Home({
               })}
           </section>
           <section id="info" className="mt-16">
-            <h2 className={`section-heading ${uniteaSansBold.className}`}>
-              Info
-            </h2>
+            <h2 className={`section-heading`}>Info</h2>
             <div className="callout-heading pt-4">
               The scoring system prioritizes fast times, similar to a time
               trial, over your finishing position.
@@ -206,9 +208,7 @@ export default function Home({
           <section id="results" className="mt-16">
             <div className="grid grid-cols-2 mt-8 gap-5">
               <div>
-                <h2 className={`section-heading ${uniteaSansBold.className}`}>
-                  Results
-                </h2>
+                <h2 className={`section-heading `}>Results</h2>
                 <div className="callout-heading-sm pt-4">
                   Participation in any of the series events automatically
                   qualifies racers for the BUMPS series.
@@ -219,7 +219,7 @@ export default function Home({
                   four results.
                 </p>
                 <div>
-                  <div className={`pt-2 ${uniteaSansBold.className}`}>Male</div>
+                  <div className={`pt-2 `}>Male</div>
                   <div>
                     Overall, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
                     75-79, 80+
@@ -227,22 +227,16 @@ export default function Home({
                 </div>
 
                 <div>
-                  <div className={`pt-2 ${uniteaSansBold.className}`}>
-                    Female
-                  </div>
+                  <div className={`pt-2 `}>Female</div>
                   <div>
                     Overall, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
                     75-79, 80+
                   </div>
                 </div>
 
-                <div className={`pt-2 ${uniteaSansBold.className}`}>
-                  Overall unicycle
-                </div>
+                <div className={`pt-2 `}>Overall unicycle</div>
 
-                <div className={`pt-2 ${uniteaSansBold.className}`}>
-                  Overall tandem
-                </div>
+                <div className={`pt-2 `}>Overall tandem</div>
 
                 <p className="pt-4">
                   * Age categories are determined by a rider&apos;s age at the
