@@ -115,7 +115,7 @@ nav a:hover {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh);
   color: #fff;
   display: grid;
 }
