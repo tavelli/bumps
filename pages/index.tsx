@@ -60,10 +60,9 @@ export default function Home({
           content="A cycling hillclimb series featuring some of the most iconic climbs in the Northeast USA."
         />
       </Head>
-      <nav className="bumps-nav nav grid gap-4 grid-cols-4 pt-4 pb-4 justify-items-center">
-        <a href="#what">What is BUMPS?</a>
+      {/* <nav className="bumps-nav nav grid grid-cols-3 pt-4 pb-4 justify-items-center justify-between">
         <a href="#events">Events</a>
-        <a href="#info">Scoring</a>
+        <a href="#info">Info</a>
         <a
           target="_blank"
           rel="noopener"
@@ -71,7 +70,7 @@ export default function Home({
         >
           Results
         </a>
-      </nav>
+      </nav> */}
       <header className="bumps-main-header flex flex-col items-center pt-4 relative">
         <div
           className="absolute"
@@ -81,7 +80,7 @@ export default function Home({
         </div>
         <div
           style={{
-            padding: "3rem",
+            padding: "4rem",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -120,10 +119,12 @@ export default function Home({
 
       <main>
         <div className="content-wrapper">
-          <section id="what">
+          <section>
             <div className="grid grid-cols-3 mt-16 gap-5">
               <div className="col-span-2">
-                <h2 className={`section-heading`}>What is BUMPS?</h2>
+                <h2 className={`section-heading`} id="what">
+                  What is BUMPS?
+                </h2>
                 <div className="callout-heading-sm pt-4">
                   BUMPS is a yearlong competition featuring some of the most
                   challenging and well-established cycling hill climb events in
@@ -155,8 +156,10 @@ export default function Home({
                 return <Hillclimb key={event.title} event={event}></Hillclimb>;
               })}
           </section>
-          <section id="info" className="mt-16">
-            <h2 className={`section-heading`}>Info</h2>
+          <section className="mt-16">
+            <h2 className={`section-heading`} id="info">
+              Info
+            </h2>
             <div className="callout-heading pt-4">
               The scoring system prioritizes fast times, similar to a time
               trial, over your finishing position.
@@ -208,7 +211,7 @@ export default function Home({
           <section id="results" className="mt-16">
             <div className="grid grid-cols-2 mt-8 gap-5">
               <div>
-                <h2 className={`section-heading `}>Results</h2>
+                <h3 className="subcategory-heading">Categories</h3>
                 <div className="callout-heading-sm pt-4">
                   Participation in any of the series events automatically
                   qualifies racers for the BUMPS series.
