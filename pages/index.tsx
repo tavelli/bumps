@@ -12,7 +12,7 @@ import bumpsJerseys from "../public/jserseys.png";
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
 
 import {Navigation} from "@/app/components/Navigation";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 interface Champion {
   name: string;
@@ -69,16 +69,19 @@ export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const rando = Math.round(Math.random());
+  const [rando, setRando] = useState<number | null>(null);
+
   let champ: Champion;
 
   useEffect(() => {
-    if (rando === 0) {
-      champ = cogburn;
-    } else {
-      champ = kristen;
-    }
-  });
+    setRando(Math.round(Math.random()));
+  }, []);
+
+  if (rando === 0) {
+    champ = cogburn;
+  } else {
+    champ = kristen;
+  }
 
   return (
     <div className={uniteaSans.className}>
