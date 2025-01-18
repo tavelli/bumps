@@ -13,6 +13,9 @@ import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
 
 import {Navigation} from "@/app/components/Navigation";
 
+interface Champion {
+  name: string;
+}
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
 }
@@ -40,6 +43,14 @@ const HOMEPAGE_QUERY = `query Events {
 
 const numberOfRaces = "four";
 
+const cogburn: Champion = {
+  name: "Cameron Cogburn",
+};
+
+const kristen: Champion = {
+  name: "Kristen Kulchinsky",
+};
+
 export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
   context
 ) => {
@@ -57,6 +68,15 @@ export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const rando = Math.round(Math.random());
+  let champ: Champion;
+
+  if (rando === 0) {
+    champ = cogburn;
+  } else {
+    champ = kristen;
+  }
+
   return (
     <div className={uniteaSans.className}>
       <Head>
@@ -66,7 +86,9 @@ export default function Home({
           content="A cycling hillclimb series featuring some of the most iconic climbs in the Northeast USA."
         />
       </Head>
-      <header className="bumps-main-header flex flex-col items-center pt-4 relative">
+      <header
+        className={`bumps-main-header flex flex-col items-center pt-4 relative bumps-main-header-champ-${rando}`}
+      >
         <div
           className="absolute"
           style={{top: "0px", left: "0px", width: "100%"}}

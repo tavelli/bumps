@@ -113,7 +113,6 @@ nav a:hover {
 }
 
 .bumps-main-header {
-  background-image: url("../public/bumps-hero-photo-bg.webp");
   background-color: #17201ca3;
   background-blend-mode: overlay;
   background-size: cover;
@@ -123,6 +122,14 @@ nav a:hover {
   min-height: 500px;
   color: #fff;
   display: grid;
+}
+
+.bumps-main-header-champ-0 {
+  background-image: url("../public/headers/kulchinsky.webp");
+}
+
+.bumps-main-header-champ-1 {
+  background-image: url("../public/headers/cogburn.webp");
 }
 
 .bumps-nav {
