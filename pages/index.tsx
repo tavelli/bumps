@@ -12,6 +12,7 @@ import bumpsJerseys from "../public/jserseys.png";
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
 
 import {Navigation} from "@/app/components/Navigation";
+import {useEffect} from "react";
 
 interface Champion {
   name: string;
@@ -71,11 +72,13 @@ export default function Home({
   const rando = Math.round(Math.random());
   let champ: Champion;
 
-  if (rando === 0) {
-    champ = cogburn;
-  } else {
-    champ = kristen;
-  }
+  useEffect(() => {
+    if (rando === 0) {
+      champ = cogburn;
+    } else {
+      champ = kristen;
+    }
+  });
 
   return (
     <div className={uniteaSans.className}>
