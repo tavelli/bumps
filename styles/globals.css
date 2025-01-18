@@ -117,7 +117,7 @@ nav a:hover {
   background-blend-mode: overlay;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center bottom;
+
   height: 100vh;
   min-height: 500px;
   color: #fff;
@@ -126,10 +126,12 @@ nav a:hover {
 
 .bumps-main-header-champ-0 {
   background-image: url("../public/headers/cogburn.webp");
+  background-position: center bottom;
 }
 
 .bumps-main-header-champ-1 {
   background-image: url("../public/headers/kulchinsky.webp");
+  background-position: 70% bottom;
 }
 
 .champion-credit {
