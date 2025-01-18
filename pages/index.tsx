@@ -142,6 +142,7 @@ export default function Home({
             States.
           </p> */}
         </div>
+        <div className="champion-credit text-sm">2024 winner {champ.name}</div>
       </header>
 
       <main>

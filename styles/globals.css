@@ -125,11 +125,20 @@ nav a:hover {
 }
 
 .bumps-main-header-champ-0 {
-  background-image: url("../public/headers/kulchinsky.webp");
+  background-image: url("../public/headers/cogburn.webp");
 }
 
 .bumps-main-header-champ-1 {
-  background-image: url("../public/headers/cogburn.webp");
+  background-image: url("../public/headers/kulchinsky.webp");
+}
+
+.champion-credit {
+  position: absolute;
+  width: 100%;
+  bottom: 12px;
+  opacity: 0.7;
+  padding: 0 12px;
+  text-align: center;
 }
 
 .bumps-nav {
@@ -160,6 +169,9 @@ nav a:hover {
   }
   .hill-event {
     width: 400px;
+  }
+  .champion-credit {
+    text-align: right;
   }
 }
 @media only screen and (min-width: 1024px) {
