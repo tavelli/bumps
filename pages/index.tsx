@@ -165,7 +165,7 @@ export default function Home({
               The scoring system prioritizes fast times, similar to a time
               trial, over your finishing position.
             </div>
-            <p className="text-lg">
+            <p className="text-lg pt-2">
               We use a unique formula that takes into account your finishing
               time, the fastest time, and the average time to determine the
               number of points you will receive for each event. The fastest
@@ -232,9 +232,13 @@ export default function Home({
                   </div>
                 </div>
 
-                <div className={`pt-2 `}>Overall unicycle</div>
+                <div className={`pt-2 `}>
+                  <em>Overall unicycle</em>
+                </div>
 
-                <div className={`pt-2 `}>Overall tandem</div>
+                <div className={`pt-2 `}>
+                  <em>Overall tandem</em>
+                </div>
 
                 <p className="pt-4">
                   * Age categories are determined by a rider&apos;s age at the
@@ -249,8 +253,14 @@ export default function Home({
               <div>
                 <h3 className="subcategory-heading">Sponsors</h3>
                 <p className="pt-2 pb-2">
-                  Interested in sponsoring the BUMPS series? Drop us a line at
-                  info@bumpshillclimb.com!
+                  Interested in sponsoring the BUMPS series? Drop us a line at{" "}
+                  <a
+                    className="body-link"
+                    href="mailto:info@bumpshillclimb.com"
+                  >
+                    info@bumpshillclimb.com
+                  </a>
+                  !
                 </p>
               </div>
               <div>
