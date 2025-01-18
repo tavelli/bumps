@@ -26,24 +26,28 @@ type Props = {
   event: HillclimbEvent;
 };
 
+const HillPhoto: FunctionComponent<Props> = ({event}) => (
+  <Image
+    src={event.aiCoverPhoto.url}
+    className="rounded-lg"
+    alt={event.title}
+    sizes="100vw"
+    style={{
+      width: "100%",
+      height: "auto",
+    }}
+    width={400}
+    height={200}
+  />
+);
+
 export const Hillclimb: FunctionComponent<Props> = ({event}) => (
   <div className="mb-4 md:mb-6 hill-event">
     <div className="relative">
       <div className="absolute top-3 right-3 hill-category">
         <span>{event.category}</span>
       </div>
-      <Image
-        src={event.aiCoverPhoto.url}
-        className="rounded-lg"
-        alt={event.title}
-        sizes="100vw"
-        style={{
-          width: "100%",
-          height: "auto",
-        }}
-        width={400}
-        height={200}
-      />
+      <HillPhoto event={event} />
     </div>
     <div className="hill-header pt-2">
       <div className={`font-bold text-lg `}>

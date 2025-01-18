@@ -29,6 +29,7 @@ h1 {
   border-radius: 4px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  display: inline-block;
 }
 
 .button-link {
