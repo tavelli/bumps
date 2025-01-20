@@ -120,7 +120,7 @@ export default function Home({
           <Image
             src={bumpsLogoLetters}
             alt="Bike up Mountain Point Series Logo"
-            width={250}
+            width={450}
             priority
           />
 
