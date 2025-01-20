@@ -1,4 +1,5 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import {uniteaSans} from "@/app/fonts";
+import {Html, Head, Main, NextScript} from "next/document";
 import Script from "next/script";
 
 export default function Document() {
@@ -25,9 +26,9 @@ export default function Document() {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#0f0101" />
       </Head>
-      <body>
+      <body className={`${uniteaSans.variable}`}>
         <Main />
         <NextScript />
         <Script

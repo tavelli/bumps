@@ -1,15 +1,23 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import {GetStaticProps, InferGetStaticPropsType} from "next";
 import Image from "next/image";
 import Head from "next/head";
+import {uniteaSans} from "@/app/fonts";
+import {request} from "../app/lib/datocms";
+import bumpsLogoLetters from "../public/bumps-logo-letters.svg";
+import cyclingHeroLogo from "../public/cycling-hero-white.svg";
+import bumpsInfographic from "../public/infographic.svg";
+import bumpsOldLogo from "../public/bumps-old-logo.png";
+import bumpsJerseys from "../public/jserseys.png";
 
-import { Righteous } from "next/font/google";
+import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
 
-import { request } from "../app/lib/datocms";
-import bumpsLogo from "../public/bumps-logo.png";
-import cyclingHeroLogo from "../public/cycling-hero-orange.svg";
+import {Navigation} from "@/app/components/Navigation";
+import {useEffect, useState} from "react";
 
-import { Hillclimb, HillclimbEvent } from "@/app/components/HillclimbEvent";
-
+interface Champion {
+  name: string;
+  photoCredit: string;
+}
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
 }
@@ -17,16 +25,37 @@ interface HomepageQuery {
 const HOMEPAGE_QUERY = `query Events {
     allEvents {
       date
+      location
       title
       registration
       results
       note
+      category
+      gradient
+      distance
+      elevationGain
+      aiCoverPhoto {
+        url
+      }
       coverPhoto {
         url
       }
     }
 }`;
-export const getStaticProps: GetStaticProps<{ data: HomepageQuery }> = async (
+
+const numberOfRaces = "four";
+
+const cogburn: Champion = {
+  name: "Cameron Cogburn",
+  photoCredit: "Joe Viger Photography (JoeViger.com)",
+};
+
+const kristen: Champion = {
+  name: "Kristen Kulchinsky",
+  photoCredit: "Joe Viger Photography (JoeViger.com)",
+};
+
+export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
   context
 ) => {
   const data = await request({
@@ -36,17 +65,29 @@ export const getStaticProps: GetStaticProps<{ data: HomepageQuery }> = async (
     excludeInvalid: true,
   });
   return {
-    props: { data },
+    props: {data},
   };
 };
-
-const righteous = Righteous({ weight: "400", subsets: ["latin"] });
 
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [rando, setRando] = useState<number | null>(null);
+
+  let champ: Champion;
+
+  useEffect(() => {
+    setRando(Math.round(Math.random()));
+  }, []);
+
+  if (rando === 0) {
+    champ = cogburn;
+  } else {
+    champ = kristen;
+  }
+
   return (
-    <div className={`justify-between  min-h-screen ${righteous.className}`}>
+    <div className={uniteaSans.className}>
       <Head>
         <title>Bike Up the Mountain Point Series (BUMPS)</title>
         <meta
@@ -54,204 +95,233 @@ export default function Home({
           content="A cycling hillclimb series featuring some of the most iconic climbs in the Northeast USA."
         />
       </Head>
-      <header className="flex flex-col items-center pt-4 pb-8 md:p-8 lg:p-10 ">
-        <Image
-          src={bumpsLogo}
-          alt="Bike up Mountain Point Series Logo"
-          width={250}
-          className="pl-4 pr-4 md:pl-0 md:pr-0"
-          priority
-        />
-        <h1 className="sr-only">Bike Up the Mountain Points Series (BUMPS)</h1>
-        <p className="text-xl sr-only">
-          A cycling hillclimb series featuring some of the most iconic climbs in
-          the Northeast USA.
-        </p>
-      </header>
-      <section className="flex flex-col items-center mt-4 pt-6 mb-2 pb-2  presented-by">
-        <a target="_blank" rel="noopener" href="https://cyclinghero.cc/">
+      <header
+        className={`bumps-main-header flex flex-col items-center pt-4 relative bumps-main-header-champ-${rando}`}
+      >
+        <div
+          className="absolute"
+          style={{top: "0px", left: "0px", width: "100%"}}
+        >
+          <Navigation />
+        </div>
+        <div
+          style={{
+            padding: "3rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <h1 className="section-heading italic bold pb-4 text-center">
+            Bike Up the Mountain Points Series
+          </h1>
+
           <Image
-            src={cyclingHeroLogo}
-            alt="Cycling Hero"
-            width={200}
+            src={bumpsLogoLetters}
+            alt="Bike up Mountain Point Series Logo"
+            width={250}
             priority
           />
-        </a>
-        <h3 className="p-4 text-sm md:text-md text-gray-500">Presented by</h3>
-      </section>
-      <nav className="nav grid gap-4 md:grid-cols-4 pb-12 pt-12 justify-items-center">
-        <a href="#overview" className="md:text-lg lg:text-xl">
-          Overview
-        </a>
-        <a href="#points" className="md:text-lg lg:text-xl">
-          Points System
-        </a>
-        <a href="#prizes" className="md:text-lg lg:text-xl">
-          Prizes
-        </a>
-        <a
-          target="_blank"
-          rel="noopener"
-          href="https://www.road-results.com/BUMPS"
-          className="md:text-lg lg:text-xl"
-        >
-          Series Results
-        </a>
-      </nav>
-      <main>
-        <section className="hill-listing">
-          {data.allEvents
-            .sort((a, b) => a.date.localeCompare(b.date))
-            .map((event) => {
-              if (event.results || event.registration) {
-                return (
-                  <a
-                    className="hill-link"
-                    href={event.results ? event.results : event.registration}
-                    key={event.title}
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <Hillclimb key={event.title} event={event}></Hillclimb>
-                  </a>
-                );
-              }
-              return <Hillclimb key={event.title} event={event}></Hillclimb>;
-            })}
-        </section>
-        <section
-          id="overview"
-          className="prose body-text mt-0 p-8 md:mt-12 md:text-lg"
-        >
-          <h2>Overview</h2>
-          <p>
-            BUMPS, short for Bike Up the Mountain Points Series, is a yearlong
-            competition featuring some of the most challenging and
-            well-established cycling hill climb events in the Northeast United
-            States.
-          </p>
-          <p>
-            Entering a BUMPS event includes automatic entry into the overall
-            series standings. Riders accumulate points in up to three races, and
-            those entering more than three races are scored based on their best
-            three results.
-          </p>
-          <p>
-            Each event is run by an independent organizer. Event formats and
-            prizes are determined independently. BUMPS aims to bring additional
-            acknowledgment to riders who enjoy the challenge of climbing.
-          </p>
-        </section>
-        <section
-          id="points"
-          className="prose body-text mt-0 p-8 md:mt-6 md:text-lg"
-        >
-          <h2>Points System</h2>
-          <p>
-            We use a unique formula that takes into account your finishing time,
-            the fastest time, and the average time to determine the number of
-            points you will receive for each event. The fastest rider earns 100
-            points, and the average finish time earns 50 points. If a rider
-            finishes with a time that is twice the average time or slower, they
-            will receive one point.
-          </p>
-          <p>
-            The scoring system prioritizes fast times, similar to a time trial,
-            over your finishing position.
-          </p>
-          <p>
-            To calculate your points, use this equation:
-            <br />
-            Points = 100 - 50 * [(Your Time - Fastest Time) / (Average Time -
-            Fastest Time)]
-          </p>
-          <p className="italic">
-            Example: In a race where the fastest time is 1:00 and the average
-            finish time is 1:30: Finishing in 1:15 earns 75 points, 1:30 earns
-            50 points, 1:45 earns 25 points, and finish times of 2:00 or slower
-            earn one point.
-          </p>
 
-          <p>
-            Each event will utilize its own timing system to determine category
-            winners and distribute event-specific awards. The results of each
-            race will subsequently be incorporated into the BUMPS scoring
-            system, with the best <b>four</b> race scores counting towards each
-            rider&apos;s total. Participation in any of the series events
-            automatically qualifies racers for the BUMPS series.
-          </p>
-          <h3 className="bold">Categories</h3>
-          <p>
-            Male: Overal, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
-            75-79, 80+
-            <br />
-            Female: Overall, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
-            75-79, 80+
-            <br />
-            Overall unicycle
-            <br />
-            Overall tandem
-            <br />
-          </p>
-          <p>
-            * Age categories are determined by a rider&apos;s age at the end of
-            the year. Please note that your age category for individual races
-            may differ from that of the BUMPS series.
-          </p>
-          <p>
-            Series Results:{" "}
-            <a
-              target="_blank"
-              rel="noopener"
-              href="https://www.road-results.com/BUMPS"
-            >
-              road-results.com/BUMPS
-            </a>
-          </p>
-        </section>
-        <section
-          className="prose body-text mt-0 p-8 md:mt-6 md:text-lg"
-          id="prizes"
-        >
-          <h2>Prizes</h2>
-          <p>
-            As part of this year&apos;s sponsorship{" "}
-            <a href="https://cyclinghero.cc/">CyclingHero</a> will award a free
-            trip to the winner of both the men&apos;s and women&apos;s overall
-            categories!! <p></p>
-            These trips are valued at approximately <strong>$2,000</strong> per
-            person and include airport pickup and return, accommodations and
-            breakfasts, routes, use of a Hammerhead computer, luggage transfers,
-            and daily road support as needed.
-          </p>
-        </section>
-        <section className="prose body-text mt-0 p-8 md:mt-6 md:text-lg">
-          <h2>Sponsors</h2>
-          <p>
-            <div className="text-m pb-4">2024 Title Sponsor</div>
-            <a target="_blank" rel="noopener" href="https://cyclinghero.cc/">
+          <div className="heading-splash">Hill Climb Series</div>
+
+          <div className="pt-8 text-center">
+            <div className="uppercase text-sm">presented by</div>
+            <a href="https://cyclinghero.cc/" target="_blank" rel="noopener">
               <Image
                 src={cyclingHeroLogo}
                 alt="Cycling Hero"
-                width={200}
+                width={175}
+                className="pt-2"
                 priority
               />
             </a>
-            <br />
-          </p>
-          <p>
-            Thanks to{" "}
-            <a target="_blank" rel="noopener" href="https://pjammcycling.com/">
-              PJAMM Cycling
-            </a>{" "}
-            for helping promote the series and providing photography for
-            Ascutney, Mt. Washington, Greylock and Allen Clark events!
-          </p>
-          <p>
-            Interested in sponsoring the BUMPS series? Drop us a line at
-            info@bumpshillclimb.com!
-          </p>
-        </section>
+          </div>
+
+          {/* <p className="pt-14" style={{maxWidth: "340px", textAlign: "center"}}>
+            A yearlong competition featuring some of the most challenging and
+            well-established cycling hill climb events in the Northeast United
+            States.
+          </p> */}
+        </div>
+        <div className="credits">
+          <div className="photo-credit text-sm">{champ.photoCredit}</div>
+          <div className="champion-credit text-sm">
+            <span className="">2024 winner</span> {champ.name}
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <div className="content-wrapper">
+          <section>
+            <div className="grid md:grid-cols-3 mt-16 gap-5">
+              <div className="col-span-2">
+                <h2 className={`section-heading`} id="what">
+                  What is BUMPS?
+                </h2>
+                <div className="callout-heading-sm pt-4">
+                  BUMPS is a yearlong competition featuring some of the most
+                  challenging and well-established cycling hill climb events in
+                  the Northeast United States.
+                </div>
+
+                <p className="text-lg pt-2">
+                  BUMPS aims to bring additional acknowledgment to riders who
+                  enjoy the challenge of climbing.
+                </p>
+                <p className="text-lg pt-2">
+                  Each event is run by an independent organizer. Event formats
+                  and prizes are determined independently.
+                </p>
+              </div>
+              <div className="justify-self-center">
+                <Image src={bumpsInfographic} alt="" width={250} />
+              </div>
+            </div>
+          </section>
+
+          <h2 id="events" className={`mt-16 section-heading`}>
+            Events
+          </h2>
+          <div className="callout-heading pt-4"></div>
+          <p className="text-lg"> </p>
+          <section className="hill-listing pt-2">
+            {data.allEvents
+              .sort((a, b) => a.date.localeCompare(b.date))
+              .map((event) => {
+                return <Hillclimb key={event.title} event={event}></Hillclimb>;
+              })}
+          </section>
+          <section className="mt-16">
+            <h2 className={`section-heading`} id="info">
+              Info
+            </h2>
+            <div className="callout-heading pt-4">
+              The scoring system prioritizes fast times, similar to a time
+              trial, over your finishing position.
+            </div>
+            <p className="text-lg pt-2">
+              We use a unique formula that takes into account your finishing
+              time, the fastest time, and the average time to determine the
+              number of points you will receive for each event. The fastest
+              rider earns 100 points, and the average finish time earns 50
+              points. If a rider finishes with a time that is twice the average
+              time or slower, they will receive one point.
+            </p>
+
+            <p className="text-lg pt-2">
+              Riders accumulate points in{" "}
+              <strong style={{color: "#ffd333"}}>
+                up to {numberOfRaces} races
+              </strong>
+              , and those entering more than {numberOfRaces} races are scored
+              based on their best {numberOfRaces} results.
+            </p>
+
+            <div className="grid md:grid-cols-2 mt-8 gap-5">
+              <div>
+                <h3 className="subcategory-heading">Points System</h3>
+                <p className="pt-2 pb-2">
+                  To calculate your points, use this equation:
+                </p>
+                <p className="bold pt-2 pb-2">
+                  Points = 100 - 50 * [(Your Time - Fastest Time) / (Average
+                  Time - Fastest Time)]
+                </p>
+                <p className="italic pt-2 pb-2">
+                  Example: In a race where the fastest time is 1:00 and the
+                  average finish time is 1:30: Finishing in 1:15 earns 75
+                  points, 1:30 earns 50 points, 1:45 earns 25 points, and finish
+                  times of 2:00 or slower earn one point.
+                </p>
+                <p className=" pt-2 pb-2">
+                  Each event will utilize its own timing system to determine
+                  category winners and distribute event-specific awards. The
+                  results of each race will subsequently be incorporated into
+                  the BUMPS scoring system, with the best <b>{numberOfRaces}</b>{" "}
+                  race scores counting towards each rider&apos;s total.
+                  Participation in any of the series events automatically
+                  qualifies racers for the BUMPS series.
+                </p>
+              </div>
+              <div>
+                <h3 className="subcategory-heading">Categories</h3>
+
+                <div>
+                  <div className={`pt-2 `}>
+                    <em>Male</em>
+                  </div>
+                  <div>
+                    Overall, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
+                    75-79, 80+
+                  </div>
+                </div>
+
+                <div>
+                  <div className={`pt-2 `}>
+                    <em>Female</em>
+                  </div>
+                  <div>
+                    Overall, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
+                    75-79, 80+
+                  </div>
+                </div>
+
+                <div className={`pt-2 `}>
+                  <em>Overall unicycle</em>
+                </div>
+
+                <div className={`pt-2 `}>
+                  <em>Overall tandem</em>
+                </div>
+
+                <p className="pt-4">
+                  * Age categories are determined by a rider&apos;s age at the
+                  end of the year. Please note that your age category for
+                  individual races may differ from that of the BUMPS series.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section id="results" className="mt-16">
+            <div className="grid md:grid-cols-2 mt-8 gap-5">
+              <div>
+                <h3 className="subcategory-heading">Sponsors</h3>
+                <p className="pt-2 pb-2">
+                  Interested in sponsoring the BUMPS series? Drop us a line at{" "}
+                  <a
+                    className="body-link"
+                    href="mailto:info@bumpshillclimb.com"
+                  >
+                    info@bumpshillclimb.com
+                  </a>
+                  !
+                </p>
+              </div>
+              <div>
+                <Image src={bumpsJerseys} alt="Leader Jerseys" width={300} />
+              </div>
+            </div>
+          </section>
+          <section>
+            <div
+              className="flex flex-col justify-center items-center text-center"
+              style={{marginTop: "10rem"}}
+            >
+              <div>
+                <Image
+                  src={bumpsOldLogo}
+                  alt="Old Bumps logo"
+                  width={150}
+                  className="pb-2"
+                />
+              </div>
+              <div className="uppercase">since 2013</div>
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   );
