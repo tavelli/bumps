@@ -57,12 +57,12 @@ export const Hillclimb: FunctionComponent<Props> = ({event}) => (
         })}{" "}
         ft <span className="pl-2 pr-2">•</span> {event.gradient}%
       </div>
-      <h3 className={`hill-title text-3xl pt-2 pb-2`}>{event.title}</h3>
+      <h3 className={`hill-title text-3xl pt-2 pb-1`}>{event.title}</h3>
       <p className="hill-date  text-lg">
         {format(parseISO(event.date), "PP")}{" "}
         <span className="pl-2 pr-2">•</span> {event.location}
       </p>
-      <div className={`pt-6`}>
+      <div className={`pt-4`}>
         {event.results ? (
           <a
             target="_blank"
