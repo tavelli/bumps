@@ -16,6 +16,7 @@ import {useEffect, useState} from "react";
 
 interface Champion {
   name: string;
+  photoCredit: string;
 }
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
@@ -46,10 +47,12 @@ const numberOfRaces = "four";
 
 const cogburn: Champion = {
   name: "Cameron Cogburn",
+  photoCredit: "Joe Viger Photography (JoeViger.com)",
 };
 
 const kristen: Champion = {
   name: "Kristen Kulchinsky",
+  photoCredit: "Joe Viger Photography (JoeViger.com)",
 };
 
 export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
@@ -142,7 +145,12 @@ export default function Home({
             States.
           </p> */}
         </div>
-        <div className="champion-credit text-sm">2024 winner {champ.name}</div>
+        <div className="credits">
+          <div className="photo-credit text-sm">{champ.photoCredit}</div>
+          <div className="champion-credit text-sm">
+            <span className="">2024 winner</span> {champ.name}
+          </div>
+        </div>
       </header>
 
       <main>
