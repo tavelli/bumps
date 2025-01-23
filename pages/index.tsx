@@ -124,7 +124,7 @@ export default function Home({
             priority
           />
 
-          <div className="heading-splash">Hill Climb Series</div>
+          <div className="heading-splash">Hill Climb Championship</div>
 
           <div className="pt-8 text-center">
             <div className="uppercase text-sm">presented by</div>
