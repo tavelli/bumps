@@ -6,7 +6,7 @@ import {request} from "../app/lib/datocms";
 import bumpsLogoLetters from "../public/bumps-logo-letters.svg";
 import cyclingHeroLogo from "../public/cycling-hero-white.svg";
 import bumpsInfographic from "../public/infographic.svg";
-import bumpsOldLogo from "../public/bumps-old-logo.png";
+import bumpsNewLogo from "../public/bumps-logo-badge.png";
 import bumpsJerseys from "../public/jserseys.png";
 
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
@@ -87,7 +87,7 @@ export default function Home({
   }
 
   return (
-    <div className={uniteaSans.className}>
+    <div className={`full-height ${uniteaSans.className}`}>
       <Head>
         <title>Bike Up the Mountain Point Series (BUMPS)</title>
         <meta
@@ -96,7 +96,7 @@ export default function Home({
         />
       </Head>
       <header
-        className={`bumps-main-header flex flex-col items-center pt-4 relative bumps-main-header-champ-${rando}`}
+        className={`bumps-main-header full-height flex flex-col items-center pt-4 relative bumps-main-header-champ-${rando}`}
       >
         <div
           className="absolute"
@@ -305,20 +305,20 @@ export default function Home({
               </div>
             </div>
           </section>
-          <section>
+          <section style={{paddingBottom: "3rem"}}>
             <div
               className="flex flex-col justify-center items-center text-center"
               style={{marginTop: "10rem"}}
             >
               <div>
                 <Image
-                  src={bumpsOldLogo}
-                  alt="Old Bumps logo"
-                  width={150}
-                  className="pb-2"
+                  src={bumpsNewLogo}
+                  alt="BUMPS logo"
+                  width={222}
+                  className="pb-4"
                 />
               </div>
-              <div className="uppercase">since 2013</div>
+              <div className="uppercase text-lg">since 2013</div>
             </div>
           </section>
         </div>
