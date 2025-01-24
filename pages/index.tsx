@@ -6,7 +6,7 @@ import {request} from "../app/lib/datocms";
 import bumpsLogoLetters from "../public/bumps-logo-letters.svg";
 import cyclingHeroLogo from "../public/cycling-hero-white.svg";
 import bumpsInfographic from "../public/infographic.svg";
-import bumpsOldLogo from "../public/bumps-old-logo.png";
+import bumpsNewLogo from "../public/bumps-logo-badge.png";
 import bumpsJerseys from "../public/jserseys.png";
 
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
@@ -87,7 +87,7 @@ export default function Home({
   }
 
   return (
-    <div className={uniteaSans.className}>
+    <div className={`full-height ${uniteaSans.className}`}>
       <Head>
         <title>Bike Up the Mountain Point Series (BUMPS)</title>
         <meta
@@ -96,7 +96,7 @@ export default function Home({
         />
       </Head>
       <header
-        className={`bumps-main-header flex flex-col items-center pt-4 relative bumps-main-header-champ-${rando}`}
+        className={`bumps-main-header full-height flex flex-col items-center pt-4 relative bumps-main-header-champ-${rando}`}
       >
         <div
           className="absolute"
@@ -285,8 +285,139 @@ export default function Home({
               </div>
             </div>
           </section>
-          <section id="results" className="mt-16">
+          <section className="mt-16">
             <div className="grid md:grid-cols-2 mt-8 gap-5">
+              <div>
+                <h3 className="subcategory-heading">Past champions</h3>
+                <table className="mt-2">
+                  <thead>
+                    <tr>
+                      <th>Year</th>
+                      <th>Men's</th>
+                      <th>Women's</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2024"
+                          target="_blank"
+                        >
+                          2024
+                        </a>
+                      </td>
+                      <td>Cameron Cogburn</td>
+                      <td>Kristen Kulchinski</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2023"
+                          target="_blank"
+                        >
+                          2023
+                        </a>
+                      </td>
+                      <td>Alan Boguslawski</td>
+                      <td>Kristen Kulchinski</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2022"
+                          target="_blank"
+                        >
+                          2022
+                        </a>
+                      </td>
+                      <td>Alan Boguslawski</td>
+                      <td>Sonya Bodick</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2021"
+                          target="_blank"
+                        >
+                          2021
+                        </a>
+                      </td>
+                      <td>Erik Levinsohn</td>
+                      <td>Julie Smith</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2019"
+                          target="_blank"
+                        >
+                          2019
+                        </a>
+                      </td>
+                      <td>Alan Boguslawski</td>
+                      <td>Caroline Roush</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2018"
+                          target="_blank"
+                        >
+                          2018
+                        </a>
+                      </td>
+                      <td>Erik Vandendries</td>
+                      <td>Johanna Lawrence</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2015"
+                          target="_blank"
+                        >
+                          2015
+                        </a>
+                      </td>
+                      <td>Chris Yura</td>
+                      <td>Victoria Di savino</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2014"
+                          target="_blank"
+                        >
+                          2014
+                        </a>
+                      </td>
+                      <td>Chris Yura</td>
+                      <td>Marti Shea</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2013"
+                          target="_blank"
+                        >
+                          2013
+                        </a>
+                      </td>
+                      <td>Eric Follen</td>
+                      <td>Silke Wunderwald</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <div>
                 <h3 className="subcategory-heading">Sponsors</h3>
                 <p className="pt-2 pb-2">
@@ -299,30 +430,27 @@ export default function Home({
                   </a>
                   !
                 </p>
+                <div className="mt-6">
+                  <Image src={bumpsJerseys} alt="Leader Jerseys" width={300} />
+                </div>
               </div>
-              <div>
-                <Image src={bumpsJerseys} alt="Leader Jerseys" width={300} />
-              </div>
-            </div>
-          </section>
-          <section>
-            <div
-              className="flex flex-col justify-center items-center text-center"
-              style={{marginTop: "10rem"}}
-            >
-              <div>
-                <Image
-                  src={bumpsOldLogo}
-                  alt="Old Bumps logo"
-                  width={150}
-                  className="pb-2"
-                />
-              </div>
-              <div className="uppercase">since 2013</div>
             </div>
           </section>
         </div>
       </main>
+      <footer style={{paddingBottom: "3rem"}}>
+        <div className="flex flex-col justify-center items-center text-center">
+          <div>
+            <Image
+              src={bumpsNewLogo}
+              alt="BUMPS logo"
+              width={222}
+              className="pb-4"
+            />
+          </div>
+          <div className="uppercase text-lg">since 2013</div>
+        </div>
+      </footer>
     </div>
   );
 }

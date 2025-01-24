@@ -4,7 +4,7 @@ import Script from "next/script";
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en" className="full-height">
       <Head>
         <link
           rel="apple-touch-icon"
@@ -28,7 +28,7 @@ export default function Document() {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#0f0101" />
       </Head>
-      <body className={`${uniteaSans.variable}`}>
+      <body className={`full-height ${uniteaSans.variable}`}>
         <Main />
         <NextScript />
         <Script
