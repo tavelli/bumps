@@ -309,7 +309,7 @@ export default function Home({
                         </a>
                       </td>
                       <td>Cameron Cogburn</td>
-                      <td>Kristen Kulchinski</td>
+                      <td>Kristen Kulchinsky</td>
                     </tr>
                     <tr>
                       <td>
@@ -322,7 +322,7 @@ export default function Home({
                         </a>
                       </td>
                       <td>Alan Boguslawski</td>
-                      <td>Kristen Kulchinski</td>
+                      <td>Kristen Kulchinsky</td>
                     </tr>
                     <tr>
                       <td>
