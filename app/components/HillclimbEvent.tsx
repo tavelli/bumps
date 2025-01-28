@@ -52,7 +52,7 @@ export const Hillclimb: FunctionComponent<Props> = ({event}) => (
       </div>
       <HillPhoto event={event} />
       <div className="absolute" style={{left: "10px", bottom: "5px"}}>
-        <div className={`text-lg font-bold`}>
+        <div className={`sm:text-lg font-bold`}>
           {event.distance} mi <span className="pl-2 pr-2">•</span>{" "}
           {event.elevationGain.toLocaleString("en-US", {
             maximumFractionDigits: 2,
@@ -60,7 +60,7 @@ export const Hillclimb: FunctionComponent<Props> = ({event}) => (
           ft <span className="pl-2 pr-2">•</span> {event.gradient}%
         </div>
       </div>
-      <div className="absolute" style={{right: "5px", bottom: "5px"}}>
+      <div className="absolute" style={{right: "2px", bottom: "5px"}}>
         <Image
           src={event.gradientProfile.url}
           alt={`gradient profile for ${event.title}`}
