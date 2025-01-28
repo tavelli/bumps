@@ -14,7 +14,7 @@ body {
 }
 
 main {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
 }
 
@@ -196,31 +196,23 @@ nav a:hover {
 }
 
 .content-wrapper {
-  padding: 2rem;
+  padding: 1rem;
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 960px) {
   .content-wrapper {
     padding: 0;
     margin: 0 auto;
-    max-width: 830px;
+    max-width: 930px;
   }
   .hill-listing {
     grid-template-columns: repeat(2, auto);
   }
   .hill-event {
-    width: 400px;
+    width: 450px;
   }
   .heading-splash {
     font-size: 18px;
-  }
-}
-@media only screen and (min-width: 1024px) {
-}
-
-@media only screen and (min-width: 1500px) {
-  .content-wrapper {
-    max-width: 1200px;
   }
 }
 
@@ -229,10 +221,10 @@ nav a:hover {
   gap: 2rem;
 }
 
-@media only screen and (min-width: 1024px) {
-}
-
 @media only screen and (min-width: 1500px) {
+  .content-wrapper {
+    max-width: 1450px;
+  }
   .hill-listing {
     grid-template-columns: repeat(3, auto);
   }
