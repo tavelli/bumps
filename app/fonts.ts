@@ -1,4 +1,10 @@
 import localFont from "next/font/local";
+import {Unbounded} from "next/font/google";
+
+export const unbounded = Unbounded({
+  variable: "--font-unbounded",
+  subsets: ["latin"],
+});
 
 export const uniteaSans = localFont({
   src: [

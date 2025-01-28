@@ -5,9 +5,10 @@ import {uniteaSans} from "@/app/fonts";
 import {request} from "../app/lib/datocms";
 import bumpsLogoLetters from "../public/bumps-logo-letters.svg";
 import cyclingHeroLogo from "../public/cycling-hero-white.svg";
-import bumpsInfographic from "../public/infographic.svg";
-import bumpsNewLogo from "../public/bumps-logo-badge.png";
+import bumpsInfographic from "../public/bumps shapes.svg";
+import bumpsHills from "../public/footerhills.svg";
 import bumpsJerseys from "../public/jserseys.png";
+import bumpsLogoSmall from "../public/BUMPS-logo-small-arrow.svg";
 
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
 
@@ -34,10 +35,13 @@ const HOMEPAGE_QUERY = `query Events {
       gradient
       distance
       elevationGain
+      gradientProfile {
+        url
+      }
       aiCoverPhoto {
         url
       }
-      coverPhoto {
+      aiCoverPhotoAlt {
         url
       }
     }
@@ -158,26 +162,24 @@ export default function Home({
           <section>
             <div className="grid md:grid-cols-3 mt-16 gap-5">
               <div className="col-span-2">
-                <h2 className={`section-heading`} id="what">
-                  What is BUMPS?
-                </h2>
-                <div className="callout-heading-sm pt-4">
+                <h2 className={`section-heading`}>How to enter</h2>
+                {/* <div className="callout-heading-sm pt-4">
                   BUMPS is a yearlong competition featuring some of the most
                   challenging and well-established cycling hill climb events in
                   the Northeast United States.
-                </div>
+                </div> */}
 
+                <div className="callout-heading-sm pt-4">
+                  Riders accumulate points in up to {numberOfRaces} races, and
+                  are scored based on their best {numberOfRaces} results.
+                </div>
                 <p className="text-lg pt-2">
-                  BUMPS aims to bring additional acknowledgment to riders who
-                  enjoy the challenge of climbing.
-                </p>
-                <p className="text-lg pt-2">
-                  Each event is run by an independent organizer. Event formats
-                  and prizes are determined independently.
+                  Participation in any of the series events automatically
+                  qualifies racers for the BUMPS series.
                 </p>
               </div>
               <div className="justify-self-center">
-                <Image src={bumpsInfographic} alt="" width={250} />
+                <Image src={bumpsInfographic} alt="" width={220} />
               </div>
             </div>
           </section>
@@ -185,6 +187,10 @@ export default function Home({
           <h2 id="events" className={`mt-16 section-heading`}>
             Events
           </h2>
+          <p className="text-lg pt-2">
+            Each event is run by an independent organizer. Individual event
+            format and prizes vary by event.
+          </p>
           <div className="callout-heading pt-4"></div>
           <p className="text-lg"> </p>
           <section className="hill-listing pt-2">
@@ -198,11 +204,11 @@ export default function Home({
             <h2 className={`section-heading`} id="info">
               Info
             </h2>
-            <div className="callout-heading pt-4">
+            <div className="callout-heading-sm pt-4">
               The scoring system prioritizes fast times, similar to a time
               trial, over your finishing position.
             </div>
-            <p className="text-lg pt-2">
+            <p className="pt-2">
               We use a unique formula that takes into account your finishing
               time, the fastest time, and the average time to determine the
               number of points you will receive for each event. The fastest
@@ -211,7 +217,7 @@ export default function Home({
               time or slower, they will receive one point.
             </p>
 
-            <p className="text-lg pt-2">
+            <p className="pt-2 font-bold">
               Riders accumulate points in{" "}
               <strong style={{color: "#ffd333"}}>
                 up to {numberOfRaces} races
@@ -438,17 +444,36 @@ export default function Home({
           </section>
         </div>
       </main>
-      <footer style={{paddingBottom: "3rem"}}>
-        <div className="flex flex-col justify-center items-center text-center">
-          <div>
-            <Image
-              src={bumpsNewLogo}
-              alt="BUMPS logo"
-              width={222}
-              className="pb-4"
-            />
+      <footer>
+        <div className="flex flex-col justify-end items-center text-center">
+          <div className="flex items-center flex-col gap-4">
+            <button>
+              <Image
+                src={bumpsLogoSmall}
+                alt="BUMPS logo"
+                width={48}
+                height={48}
+                onClick={() =>
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  })
+                }
+              />
+            </button>
+            <div className="uppercase font-bold">since 2013</div>
           </div>
-          <div className="uppercase text-lg">since 2013</div>
+
+          <Image
+            src={bumpsHills}
+            alt="BUMPS logo"
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
+            height={505}
+            width={1145}
+          />
         </div>
       </footer>
     </div>

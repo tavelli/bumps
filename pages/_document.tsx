@@ -1,4 +1,4 @@
-import {uniteaSans} from "@/app/fonts";
+import {unbounded, uniteaSans} from "@/app/fonts";
 import {Html, Head, Main, NextScript} from "next/document";
 import Script from "next/script";
 
@@ -28,7 +28,9 @@ export default function Document() {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#0f0101" />
       </Head>
-      <body className={`full-height ${uniteaSans.variable}`}>
+      <body
+        className={`full-height ${uniteaSans.variable} ${unbounded.variable}`}
+      >
         <Main />
         <NextScript />
         <Script
