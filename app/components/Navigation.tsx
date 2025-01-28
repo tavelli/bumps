@@ -18,9 +18,6 @@ export const Navigation: FunctionComponent = () => (
     </div>
     <div style={{width: "100%"}}>
       <nav className="bumps-nav-2">
-        <a href="#what" className="hidden lg:inline">
-          What is BUMPS?
-        </a>
         <a href="#events">Events</a>
         <a href="#info" className="hidden md:inline">
           Info

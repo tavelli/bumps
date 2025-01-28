@@ -14,10 +14,13 @@ export interface HillclimbEvent {
   gradient: number;
   distance: number;
   elevationGain: number;
-  coverPhoto: {
+  gradientProfile: {
     url: string;
   };
   aiCoverPhoto: {
+    url: string;
+  };
+  aiCoverPhotoAlt: {
     url: string;
   };
 }
@@ -28,8 +31,8 @@ type Props = {
 
 const HillPhoto: FunctionComponent<Props> = ({event}) => (
   <Image
-    src={event.aiCoverPhoto.url}
-    className="rounded-lg"
+    src={event.aiCoverPhotoAlt.url}
+    className=""
     alt={event.title}
     sizes="100vw"
     style={{
@@ -48,16 +51,26 @@ export const Hillclimb: FunctionComponent<Props> = ({event}) => (
         <span>{event.category}</span>
       </div>
       <HillPhoto event={event} />
+      <div className="absolute" style={{left: "10px", bottom: "5px"}}>
+        <div className={`text-lg font-bold`}>
+          {event.distance} mi <span className="pl-2 pr-2">•</span>{" "}
+          {event.elevationGain.toLocaleString("en-US", {
+            maximumFractionDigits: 2,
+          })}{" "}
+          ft <span className="pl-2 pr-2">•</span> {event.gradient}%
+        </div>
+      </div>
+      <div className="absolute" style={{right: "5px", bottom: "5px"}}>
+        <Image
+          src={event.gradientProfile.url}
+          alt={`gradient profile for ${event.title}`}
+          width={134}
+          height={56}
+        />
+      </div>
     </div>
     <div className="hill-header pt-2">
-      <div className={`font-bold text-lg `}>
-        {event.distance} mi <span className="pl-2 pr-2">•</span>{" "}
-        {event.elevationGain.toLocaleString("en-US", {
-          maximumFractionDigits: 2,
-        })}{" "}
-        ft <span className="pl-2 pr-2">•</span> {event.gradient}%
-      </div>
-      <h3 className={`hill-title text-3xl pt-2 pb-1`}>{event.title}</h3>
+      <h3 className={`hill-title pt-2 pb-1`}>{event.title}</h3>
       <p className="hill-date  text-lg">
         {format(parseISO(event.date), "PP")}{" "}
         <span className="pl-2 pr-2">•</span> {event.location}

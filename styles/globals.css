@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  background: #0f0101;
+  background: #171313;
   color: #fff;
   font-size: 16px;
 }
@@ -19,10 +19,8 @@ main {
 }
 
 footer {
-  background: #eeeae3;
-  color: #000;
-  padding: 3rem 0;
-  margin-top: 3rem;
+  padding-top: 4rem;
+  margin-top: 4rem;
 }
 
 h1 {
@@ -47,7 +45,8 @@ td {
 .disabled-link {
   padding: 12px;
   border: 1px solid #fff;
-  border-radius: 4px;
+  font-weight: 700;
+  line-height: 16px;
   text-transform: uppercase;
   letter-spacing: 1px;
   display: inline-block;
@@ -59,7 +58,8 @@ td {
   background: #fff;
   color: #000;
   text-transform: uppercase;
-  border-radius: 4px;
+  font-weight: 700;
+  line-height: 16px;
   letter-spacing: 1px;
 }
 
@@ -83,7 +83,7 @@ td {
 
 .section-heading {
   font-size: 16px;
-  font-weight: 700;
+  font-family: var(--font-unbounded);
   text-transform: uppercase;
   line-height: 19px;
   letter-spacing: 3px;
@@ -99,16 +99,22 @@ td {
 .callout-heading {
   font-size: 32px;
   line-height: 38px;
+  font-family: var(--font-unbounded);
+  font-weight: 700;
 }
 
 .callout-heading-sm {
   font-size: 24px;
   line-height: 28px;
+  font-family: var(--font-unbounded);
+  font-weight: 700;
 }
 
 .subcategory-heading {
   font-size: 24px;
   line-height: 32px;
+  font-family: var(--font-unbounded);
+  text-transform: uppercase;
 }
 
 .bumps-nav-2 {
@@ -232,9 +238,13 @@ nav a:hover {
   }
 }
 
-/* .hill-event {
-  width: 400px;
-} */
+.hill-title {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: var(--font-unbounded);
+  font-size: 20px;
+  line-height: 24px;
+}
 
 .hill-category {
   background-color: #cc3434;
