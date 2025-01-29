@@ -3,8 +3,7 @@ import Image from "next/image";
 import Head from "next/head";
 import {uniteaSans} from "@/app/fonts";
 import {request} from "../app/lib/datocms";
-import bumpsLogoLetters from "../public/bumps-logo-letters.svg";
-import cyclingHeroLogo from "../public/cycling-hero-white.svg";
+
 import bumpsInfographic from "../public/bumps shapes.svg";
 import bumpsHills from "../public/footerhills.svg";
 import bumpsJerseys from "../public/jserseys.png";
@@ -12,13 +11,8 @@ import bumpsLogoSmall from "../public/BUMPS-logo-small-arrow.svg";
 
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
 
-import {Navigation} from "@/app/components/Navigation";
-import {useEffect, useState} from "react";
+import {Header} from "@/app/components/Header";
 
-interface Champion {
-  name: string;
-  photoCredit: string;
-}
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
 }
@@ -49,16 +43,6 @@ const HOMEPAGE_QUERY = `query Events {
 
 const numberOfRaces = "four";
 
-const cogburn: Champion = {
-  name: "Cameron Cogburn",
-  photoCredit: "Joe Viger Photography (JoeViger.com)",
-};
-
-const kristen: Champion = {
-  name: "Kristen Kulchinsky",
-  photoCredit: "Joe Viger Photography (JoeViger.com)",
-};
-
 export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
   context
 ) => {
@@ -76,20 +60,6 @@ export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [rando, setRando] = useState<number | null>(null);
-
-  let champ: Champion;
-
-  useEffect(() => {
-    setRando(Math.round(Math.random()));
-  }, []);
-
-  if (rando === 0) {
-    champ = cogburn;
-  } else {
-    champ = kristen;
-  }
-
   return (
     <div className={`full-height ${uniteaSans.className}`}>
       <Head>
@@ -99,67 +69,12 @@ export default function Home({
           content="A cycling hillclimb series featuring some of the most iconic climbs in the Northeast USA."
         />
       </Head>
-      <header
-        className={`bumps-main-header full-height flex flex-col items-center pt-4 relative bumps-main-header-champ-${rando}`}
-      >
-        <div
-          className="absolute"
-          style={{top: "0px", left: "0px", width: "100%"}}
-        >
-          <Navigation />
-        </div>
-        <div
-          style={{
-            padding: "3rem",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <h1 className="section-heading italic bold pb-4 text-center">
-            Bike Up the Mountain Points Series
-          </h1>
 
-          <Image
-            src={bumpsLogoLetters}
-            alt="Bike up Mountain Point Series Logo"
-            width={450}
-            priority
-          />
-
-          <div className="heading-splash">Hill Climb Championship</div>
-
-          <div className="pt-8 text-center">
-            <div className="uppercase text-sm">presented by</div>
-            <a href="https://cyclinghero.cc/" target="_blank" rel="noopener">
-              <Image
-                src={cyclingHeroLogo}
-                alt="Cycling Hero"
-                width={175}
-                className="pt-2"
-                priority
-              />
-            </a>
-          </div>
-
-          {/* <p className="pt-14" style={{maxWidth: "340px", textAlign: "center"}}>
-            A yearlong competition featuring some of the most challenging and
-            well-established cycling hill climb events in the Northeast United
-            States.
-          </p> */}
-        </div>
-        <div className="credits">
-          <div className="photo-credit text-sm">{champ.photoCredit}</div>
-          <div className="champion-credit text-sm">
-            <span className="">2024 winner</span> {champ.name}
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main>
         <div className="content-wrapper">
-          <section>
+          <section style={{maxWidth: "900px"}}>
             <div className="grid md:grid-cols-3 mt-16 gap-5">
               <div className="col-span-2">
                 <h2 className={`section-heading`}>How to enter</h2>
@@ -170,12 +85,13 @@ export default function Home({
                 </div> */}
 
                 <div className="callout-heading-sm pt-4">
-                  Riders accumulate points in up to {numberOfRaces} races, and
-                  are scored based on their best {numberOfRaces} results.
+                  Participation in any event automatically qualifies racers for
+                  the BUMPS series.
                 </div>
                 <p className="text-lg pt-2">
-                  Participation in any of the series events automatically
-                  qualifies racers for the BUMPS series.
+                  Racers accumulate points in up to{" "}
+                  <strong>{numberOfRaces}</strong> races, and are scored based
+                  on their <strong>best {numberOfRaces}</strong> results.
                 </p>
               </div>
               <div className="justify-self-center">
@@ -284,9 +200,10 @@ export default function Home({
                 </div>
 
                 <p className="pt-4">
-                  * Age categories are determined by a rider&apos;s age at the
-                  end of the year. Please note that your age category for
-                  individual races may differ from that of the BUMPS series.
+                  * Age categories are determined by a rider&apos;s{" "}
+                  <strong>age at the end of the year</strong>. Please note that
+                  your age category for individual races may differ from that of
+                  the BUMPS series.
                 </p>
               </div>
             </div>
