@@ -37,12 +37,9 @@ export const Header: FunctionComponent = () => {
 
   return (
     <header
-      className={`bumps-main-header full-height flex flex-col items-center pt-4 relative bumps-main-header-champ-${rando}`}
+      className={`bumps-main-header full-height flex flex-col items-center relative bumps-main-header-champ-${rando}`}
     >
-      <div
-        className="absolute z-10"
-        style={{top: "0px", left: "0px", width: "100%"}}
-      >
+      <div className="z-10" style={{width: "100%", alignSelf: "self-start"}}>
         <Navigation />
       </div>
       <div
