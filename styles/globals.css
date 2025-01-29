@@ -120,7 +120,6 @@ td {
 .bumps-nav-2 {
   display: flex;
   justify-content: space-around;
-  padding: 0 2rem;
   margin: 0 auto;
   gap: 3rem;
 }
