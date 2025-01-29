@@ -66,11 +66,10 @@ export const Header: FunctionComponent = () => {
         <div className="heading-splash">Hill Climb Championship</div>
 
         <p
-          style={{maxWidth: "600px", margin: "1rem auto", textAlign: "center"}}
+          style={{maxWidth: "500px", margin: "1rem auto", textAlign: "center"}}
         >
-          A yearlong competition featuring some of the most challenging and
-          well-established cycling hill climb events in the Northeast United
-          States.
+          A yearlong competition featuring some of the most challenging hill
+          climb events in the United States.
         </p>
         <div className="pt-8 text-center">
           <div className="uppercase text-sm">presented by</div>
