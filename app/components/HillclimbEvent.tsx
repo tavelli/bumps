@@ -64,7 +64,7 @@ export const Hillclimb: FunctionComponent<Props> = ({event}) => (
         <Image
           src={event.gradientProfile.url}
           alt={`gradient profile for ${event.title}`}
-          width={134}
+          width={136}
           height={56}
         />
       </div>
