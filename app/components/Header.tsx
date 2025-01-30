@@ -86,8 +86,8 @@ export const Header: FunctionComponent = () => {
       </div>
       <div className="credits z-10">
         <div className="champion-header">2024 Winner</div>
-        <div className="">{champ.name}</div>
-        <div className="text-sm mt-2">
+        <div className="text-sm">{champ.name}</div>
+        <div className="text-sm">
           Photo by{" "}
           <a href="https://www.joeviger.com/" target="_blank">
             Joe Viger
