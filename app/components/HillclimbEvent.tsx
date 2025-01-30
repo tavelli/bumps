@@ -47,7 +47,10 @@ const HillPhoto: FunctionComponent<Props> = ({event}) => (
 export const Hillclimb: FunctionComponent<Props> = ({event}) => (
   <div className="mb-4 md:mb-6 hill-event">
     <div className="relative">
-      <div className="absolute top-3 right-3 hill-category">
+      <div
+        className="absolute hill-category"
+        style={{top: "8px", right: "8px"}}
+      >
         <span>{event.category}</span>
       </div>
       <HillPhoto event={event} />
@@ -60,7 +63,7 @@ export const Hillclimb: FunctionComponent<Props> = ({event}) => (
           ft <span className="pl-2 pr-2">•</span> {event.gradient}%
         </div>
       </div>
-      <div className="absolute" style={{right: "2px", bottom: "5px"}}>
+      <div className="absolute" style={{right: "0", bottom: "5px"}}>
         <Image
           src={event.gradientProfile.url}
           alt={`gradient profile for ${event.title}`}

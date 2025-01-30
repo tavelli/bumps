@@ -210,7 +210,13 @@ nav a:hover {
 }
 
 .content-wrapper {
-  padding: 1rem;
+  padding: 0 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .content-wrapper {
+    padding: 0 2rem;
+  }
 }
 
 @media only screen and (min-width: 960px) {
