@@ -103,7 +103,7 @@ export default function Home({
           <h2 id="events" className={`mt-16 section-heading`}>
             Events
           </h2>
-          <p className="text-lg pt-2">
+          <p className="pt-4">
             Each event is run by an independent organizer. Individual event
             format and prizes vary by event.
           </p>
