@@ -74,7 +74,7 @@ export default function Home({
 
       <main>
         <div className="content-wrapper">
-          <section style={{maxWidth: "900px"}}>
+          <section style={{maxWidth: "900px", margin: "0 auto"}}>
             <div className="grid md:grid-cols-3 mt-16 gap-5">
               <div className="col-span-2">
                 <h2 className={`section-heading`}>How to enter</h2>
