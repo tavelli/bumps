@@ -21,23 +21,23 @@ const kristen: Champion = {
 };
 
 export const Header: FunctionComponent = () => {
-  const [rando, setRando] = useState<number | null>(null);
+  // const [rando, setRando] = useState<number | null>(null);
 
-  let champ: Champion;
+  // let champ: Champion;
 
-  useEffect(() => {
-    setRando(Math.round(Math.random()));
-  }, []);
+  // useEffect(() => {
+  //   setRando(Math.round(Math.random()));
+  // }, []);
 
-  if (rando === 0) {
-    champ = cogburn;
-  } else {
-    champ = kristen;
-  }
+  // if (rando === 0) {
+  //   champ = cogburn;
+  // } else {
+  //   champ = kristen;
+  // }
 
   return (
     <header
-      className={`bumps-main-header full-height flex flex-col items-center relative bumps-main-header-champ-${rando}`}
+      className={`bumps-main-header full-height flex flex-col items-center relative`}
     >
       <div className="z-10" style={{width: "100%", alignSelf: "self-start"}}>
         <Navigation />
@@ -86,7 +86,7 @@ export const Header: FunctionComponent = () => {
       </div>
       <div className="credits z-10">
         <div className="champion-header">2024 Winner</div>
-        <div className="text-sm">{champ.name}</div>
+        {/* <div className="text-sm">{champ.name}</div> */}
         <div className="text-sm">
           Photo by{" "}
           <a href="https://www.joeviger.com/" target="_blank">
