@@ -30,7 +30,11 @@ export default function Document() {
 
         <meta
           property="og:title"
-          content="Bike up the Mountain Points Series"
+          content="Bike Up the Mountain Point Series (BUMPS)"
+        />
+        <meta
+          property="og:description"
+          content="A yearlong contest featuring premier U.S. hill climb races."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://bumpshillclimb.com/" />
