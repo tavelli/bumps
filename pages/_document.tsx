@@ -27,6 +27,17 @@ export default function Document() {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#0f0101" />
+
+        <meta
+          property="og:title"
+          content="Bike up the Mountain Points Series"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://bumpshillclimb.com/" />
+        <meta
+          property="og:image"
+          content="https://bumpshillclimb.com/bumps-social-card.jpg"
+        />
       </Head>
       <body
         className={`full-height ${uniteaSans.variable} ${unbounded.variable}`}
