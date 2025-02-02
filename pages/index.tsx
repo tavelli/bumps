@@ -66,7 +66,7 @@ export default function Home({
         <title>Bike Up the Mountain Point Series (BUMPS)</title>
         <meta
           name="description"
-          content="A cycling hillclimb series featuring some of the most iconic climbs in the Northeast USA."
+          content="A yearlong competition featuring some of the most challenging and well-established cycling hill climb events in the United States."
         />
       </Head>
 
@@ -78,11 +78,6 @@ export default function Home({
             <div className="grid md:grid-cols-3 mt-16 gap-5">
               <div className="col-span-2">
                 <h2 className={`section-heading`}>How to enter</h2>
-                {/* <div className="callout-heading-sm pt-4">
-                  BUMPS is a yearlong competition featuring some of the most
-                  challenging and well-established cycling hill climb events in
-                  the Northeast United States.
-                </div> */}
 
                 <div className="callout-heading-sm pt-4">
                   Participation in any event automatically qualifies racers for
