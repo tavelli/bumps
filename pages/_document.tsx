@@ -42,6 +42,22 @@ export default function Document() {
           property="og:image"
           content="https://bumpshillclimb.com/bumps-social-card.jpg"
         />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="bumpshillclimb.com" />
+        <meta property="twitter:url" content="https://bumpshillclimb.com/" />
+        <meta
+          name="twitter:title"
+          content="Bike Up the Mountain Point Series (BUMPS)"
+        />
+        <meta
+          name="twitter:description"
+          content="A yearlong contest featuring premier U.S. hill climb races."
+        />
+        <meta
+          name="twitter:image"
+          content="https://bumpshillclimb.com/bumps-social-card.jpg"
+        />
       </Head>
       <body
         className={`full-height ${uniteaSans.variable} ${unbounded.variable}`}
