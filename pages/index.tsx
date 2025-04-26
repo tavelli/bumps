@@ -112,6 +112,83 @@ export default function Home({
               })}
           </section>
           <section className="mt-16">
+            <h2 className={`section-heading`} id="involved">
+              Get involved
+            </h2>
+            <p className="pt-2">
+              BUMPS is a volunteer-run cycling hillclimb series built on
+              community, passion, and climbing hard stuff—together. Want to be
+              part of it? Whether you're a rider, sponsor, organizer, or just
+              someone who loves a good hill, there's a way to help.
+            </p>
+
+            <div className="grid md:grid-cols-2 mt-8 gap-5">
+              <div>
+                <h3 className="subcategory-heading">Volunteers</h3>
+                <p className="pt-2">We're looking for people who can:</p>
+                <ul className="list-disc list-inside">
+                  <li>
+                    Promote BUMPS at your local hillclimb (hand out flyers, talk
+                    to riders)
+                  </li>
+                  <li>Help with photography and social posts</li>
+                  <li>Offer creative or logistical help behind the scenes</li>
+                </ul>
+                <p className="pt-2">
+                  <a
+                    className="body-link"
+                    href="mailto:info@bumpshillclimb.com"
+                  >
+                    Email us to get started!
+                  </a>
+                </p>
+              </div>
+              <div>
+                <h3 className="subcategory-heading">Donors and Sponsors</h3>
+                <p>We're seeking support from people and brands who want to:</p>
+                <ul className="list-disc list-inside">
+                  <li>Contribute cash or prizes to support rider awards</li>
+                  <li>Be part of our digital and on-site storytelling</li>
+                  <li>
+                    Reach passionate cyclists, triathletes, and outdoor
+                    communities across the Northeast
+                  </li>
+                </ul>
+                <p className="pt-2">
+                  <a
+                    className="body-link"
+                    href="mailto:info@bumpshillclimb.com"
+                  >
+                    Email us to with your ideas!
+                  </a>
+                </p>
+              </div>
+              <div>
+                <h3 className="subcategory-heading">Event Organizers</h3>
+                <p>Run a hillclimb? We'd love to:</p>
+                <ul className="list-disc list-inside">
+                  <li>
+                    Help bring new riders to your event through series-wide
+                    promotion
+                  </li>
+                  <li>
+                    Offer leaderboard tracking and recognition for your top
+                    finishers
+                  </li>
+                  <li>Share resources to make your race even more impactful</li>
+                </ul>
+                <p className="pt-2">
+                  <a
+                    className="body-link"
+                    href="mailto:info@bumpshillclimb.com"
+                  >
+                    Email us to learn more
+                  </a>
+                </p>
+              </div>
+            </div>
+          </section>
+          <section className="mt-16">
             <h2 className={`section-heading`} id="info">
               Info
             </h2>
@@ -337,9 +414,12 @@ export default function Home({
                 </table>
               </div>
               <div>
-                <h3 className="subcategory-heading">Sponsors</h3>
+                <h3 className="subcategory-heading">Get Involved with BUMPS</h3>
                 <p className="pt-2 pb-2">
-                  Interested in sponsoring the BUMPS series? Drop us a line at{" "}
+                  BUMPS is a volunteer-run cycling hillclimb series built on
+                  community, passion, and climbing hard stuff—together. Want to
+                  be part of it? Whether you're a rider, sponsor, organizer, or
+                  just someone who loves a good hill, there’s a way to help.
                   <a
                     className="body-link"
                     href="mailto:info@bumpshillclimb.com"

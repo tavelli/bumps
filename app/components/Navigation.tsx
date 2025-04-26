@@ -14,12 +14,17 @@ export const Navigation: FunctionComponent = () => (
         <a href="#info" className="hidden md:inline">
           Info
         </a>
+
         <a
           target="_blank"
           rel="noopener"
           href="https://www.road-results.com/BUMPS"
         >
           Results
+        </a>
+
+        <a href="#involved" className="">
+          Get Invovled
         </a>
       </nav>
     </div>
