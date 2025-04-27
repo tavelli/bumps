@@ -115,7 +115,7 @@ export default function Home({
             <h2 className={`section-heading`} id="involved">
               Get involved
             </h2>
-            <p className="pt-2">
+            <p className="pt-2" style={{maxWidth: "800px"}}>
               BUMPS is a volunteer-run cycling hillclimb series built on
               community, passion, and climbing hard stuff—together. Want to be
               part of it? Whether you're a rider, sponsor, organizer, or just
@@ -126,7 +126,7 @@ export default function Home({
               <div>
                 <h3 className="subcategory-heading">Volunteers</h3>
                 <p className="pt-2">We're looking for people who can:</p>
-                <ul className="list-disc list-inside">
+                <ul className="list-disc list-inside mt-4">
                   <li>
                     Promote BUMPS at your local hillclimb (hand out flyers, talk
                     to riders)
@@ -145,8 +145,10 @@ export default function Home({
               </div>
               <div>
                 <h3 className="subcategory-heading">Donors and Sponsors</h3>
-                <p>We're seeking support from people and brands who want to:</p>
-                <ul className="list-disc list-inside">
+                <p className="pt-2">
+                  We're seeking support from people and brands who want to:
+                </p>
+                <ul className="list-disc list-inside mt-4">
                   <li>Contribute cash or prizes to support rider awards</li>
                   <li>Be part of our digital and on-site storytelling</li>
                   <li>
@@ -157,16 +159,26 @@ export default function Home({
                 <p className="pt-2">
                   <a
                     className="body-link"
+                    href="https://www.figma.com/deck/ir0qbVevAwOxcVOfBdOMQX/BUMPS-for-Sponsors"
+                    target="_blank"
+                  >
+                    View sponsor deck
+                  </a>
+                </p>
+
+                <p className="pt-2">
+                  <a
+                    className="body-link"
                     href="mailto:info@bumpshillclimb.com"
                   >
-                    Email us to with your ideas!
+                    Email us to connect!
                   </a>
                 </p>
               </div>
               <div>
                 <h3 className="subcategory-heading">Event Organizers</h3>
-                <p>Run a hillclimb? We'd love to:</p>
-                <ul className="list-disc list-inside">
+                <p className="mt-2">Run a hillclimb? We'd love to:</p>
+                <ul className="list-disc list-inside mt-4">
                   <li>
                     Help bring new riders to your event through series-wide
                     promotion
@@ -180,9 +192,19 @@ export default function Home({
                 <p className="pt-2">
                   <a
                     className="body-link"
+                    href="https://www.figma.com/deck/FGXwSJTEiGEQmdN2MSHOF6/BUMPS-for-Organizers"
+                    target="_blank"
+                  >
+                    View organizer info
+                  </a>
+                </p>
+
+                <p className="pt-2">
+                  <a
+                    className="body-link"
                     href="mailto:info@bumpshillclimb.com"
                   >
-                    Email us to learn more
+                    Email us directly
                   </a>
                 </p>
               </div>
