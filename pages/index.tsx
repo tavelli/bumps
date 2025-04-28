@@ -435,25 +435,6 @@ export default function Home({
                   </tbody>
                 </table>
               </div>
-              <div>
-                <h3 className="subcategory-heading">Get Involved with BUMPS</h3>
-                <p className="pt-2 pb-2">
-                  BUMPS is a volunteer-run cycling hillclimb series built on
-                  community, passion, and climbing hard stuff—together. Want to
-                  be part of it? Whether you're a rider, sponsor, organizer, or
-                  just someone who loves a good hill, there’s a way to help.
-                  <a
-                    className="body-link"
-                    href="mailto:info@bumpshillclimb.com"
-                  >
-                    info@bumpshillclimb.com
-                  </a>
-                  !
-                </p>
-                <div className="mt-6">
-                  <Image src={bumpsJerseys} alt="Leader Jerseys" width={300} />
-                </div>
-              </div>
             </div>
           </section>
         </div>
