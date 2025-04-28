@@ -1,9 +1,8 @@
 import {FunctionComponent, useEffect, useState} from "react";
 import Image from "next/image";
 import bumpsLogoLetters from "../../public/bumps-logo-letters.svg";
-import cyclingHeroLogo from "../../public/cycling-hero-white.svg";
+import mavicLogo from "../../public/mavic-white.png";
 import {Navigation} from "./Navigation";
-import bumpsLogo from "../../public/bumps-log-badge.svg";
 
 interface Champion {
   name: string;
@@ -73,10 +72,10 @@ export const Header: FunctionComponent = () => {
         </p>
         <div className="pt-8 text-center">
           <div className="uppercase text-sm">presented by</div>
-          <a href="https://cyclinghero.cc/" target="_blank" rel="noopener">
+          <a href="https://www.mavic.com/en-us" target="_blank" rel="noopener">
             <Image
-              src={cyclingHeroLogo}
-              alt="Cycling Hero"
+              src={mavicLogo}
+              alt="Mavic"
               width={175}
               className="pt-2"
               priority
