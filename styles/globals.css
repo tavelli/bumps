@@ -147,16 +147,19 @@ nav a:hover {
 }
 
 .bumps-main-header {
-  background-color: #17201ca3;
-  background-blend-mode: overlay;
+  /* background-color: #17201ca3;
+  background-blend-mode: overlay; */
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 600px;
   color: #fff;
   display: grid;
+
+  background-image: url("../public/headers/2024-winners-combined-narrow.webp");
+  background-position: center center;
 }
 
-.bumps-main-header::before {
+/* .bumps-main-header::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -165,7 +168,7 @@ nav a:hover {
   background-repeat: repeat;
   height: 100%;
   width: 100%;
-}
+} */
 
 .bumps-main-header-champ-0 {
   background-image: url("../public/headers/cogburn.webp");
@@ -214,6 +217,10 @@ nav a:hover {
 }
 
 @media only screen and (min-width: 600px) {
+  .bumps-main-header {
+    background-image: url("../public/headers/2024-winners-combined-wide.webp");
+    background-position: center center;
+  }
   .content-wrapper {
     padding: 0 2rem;
   }
