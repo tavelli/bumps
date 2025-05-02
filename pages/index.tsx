@@ -6,7 +6,6 @@ import {request} from "../app/lib/datocms";
 
 import bumpsInfographic from "../public/bumps shapes.svg";
 import bumpsHills from "../public/footerhills.svg";
-import bumpsJerseys from "../public/jserseys.png";
 import bumpsLogoSmall from "../public/BUMPS-logo-small-arrow.svg";
 
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
@@ -93,6 +92,27 @@ export default function Home({
                 <Image src={bumpsInfographic} alt="" width={220} />
               </div>
             </div>
+          </section>
+
+          <section style={{maxWidth: "900px", margin: "2rem auto"}} id="join">
+            <h2 className={`section-heading`}>Stay on top</h2>
+            <p></p>
+            <ul className="list-disc list-inside mt-4">
+              <li className="text-lg">
+                Receive exclusive discounts from BUMPS sponsors
+              </li>
+              <li className="text-lg">
+                Stay up to date on series results, prizes, and more
+              </li>
+            </ul>
+            <a
+              style={{marginTop: "1.5rem"}}
+              className="button-link"
+              data-eo-form-toggle-id="72f08518-2439-11f0-87bf-f949f059b29a"
+              href="#"
+            >
+              Subscribe
+            </a>
           </section>
 
           <h2 id="events" className={`mt-16 section-heading`}>
@@ -471,6 +491,12 @@ export default function Home({
           />
         </div>
       </footer>
+
+      <script
+        async
+        src="https://eocampaign1.com/form/72f08518-2439-11f0-87bf-f949f059b29a.js"
+        data-form="72f08518-2439-11f0-87bf-f949f059b29a"
+      ></script>
     </div>
   );
 }
