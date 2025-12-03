@@ -108,8 +108,8 @@ export default function Home({
             <a
               style={{marginTop: "1.5rem"}}
               className="button-link"
-              data-eo-form-toggle-id="72f08518-2439-11f0-87bf-f949f059b29a"
-              href="#"
+              href="https://bumpshillclimb.substack.com/welcome"
+              target="_blank"
             >
               Subscribe
             </a>
@@ -491,12 +491,6 @@ export default function Home({
           />
         </div>
       </footer>
-
-      <script
-        async
-        src="https://eocampaign1.com/form/72f08518-2439-11f0-87bf-f949f059b29a.js"
-        data-form="72f08518-2439-11f0-87bf-f949f059b29a"
-      ></script>
     </div>
   );
 }
