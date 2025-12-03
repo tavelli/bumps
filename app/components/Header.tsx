@@ -70,7 +70,7 @@ export const Header: FunctionComponent = () => {
           A yearlong competition featuring some of the most challenging hill
           climb events in the United States.
         </p>
-        <div className="pt-8 text-center">
+        {/* <div className="pt-8 text-center">
           <div className="uppercase text-sm">presented by</div>
           <a href="https://www.mavic.com/en-us" target="_blank" rel="noopener">
             <Image
@@ -81,7 +81,7 @@ export const Header: FunctionComponent = () => {
               priority
             />
           </a>
-        </div>
+        </div> */}
       </div>
       <div className="credits z-10">
         <div className="champion-header">2024 Winner</div>
