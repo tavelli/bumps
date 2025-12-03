@@ -339,6 +339,19 @@ export default function Home({
                       <td>
                         <a
                           className="body-link"
+                          href="https://www.road-results.com/?n=series&sn=bumps&y=2025"
+                          target="_blank"
+                        >
+                          2025
+                        </a>
+                      </td>
+                      <td>Joshua Mcdougal</td>
+                      <td>Kristen Kulchinsky</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a
+                          className="body-link"
                           href="https://www.road-results.com/?n=series&sn=bumps&y=2024"
                           target="_blank"
                         >
