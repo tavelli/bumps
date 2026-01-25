@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
@@ -19,10 +19,10 @@
     "date-fns": "^2.30.0",
     "eslint": "8.39.0",
     "graphql-request": "^6.0.0",
-    "next": "15.1.5",
+    "next": "^16.1.4",
     "postcss": "8.4.23",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4"
   },
