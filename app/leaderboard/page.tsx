@@ -4,8 +4,10 @@ import {useSearchParams} from "next/navigation";
 import {Suspense, useState, useEffect} from "react";
 import {uniteaSans} from "@/app/fonts";
 import Filters from "@/app/components/Filters";
+import leaderboardBanner from "@/public/leaderboard_banner.svg";
 
 import {Navigation} from "../components/Navigation";
+import Loading from "./loading";
 
 function LeaderboardContent() {
   const searchParams = useSearchParams();
@@ -72,17 +74,23 @@ function LeaderboardContent() {
 
   return (
     <div className={uniteaSans.className}>
-      <Navigation />
+      <header
+        style={{
+          backgroundImage: `url(${leaderboardBanner.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "262px",
+        }}
+      >
+        <Navigation />
+      </header>
 
       <main className="p-8 max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Leaderboard</h1>
-
+        <h1 className="text-3xl font-bold mb-8">Leaderboard</h1>{" "}
         <Filters years={years} categories={categories} />
-
         {loading ? (
-          <div className="text-center py-8 text-gray-600">
-            Loading leaderboard...
-          </div>
+          <Loading />
         ) : (
           <div className="text-white rounded-lg overflow-hidden">
             <table className="w-full">
