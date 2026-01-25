@@ -19,11 +19,11 @@ export default function Filters({
   };
 
   return (
-    <div className="flex gap-4 mb-8 bg-slate-100 p-4 rounded-lg">
+    <div className="flex gap-4 mb-8">
       <select
         value={searchParams?.get("year") || "2025"}
         onChange={(e) => updateFilter("year", e.target.value)}
-        className="p-2 border rounded"
+        className=""
       >
         {years.map((y: string) => (
           <option key={y} value={y}>
@@ -35,7 +35,7 @@ export default function Filters({
       <select
         value={searchParams?.get("category") || "Overall Men"}
         onChange={(e) => updateFilter("category", e.target.value)}
-        className="p-2 border rounded"
+        className=""
       >
         {categories.map((c: string) => (
           <option key={c} value={c}>

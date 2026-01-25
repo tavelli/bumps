@@ -5,6 +5,8 @@ import {Suspense, useState, useEffect} from "react";
 import {uniteaSans} from "@/app/fonts";
 import Filters from "@/app/components/Filters";
 
+import {Navigation} from "../components/Navigation";
+
 function LeaderboardContent() {
   const searchParams = useSearchParams();
   const [results, setResults] = useState<any[]>([]);
@@ -13,12 +15,37 @@ function LeaderboardContent() {
   const selectedYear = searchParams.get("year") || "2025";
   const selectedCat = searchParams.get("category") || "Overall Men";
 
-  const years = ["2025", "2024", "2023"];
+  const years = [
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2019",
+    "2018",
+    "2015",
+    "2014",
+    "2013",
+  ];
   const categories = [
     "Overall Men",
     "Overall Women",
-    "40-49 Men",
+    "Under 20 Women",
+    "20-29 Women",
+    "30-39 Women",
     "40-49 Women",
+    "50-59 Women",
+    "60-69 Women",
+    "70-79 Women",
+    "80+ Women",
+    "Under 20 Men",
+    "20-29 Men",
+    "30-39 Men",
+    "40-49 Men",
+    "50-59 Men",
+    "60-69 Men",
+    "70-79 Men",
+    "80+ Men",
   ];
 
   useEffect(() => {
@@ -45,36 +72,55 @@ function LeaderboardContent() {
 
   return (
     <div className={uniteaSans.className}>
+      <Navigation />
+
       <main className="p-8 max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">BUMPS Leaderboard</h1>
+        <h1 className="text-3xl font-bold mb-8">Leaderboard</h1>
 
         <Filters years={years} categories={categories} />
 
         {loading ? (
-          <div className="text-center py-8">Loading leaderboard...</div>
+          <div className="text-center py-8 text-gray-600">
+            Loading leaderboard...
+          </div>
         ) : (
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="text-left border-b-2 border-slate-200">
-                <th className="py-2">Rank</th>
-                <th className="py-2">Rider</th>
-                <th className="py-2">Age</th>
-                <th className="py-2 text-right">Points</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results?.map((r, i) => (
-                <tr key={r.result_id} className="border-b hover:bg-slate-50">
-                  <td className="py-2 text-slate-500">{i + 1}</td>
-                  <td className="py-2 font-semibold">{r.rider_name}</td>
-                  <td className="py-2">{r.age_at_race}</td>
-                  <td className="py-2 text-right text-blue-700 font-mono">
-                    {r.points.toFixed(2)}
-                  </td>
+          <div className="text-white rounded-lg overflow-hidden">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-700">
+                  <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide">
+                    Rank
+                  </th>
+                  <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide">
+                    Name
+                  </th>
+                  <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide">
+                    Age
+                  </th>
+                  <th className="py-4 px-6 text-right text-sm font-semibold uppercase tracking-wide">
+                    Points
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {results?.map((r, i) => (
+                  <tr
+                    key={r.id}
+                    className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
+                  >
+                    <td className="py-4 px-6 text-gray-400 text-sm">{i + 1}</td>
+                    <td className="py-4 px-6 font-semibold">{r.rider_name}</td>
+                    <td className="py-4 px-6 text-gray-300 text-sm">
+                      {r.age_at_race}
+                    </td>
+                    <td className="py-4 px-6 text-right font-mono text-base">
+                      {r.season_points.toFixed(2)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </main>
     </div>

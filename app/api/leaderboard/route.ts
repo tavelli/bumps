@@ -16,13 +16,14 @@ export async function GET(request: NextRequest) {
       .from("categorized_results")
       .select("*")
       .eq("year", selectedYear)
-      .order("points", {ascending: false});
+      .order("season_points", {ascending: false})
+      .limit(25);
 
     // Apply Category Logic
     if (!selectedCat.includes("Overall")) {
       query = query.eq("category_label", selectedCat);
     } else {
-      const gender = selectedCat.includes("Men") ? "M" : "F";
+      const gender = selectedCat.includes("Men") ? "M" : "W";
       query = query.eq("gender", gender);
     }
 

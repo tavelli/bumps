@@ -37,6 +37,13 @@ td {
   text-align: left;
 }
 
+select {
+  padding: 8px 12px;
+  border: 1px solid #fff;
+  background-color: #171313;
+  text-transform: uppercase;
+}
+
 #__next,
 .full-height {
   height: 100%;

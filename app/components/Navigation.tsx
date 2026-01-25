@@ -12,20 +12,10 @@ export const Navigation: FunctionComponent = () => (
           Events
         </a>
         <a href="#info" className="hidden md:inline">
-          Info
+          About
         </a>
 
-        <a
-          target="_blank"
-          rel="noopener"
-          href="https://www.road-results.com/BUMPS"
-        >
-          Results
-        </a>
-
-        <a href="#involved" className="">
-          Get Invovled
-        </a>
+        <a href="/leaderboard">Leaderboard</a>
       </nav>
     </div>
     <div className="flex gap-4 justify-center">
