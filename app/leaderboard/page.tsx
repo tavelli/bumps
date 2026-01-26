@@ -82,12 +82,13 @@ function LeaderboardContent() {
           backgroundRepeat: "no-repeat",
           minHeight: "262px",
         }}
+        className="flex flex-col"
       >
-        <Navigation />
+        <Navigation inverse={true} />
+        <h1 className="h1-heading text-center">Leaderboard</h1>
       </header>
 
       <main className="p-8 max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Leaderboard</h1>{" "}
         <Filters years={years} categories={categories} />
         {loading ? (
           <Loading />
