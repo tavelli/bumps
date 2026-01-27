@@ -80,9 +80,8 @@ function LeaderboardContent() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          minHeight: "262px",
         }}
-        className="flex flex-col"
+        className="page-header flex flex-col"
       >
         <Navigation inverse={true} />
         <h1 className="h1-heading text-center">Leaderboard</h1>
@@ -97,17 +96,32 @@ function LeaderboardContent() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-gray-700">
-                  <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide">
+                  <th
+                    className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
+                    style={{width: "100px"}}
+                  >
                     Rank
+                  </th>
+                  <th
+                    className="py-4 px-6 text-right text-sm font-semibold uppercase tracking-wide"
+                    style={{width: "100px"}}
+                  >
+                    Points
                   </th>
                   <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide">
                     Name
                   </th>
-                  <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide">
+                  <th
+                    className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
+                    style={{width: "100px"}}
+                  >
                     Age
                   </th>
-                  <th className="py-4 px-6 text-right text-sm font-semibold uppercase tracking-wide">
-                    Points
+                  <th
+                    className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
+                    style={{width: "175px"}}
+                  >
+                    Races Entered
                   </th>
                 </tr>
               </thead>
@@ -118,12 +132,15 @@ function LeaderboardContent() {
                     className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
                   >
                     <td className="py-4 px-6 text-gray-400 text-sm">{i + 1}</td>
+                    <td className="py-4 px-6 font-mono text-base">
+                      {r.season_points}
+                    </td>
                     <td className="py-4 px-6 font-semibold">{r.rider_name}</td>
                     <td className="py-4 px-6 text-gray-300 text-sm">
                       {r.age_at_race}
                     </td>
-                    <td className="py-4 px-6 text-right font-mono text-base">
-                      {r.season_points.toFixed(2)}
+                    <td className="py-4 px-6 text-center text-gray-300 text-sm">
+                      {r.total_races}
                     </td>
                   </tr>
                 ))}
