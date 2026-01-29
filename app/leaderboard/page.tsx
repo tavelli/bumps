@@ -95,8 +95,10 @@ function LeaderboardContent() {
         <h1 className="h1-heading text-center">Leaderboard</h1>
       </header>
 
-      <main className="p-8 max-w-4xl mx-auto">
-        <Filters years={years} categories={categories} />
+      <main className="max-w-4xl mx-auto">
+        <div className="mt-8 ml-4 lg:ml-0">
+          <Filters years={years} categories={categories} />
+        </div>
         {loading ? (
           <Loading />
         ) : (
