@@ -69,15 +69,11 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
         </div>
       </nav>
 
-      {/* Main Content with Slide Effect */}
-      <div
-        className={`transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? "translate-x-64" : "translate-x-0"
-        }`}
-      >
+      {/* Main Content */}
+      <div>
         <div className="nav-wrapper" style={inverse ? {color: linkColor} : {}}>
           <div>
-            <nav className="flex gap-12">
+            <nav className="flex gap-8">
               <a href="/#events" className="hidden md:inline">
                 Events
               </a>
