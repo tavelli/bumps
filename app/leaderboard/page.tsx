@@ -106,13 +106,13 @@ function LeaderboardContent() {
                 <tr className="border-b border-gray-700">
                   <th
                     className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
-                    style={{width: "100px"}}
+                    style={{width: "80px"}}
                   >
                     Rank
                   </th>
                   <th
                     className="py-4 px-6 text-right text-sm font-semibold uppercase tracking-wide"
-                    style={{width: "100px"}}
+                    style={{width: "80px"}}
                   >
                     Points
                   </th>
@@ -120,13 +120,13 @@ function LeaderboardContent() {
                     Name
                   </th>
                   <th
-                    className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
+                    className="hidden lg:table-cell py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
                     style={{width: "100px"}}
                   >
                     Age
                   </th>
                   <th
-                    className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
+                    className="hidden lg:table-cell py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
                     style={{width: "175px"}}
                   >
                     Races Entered
@@ -146,10 +146,10 @@ function LeaderboardContent() {
                       {r.season_points}
                     </td>
                     <td className="py-4 px-6 font-semibold">{r.rider_name}</td>
-                    <td className="py-4 px-6 text-gray-300 font-mono text-base">
+                    <td className="hidden lg:table-cell py-4 px-6 text-gray-300 font-mono text-base">
                       {r.age_at_race}
                     </td>
-                    <td className="py-4 px-6 text-center text-gray-300 font-mono text-base">
+                    <td className="hidden lg:table-cell py-4 px-6 text-center text-gray-300 font-mono text-base">
                       {r.total_races}
                     </td>
                   </tr>
