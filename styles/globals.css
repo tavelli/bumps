@@ -175,6 +175,11 @@ nav a:hover {
   text-decoration: underline;
 }
 
+.bumps-nav-mobile a,
+.bumps-nav-mobile button {
+  color: #171313;
+}
+
 .body-link {
   text-decoration: underline;
 }
