@@ -157,19 +157,21 @@ function LeaderboardContent() {
               </tbody>
             </table>
             <div className="flex items-center justify-between px-6 py-4 bg-gray-900 border-t border-gray-700">
-              <div className="text-sm text-gray-400">
-                Total Results:{" "}
-                <span className="font-semibold text-white">{totalCount}</span>
+              <div className="text-gray-400">
+                <span className="text-white">
+                  <span className="font-semibold ">{totalCount}</span>{" "}
+                  <span className="text-sm">participants</span>
+                </span>
               </div>
               <div className="flex gap-4">
                 <button
                   onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="px-3 py-1 text-sm font-medium text-gray-300 hover:text-white disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"
+                  className="px-3 py-2 text-sm font-bold uppercase letter-spacing-1 border border-white disabled:border-gray-600 disabled:text-gray-600 disabled:cursor-not-allowed hover:outline hover:outline-2 hover:outline-offset-2 hover:outline-white disabled:hover:outline-none"
                 >
-                  Previous
+                  &lt; Previous
                 </button>
-                <span className="text-sm text-gray-400">
+                {/* <span className="text-sm text-gray-400">
                   Page{" "}
                   <span className="font-semibold text-white">
                     {currentPage}
@@ -178,13 +180,13 @@ function LeaderboardContent() {
                   <span className="font-semibold text-white">
                     {Math.ceil(results.length / itemsPerPage) || 1}
                   </span>
-                </span>
+                </span> */}
                 <button
                   onClick={() => setCurrentPage((p) => p + 1)}
                   disabled={results.length < itemsPerPage}
-                  className="px-3 py-1 text-sm font-medium text-gray-300 hover:text-white disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"
+                  className="px-3 py-2 text-sm font-bold uppercase letter-spacing-1 border border-white disabled:border-gray-600 disabled:text-gray-600 disabled:cursor-not-allowed hover:outline hover:outline-2 hover:outline-offset-2 hover:outline-white disabled:hover:outline-none"
                 >
-                  Next
+                  Next &gt;
                 </button>
               </div>
             </div>
