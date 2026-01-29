@@ -37,6 +37,21 @@ td {
   text-align: left;
 }
 
+select {
+  padding: 8px 12px;
+  padding-right: 30px;
+  border: 1px solid #fff;
+  background-color: #171313;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
 #__next,
 .full-height {
   height: 100%;
@@ -96,6 +111,21 @@ td {
   line-height: 32px;
 }
 
+.h1-heading {
+  font-size: 24px;
+  line-height: 100%;
+  font-family: var(--font-unbounded);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1e1e1e;
+}
+
+@media only screen and (min-width: 1024px) {
+  .h1-heading {
+    font-size: 48px;
+  }
+}
+
 .callout-heading {
   font-size: 32px;
   line-height: 38px;
@@ -119,27 +149,35 @@ td {
 
 .bumps-nav-2 {
   display: flex;
-  justify-content: space-around;
   margin: 0 auto;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .nav-wrapper {
-  padding: 20px;
+  padding: 20px 20px 30px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.nav-wrapper > div {
+  flex: 1;
+}
+
 nav a {
   text-transform: uppercase;
-  text-decoration: none;
+  text-decoration: underline;
   font-weight: bold;
   letter-spacing: 2px;
 }
 
 nav a:hover {
   text-decoration: underline;
+}
+
+.bumps-nav-mobile a,
+.bumps-nav-mobile button {
+  color: #171313;
 }
 
 .body-link {
@@ -209,6 +247,16 @@ nav a:hover {
   color: var(--brand-main);
 }
 
+.page-header {
+  min-height: 175px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .page-header {
+    min-height: 260px;
+  }
+}
+
 .content-wrapper {
   padding: 0 1rem;
 }
@@ -219,9 +267,9 @@ nav a:hover {
   }
 }
 
-@media only screen and (min-width: 960px) {
+@media only screen and (min-width: 1024px) {
   .nav-wrapper {
-    padding: 40px;
+    padding: 40px 40px 50px 40px;
   }
   .content-wrapper {
     padding: 0;

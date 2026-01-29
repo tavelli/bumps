@@ -1,16 +1,12 @@
-import {GetStaticProps, InferGetStaticPropsType} from "next";
 import Image from "next/image";
-import Head from "next/head";
 import {uniteaSans} from "@/app/fonts";
-import {request} from "../app/lib/datocms";
+import {request} from "@/app/lib/datocms";
 
-import bumpsInfographic from "../public/bumps shapes.svg";
-import bumpsHills from "../public/footerhills.svg";
-import bumpsLogoSmall from "../public/BUMPS-logo-small-arrow.svg";
+import bumpsInfographic from "@/public/bumps shapes.svg";
 
 import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
-
 import {Header} from "@/app/components/Header";
+import {Footer} from "@/app/components/Footer";
 
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
@@ -42,33 +38,21 @@ const HOMEPAGE_QUERY = `query Events {
 
 const numberOfRaces = "four";
 
-export const getStaticProps: GetStaticProps<{data: HomepageQuery}> = async (
-  context
-) => {
+async function getHomeData(): Promise<HomepageQuery> {
   const data = await request({
     query: HOMEPAGE_QUERY,
     variables: {},
     includeDrafts: true,
     excludeInvalid: true,
   });
-  return {
-    props: {data},
-  };
-};
+  return data;
+}
 
-export default function Home({
-  data,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default async function Home() {
+  const data = await getHomeData();
+
   return (
     <div className={`full-height ${uniteaSans.className}`}>
-      <Head>
-        <title>Bike Up the Mountain Point Series (BUMPS)</title>
-        <meta
-          name="description"
-          content="A yearlong competition featuring some of the most challenging and well-established cycling hill climb events in the United States."
-        />
-      </Head>
-
       <Header />
 
       <main>
@@ -473,36 +457,7 @@ export default function Home({
         </div>
       </main>
       <footer>
-        <div className="flex flex-col justify-end items-center text-center">
-          <div className="flex items-center flex-col gap-4">
-            <button>
-              <Image
-                src={bumpsLogoSmall}
-                alt="BUMPS logo"
-                width={48}
-                height={48}
-                onClick={() =>
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                  })
-                }
-              />
-            </button>
-            <div className="uppercase font-bold">since 2013</div>
-          </div>
-
-          <Image
-            src={bumpsHills}
-            alt="BUMPS logo"
-            style={{
-              width: "100%",
-              height: "auto",
-            }}
-            height={505}
-            width={1145}
-          />
-        </div>
+        <Footer />
       </footer>
     </div>
   );
