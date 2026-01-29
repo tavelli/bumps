@@ -12,7 +12,10 @@ import Loading from "./loading";
 function LeaderboardContent() {
   const searchParams = useSearchParams();
   const [results, setResults] = useState<any[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const selectedYear = searchParams.get("year") || "2025";
   const selectedCat = searchParams.get("category") || "Overall Men";
@@ -51,16 +54,21 @@ function LeaderboardContent() {
   ];
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedYear, selectedCat]);
+
+  useEffect(() => {
     // Fetch leaderboard data
     const fetchResults = async () => {
       try {
         const response = await fetch(
           `/api/leaderboard?year=${selectedYear}&category=${encodeURIComponent(
             selectedCat,
-          )}`,
+          )}&page=${currentPage}`,
         );
         const data = await response.json();
-        setResults(data);
+        setResults(data.results);
+        setTotalCount(data.count);
       } catch (error) {
         console.error("Error fetching leaderboard:", error);
         setResults([]);
@@ -70,7 +78,7 @@ function LeaderboardContent() {
     };
 
     fetchResults();
-  }, [selectedYear, selectedCat]);
+  }, [selectedYear, selectedCat, currentPage]);
 
   return (
     <div className={uniteaSans.className}>
@@ -132,7 +140,7 @@ function LeaderboardContent() {
                     className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
                   >
                     <td className="py-4 px-6 font-mono text-base font-semibold">
-                      {i + 1}
+                      {(currentPage - 1) * itemsPerPage + i + 1}
                     </td>
                     <td className="py-4 px-6 font-mono text-base">
                       {r.season_points}
@@ -148,6 +156,38 @@ function LeaderboardContent() {
                 ))}
               </tbody>
             </table>
+            <div className="flex items-center justify-between px-6 py-4 bg-gray-900 border-t border-gray-700">
+              <div className="text-sm text-gray-400">
+                Total Results:{" "}
+                <span className="font-semibold text-white">{totalCount}</span>
+              </div>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 text-sm font-medium text-gray-300 hover:text-white disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"
+                >
+                  Previous
+                </button>
+                <span className="text-sm text-gray-400">
+                  Page{" "}
+                  <span className="font-semibold text-white">
+                    {currentPage}
+                  </span>{" "}
+                  of{" "}
+                  <span className="font-semibold text-white">
+                    {Math.ceil(results.length / itemsPerPage) || 1}
+                  </span>
+                </span>
+                <button
+                  onClick={() => setCurrentPage((p) => p + 1)}
+                  disabled={results.length < itemsPerPage}
+                  className="px-3 py-1 text-sm font-medium text-gray-300 hover:text-white disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </main>
