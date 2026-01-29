@@ -83,7 +83,7 @@ function LeaderboardContent() {
         }}
         className="page-header flex flex-col"
       >
-        <Navigation inverse={true} />
+        <Navigation inverse={true} showLogo={true} />
         <h1 className="h1-heading text-center">Leaderboard</h1>
       </header>
 

@@ -2,14 +2,16 @@ import {FunctionComponent} from "react";
 import Image from "next/image";
 import facebookLogo from "../../public/facebook.svg";
 import instagramLogo from "../../public/instagram.svg";
-import bumpsLogo from "../../public/bumps-log-badge.svg";
+import bumpsLogo from "../../public/bumps-logo-letters-2.svg";
 
 interface NavigationProps {
   inverse?: boolean;
+  showLogo?: boolean;
 }
 
 export const Navigation: FunctionComponent<NavigationProps> = ({
   inverse = false,
+  showLogo = false,
 }) => {
   const linkColor = inverse ? "#1E1E1E" : undefined;
   const linkClass = inverse ? "" : "";
@@ -38,7 +40,15 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
           </a>
         </nav>
       </div>
-      <div className="flex gap-4 justify-center">
+
+      {showLogo && (
+        <div className="flex justify-center">
+          <a href="/" style={inverse ? {color: linkColor} : {}}>
+            <Image src={bumpsLogo} alt="Bumps logo" width={128} height={48} />
+          </a>
+        </div>
+      )}
+      <div className="flex gap-4 justify-end">
         <a
           href="https://www.facebook.com/BikeUpTheMountainPointSeries"
           target="_blank"

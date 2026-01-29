@@ -149,9 +149,8 @@ select {
 
 .bumps-nav-2 {
   display: flex;
-  justify-content: space-around;
   margin: 0 auto;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .nav-wrapper {
@@ -159,6 +158,10 @@ select {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.nav-wrapper > div {
+  flex: 1;
 }
 
 nav a {
