@@ -35,14 +35,6 @@ function LeaderboardContent() {
   const categories = [
     "Overall Men",
     "Overall Women",
-    "Under 20 Women",
-    "20-29 Women",
-    "30-39 Women",
-    "40-49 Women",
-    "50-59 Women",
-    "60-69 Women",
-    "70-79 Women",
-    "80+ Women",
     "Under 20 Men",
     "20-29 Men",
     "30-39 Men",
@@ -51,6 +43,14 @@ function LeaderboardContent() {
     "60-69 Men",
     "70-79 Men",
     "80+ Men",
+    "Under 20 Women",
+    "20-29 Women",
+    "30-39 Women",
+    "40-49 Women",
+    "50-59 Women",
+    "60-69 Women",
+    "70-79 Women",
+    "80+ Women",
   ];
 
   useEffect(() => {
