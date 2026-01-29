@@ -44,7 +44,7 @@ export const Header: FunctionComponent = () => {
         <Navigation />
       </div>
       <div
-        className="z-10"
+        className="z-1"
         style={{
           padding: "3rem",
           display: "flex",

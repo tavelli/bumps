@@ -120,7 +120,7 @@ select {
   color: #1e1e1e;
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1024px) {
   .h1-heading {
     font-size: 48px;
   }
@@ -251,7 +251,7 @@ nav a:hover {
   min-height: 175px;
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1024px) {
   .page-header {
     min-height: 260px;
   }
@@ -267,7 +267,7 @@ nav a:hover {
   }
 }
 
-@media only screen and (min-width: 960px) {
+@media only screen and (min-width: 1024px) {
   .nav-wrapper {
     padding: 40px 40px 50px 40px;
   }

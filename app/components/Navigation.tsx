@@ -22,14 +22,14 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
       {/* Left Drawer Overlay */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-30"
+          className="fixed inset-0 bg-black bg-opacity-50 lg:hidden z-30"
           onClick={() => setIsMenuOpen(false)}
         />
       )}
 
       {/* Left Drawer */}
       <nav
-        className={`fixed left-0 top-0 h-screen w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-40 md:hidden ${
+        className={`fixed left-0 top-0 h-screen w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-40 lg:hidden ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -74,12 +74,12 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
         <div className="nav-wrapper" style={inverse ? {color: linkColor} : {}}>
           <div>
             <nav className="flex gap-8">
-              <a href="/#events" className="hidden md:inline">
+              <a href="/#events" className="hidden lg:inline">
                 Events
               </a>
               <a
                 href="/#info"
-                className="hidden md:inline"
+                className="hidden lg:inline"
                 style={inverse ? {color: linkColor} : {}}
               >
                 Info
@@ -87,14 +87,14 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
 
               <a
                 href="/leaderboard"
-                className="hidden md:inline"
+                className="hidden lg:inline"
                 style={inverse ? {color: linkColor} : {}}
               >
                 Leaderboard
               </a>
 
               <button
-                className="md:hidden"
+                className="lg:hidden"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
                 style={

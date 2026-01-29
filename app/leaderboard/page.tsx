@@ -56,8 +56,8 @@ function LeaderboardContent() {
       try {
         const response = await fetch(
           `/api/leaderboard?year=${selectedYear}&category=${encodeURIComponent(
-            selectedCat
-          )}`
+            selectedCat,
+          )}`,
         );
         const data = await response.json();
         setResults(data);
@@ -131,15 +131,17 @@ function LeaderboardContent() {
                     key={r.id}
                     className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
                   >
-                    <td className="py-4 px-6 text-gray-400 text-sm">{i + 1}</td>
+                    <td className="py-4 px-6 font-mono text-base font-semibold">
+                      {i + 1}
+                    </td>
                     <td className="py-4 px-6 font-mono text-base">
                       {r.season_points}
                     </td>
                     <td className="py-4 px-6 font-semibold">{r.rider_name}</td>
-                    <td className="py-4 px-6 text-gray-300 text-sm">
+                    <td className="py-4 px-6 text-gray-300 font-mono text-base">
                       {r.age_at_race}
                     </td>
-                    <td className="py-4 px-6 text-center text-gray-300 text-sm">
+                    <td className="py-4 px-6 text-center text-gray-300 font-mono text-base">
                       {r.total_races}
                     </td>
                   </tr>
