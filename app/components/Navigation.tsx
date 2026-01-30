@@ -1,3 +1,5 @@
+"use client";
+
 import {FunctionComponent, useState} from "react";
 import Image from "next/image";
 import facebookLogo from "../../public/facebook.svg";

@@ -28,6 +28,7 @@ WITH RankedResults AS (
 SELECT 
     min(id) as id,
     year,
+    rider_id,
     rider_name,
     gender,
     year - birth_year AS age_at_race,

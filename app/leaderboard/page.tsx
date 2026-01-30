@@ -1,6 +1,7 @@
 "use client";
 
 import {useSearchParams} from "next/navigation";
+import Link from "next/link";
 import {Suspense, useState, useEffect} from "react";
 import {uniteaSans} from "@/app/fonts";
 import Filters from "@/app/components/Filters";
@@ -107,28 +108,28 @@ function LeaderboardContent() {
               <thead>
                 <tr className="border-b border-gray-700">
                   <th
-                    className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
+                    className="py-4 px-6 text-left text-smuppercase tracking-wide"
                     style={{width: "80px"}}
                   >
                     Rank
                   </th>
                   <th
-                    className="py-4 px-6 text-right text-sm font-semibold uppercase tracking-wide"
+                    className="py-4 px-6 text-right text-sm uppercase tracking-wide"
                     style={{width: "80px"}}
                   >
                     Points
                   </th>
-                  <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide">
+                  <th className="py-4 px-6 text-left text-sm uppercase tracking-wide">
                     Name
                   </th>
                   <th
-                    className="hidden lg:table-cell py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
+                    className="hidden lg:table-cell py-4 px-6 text-left text-sm uppercase tracking-wide"
                     style={{width: "100px"}}
                   >
                     Age
                   </th>
                   <th
-                    className="hidden lg:table-cell py-4 px-6 text-left text-sm font-semibold uppercase tracking-wide"
+                    className="hidden lg:table-cell py-4 px-6 text-left text-sm uppercase tracking-wide"
                     style={{width: "175px"}}
                   >
                     Races Entered
@@ -147,7 +148,14 @@ function LeaderboardContent() {
                     <td className="py-4 px-6 font-mono text-base">
                       {r.season_points}
                     </td>
-                    <td className="py-4 px-6 font-semibold">{r.rider_name}</td>
+                    <td className="py-4 px-6 font-semibold">
+                      <Link
+                        href={`/leaderboard/profile/${r.rider_id}`}
+                        className="underline"
+                      >
+                        {r.rider_name}
+                      </Link>
+                    </td>
                     <td className="hidden lg:table-cell py-4 px-6 text-gray-300 font-mono text-base">
                       {r.age_at_race}
                     </td>
