@@ -86,20 +86,31 @@ export default function RiderProfilePage({params}: Props) {
     }
   }, [rider]);
 
-  const {availableYears, filteredResults} = useMemo(() => {
-    if (!rider?.results) return {availableYears: [], filteredResults: []};
+  const {availableYears, filteredResults, earliestYear} = useMemo(() => {
+    if (!rider?.results || rider.results.length === 0) {
+      return {availableYears: [], filteredResults: [], earliestYear: null};
+    }
 
-    // Get unique years and sort them descending
-    const years = Array.from(new Set(rider.results.map((r) => r.year)))
-      .sort((a: any, b: any) => b - a)
+    const yearNumbers = rider.results.map((r) => Number(r.year));
+
+    // Get unique years and sort them descending for the dropdown
+    const years = Array.from(new Set(yearNumbers))
+      .sort((a, b) => b - a)
       .map(String);
+
+    // Find the minimum year for the "Since" text
+    const earliest = Math.min(...yearNumbers);
 
     // Filter results based on selectedYear
     const filtered = rider.results.filter(
       (r) => String(r.year) === selectedYear,
     );
 
-    return {availableYears: years, filteredResults: filtered};
+    return {
+      availableYears: years,
+      filteredResults: filtered,
+      earliestYear: earliest,
+    };
   }, [rider, selectedYear]);
 
   return (
@@ -115,6 +126,11 @@ export default function RiderProfilePage({params}: Props) {
       >
         <Navigation inverse={true} showLogo={true} />
         <h1 className="h1-heading text-center">{rider && rider.name}</h1>
+        {earliestYear && (
+          <p className="text-gray-600 font-medium  uppercase tracking-widest text-center mt-2 text-xl">
+            Since {earliestYear}
+          </p>
+        )}
       </header>
 
       <main className="p-8 max-w-4xl mx-auto">
@@ -130,7 +146,7 @@ export default function RiderProfilePage({params}: Props) {
             <div>
               <p className="mt-2">Age: {rider.age ?? "—"}</p>
 
-              <div className="flex flex-col gap-2">
+              <div className="inline-flex flex-col gap-2 mt-4">
                 <label
                   htmlFor="year-filter"
                   className="text-xs uppercase tracking-widest text-gray-500 font-semibold"
@@ -150,27 +166,27 @@ export default function RiderProfilePage({params}: Props) {
                 </select>
               </div>
 
-              <div className="text-white rounded-lg overflow-hidden">
+              <div className="text-white rounded-lg overflow-hidden mt-8">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-gray-700">
-                      <th className="py-4 px-6 text-left text-sm uppercase tracking-wide">
+                      <th className="py-4 px-6 text-left text-sm uppercase tracking-wide font-normal">
                         Event
                       </th>
                       <th
-                        className="py-4 px-6 text-center text-sm uppercase tracking-wide"
+                        className="py-4 px-6 text-center text-sm uppercase tracking-wide font-normal"
                         style={{width: "80px"}}
                       >
                         Points
                       </th>
                       <th
-                        className="hidden lg:table-cell  py-4 px-6 text-center text-sm uppercase tracking-wide"
+                        className="hidden lg:table-cell  py-4 px-6 text-center text-sm uppercase tracking-wide font-normal"
                         style={{width: "175px"}}
                       >
                         Overall
                       </th>
                       <th
-                        className="hidden lg:table-cell py-4 px-6 text-center text-sm uppercase tracking-wide"
+                        className="hidden lg:table-cell py-4 px-6 text-center text-sm uppercase tracking-wide font-normal"
                         style={{width: "175px"}}
                       >
                         Age Group
