@@ -16,7 +16,25 @@ export default function RiderProfilePage({params}: Props) {
   const [rider, setRider] = useState<{
     name: string;
     age?: number | null;
-    results: any[];
+    results?: {
+      rider_name: any;
+      birth_year: any;
+      event_name: any;
+      race_date: any;
+      race_id: any;
+      points: any;
+      overall_rank: any;
+      overall_total: any;
+      category_total: any;
+      category_rank: any;
+      year: any;
+    }[];
+    standings?: {
+      year: any;
+      overall_standing_rank: any;
+      category_standing_rank: any;
+      season_points: any;
+    }[];
   } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -53,6 +71,7 @@ export default function RiderProfilePage({params}: Props) {
           name: data.name,
           age: data.age ?? null,
           results: data.results,
+          standings: data.standings,
         });
       })
       .catch(async (err) => {
@@ -87,14 +106,13 @@ export default function RiderProfilePage({params}: Props) {
     }
   }, [rider]);
 
-  const {availableYears, filteredResults, earliestYear, seasonTotal} =
+  const {availableYears, filteredResults, earliestYear, seasonStandings} =
     useMemo(() => {
       if (!rider?.results || rider.results.length === 0) {
         return {
           availableYears: [],
           filteredResults: [],
           earliestYear: null,
-          seasonTotal: 0,
         };
       }
 
@@ -125,20 +143,19 @@ export default function RiderProfilePage({params}: Props) {
         sortedByPoints.slice(0, maxCount).map((r) => r.race_id), // Assuming each result has a unique 'id'
       );
 
-      // Calculate total based only on the top 'maxCount' results
-      const total = sortedByPoints
-        .slice(0, maxCount)
-        .reduce((sum, r) => sum + (r.points || 0), 0);
-
       const filtered = resultsForYear.map((r) => {
         return {...r, countsTowardTotal: scoringIds.has(r.race_id)};
       });
+
+      const standingsForYear = rider.standings?.find(
+        (s) => String(s.year) === selectedYear,
+      );
 
       return {
         availableYears: years,
         filteredResults: filtered,
         earliestYear: earliest,
-        seasonTotal: total,
+        seasonStandings: standingsForYear,
       };
     }, [rider, selectedYear]);
 
@@ -162,7 +179,7 @@ export default function RiderProfilePage({params}: Props) {
         )}
       </header>
 
-      <main className="p-8 max-w-4xl mx-auto">
+      <main className="lg:p-8 max-w-4xl mx-auto">
         <section className="text-white">
           {loading ? (
             <p>Loading...</p>
@@ -173,7 +190,7 @@ export default function RiderProfilePage({params}: Props) {
             </div>
           ) : rider ? (
             <div>
-              <div className="flex flex-col lg:flex-row gap-8 mt-4 justify-between">
+              <div className="flex flex-col lg:flex-row gap-8 mt-4 justify-between px-6">
                 <div className="inline-flex flex-col gap-2 ">
                   <label
                     htmlFor="year-filter"
@@ -194,19 +211,35 @@ export default function RiderProfilePage({params}: Props) {
                   </select>
                 </div>
 
-                <div>
-                  <div className="inline-flex flex-col gap-2">
+                <div className="flex gap-8 items-center">
+                  <div className="inline-flex flex-col gap-2 text-center">
                     <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
-                      Season Total
+                      Points
                     </p>
                     <p className="text-3xl font-bold font-mono text-white">
-                      {seasonTotal}
+                      {seasonStandings?.season_points}
+                    </p>
+                  </div>
+                  <div className="inline-flex flex-col gap-2 text-center">
+                    <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
+                      Overall
+                    </p>
+                    <p className="text-3xl font-bold font-mono text-white">
+                      {seasonStandings?.overall_standing_rank || "--"}
+                    </p>
+                  </div>
+                  <div className="inline-flex flex-col gap-2 text-center">
+                    <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
+                      Age Group
+                    </p>
+                    <p className="text-3xl font-bold font-mono text-white">
+                      {seasonStandings?.overall_standing_rank || "--"}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="text-white rounded-lg overflow-hidden mt-8">
+              <div className="text-white rounded-lg overflow-hidden mt-12">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-gray-700">
