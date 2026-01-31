@@ -182,7 +182,7 @@ export default function RiderProfilePage({params}: Props) {
       <main className="lg:p-8 max-w-4xl mx-auto">
         <section className="text-white">
           {loading ? (
-            <p>Loading...</p>
+            <p className="px-6 mt-4">Loading...</p>
           ) : error ? (
             <div>
               <h2 className="section-heading">Error</h2>
@@ -281,6 +281,27 @@ export default function RiderProfilePage({params}: Props) {
                               Dropped Score
                             </span>
                           )}
+
+                          <div className="flex lg:hidden gap-8">
+                            <div className=" py-4 text-center  font-mono text-sm">
+                              <div className="font-normal">Overall</div>
+                              <span className="font-semibold text-lg">
+                                {r.overall_rank}{" "}
+                              </span>
+                              <span className="text-gray-300">
+                                / {r.overall_total}
+                              </span>
+                            </div>
+                            <div className="lg:hidden py-4 text-center font-mono text-sm">
+                              <div className="font-normal">Age group</div>
+                              <span className="font-semibold text-lg">
+                                {r.category_rank}{" "}
+                              </span>
+                              <span className="text-gray-300">
+                                / {r.category_total}
+                              </span>
+                            </div>
+                          </div>
                         </td>
 
                         <td className="py-4 px-6 text-center font-mono text-lg font-semibold">
