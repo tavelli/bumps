@@ -6,6 +6,7 @@ import {uniteaSans} from "@/app/fonts";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
 import {Navigation} from "@/app/components/Navigation";
 import {getRacesCountForYear} from "@/app/lib/bumps/utils"; // Adjust path as needed
+import {Footer} from "@/app/components/Footer";
 
 interface Props {
   params: {riderId: string};
@@ -173,7 +174,7 @@ export default function RiderProfilePage({params}: Props) {
         <Navigation inverse={true} showLogo={true} />
         <h1 className="h1-heading text-center">{rider && rider.name}</h1>
         {earliestYear && (
-          <p className="text-gray-600 font-medium  uppercase tracking-widest text-center mt-2 text-xl">
+          <p className="text-gray-600 font-medium  uppercase tracking-widest text-center mt-2 text-md lg:text-xl">
             Since {earliestYear}
           </p>
         )}
@@ -233,7 +234,7 @@ export default function RiderProfilePage({params}: Props) {
                       Age Group
                     </p>
                     <p className="text-3xl font-bold font-mono text-white">
-                      {seasonStandings?.overall_standing_rank || "--"}
+                      {seasonStandings?.category_standing_rank || "--"}
                     </p>
                   </div>
                 </div>
@@ -283,7 +284,7 @@ export default function RiderProfilePage({params}: Props) {
                           )}
 
                           <div className="flex lg:hidden gap-8">
-                            <div className=" py-4 text-center  font-mono text-sm">
+                            <div className=" py-4  font-mono text-sm">
                               <div className="font-normal">Overall</div>
                               <span className="font-semibold text-lg">
                                 {r.overall_rank}{" "}
@@ -292,7 +293,7 @@ export default function RiderProfilePage({params}: Props) {
                                 / {r.overall_total}
                               </span>
                             </div>
-                            <div className="lg:hidden py-4 text-center font-mono text-sm">
+                            <div className="lg:hidden py-4 font-mono text-sm">
                               <div className="font-normal">Age group</div>
                               <span className="font-semibold text-lg">
                                 {r.category_rank}{" "}
@@ -337,6 +338,9 @@ export default function RiderProfilePage({params}: Props) {
           )}
         </section>
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

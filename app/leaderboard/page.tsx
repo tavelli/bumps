@@ -9,6 +9,7 @@ import leaderboardBanner from "@/public/leaderboard_banner.svg";
 
 import {Navigation} from "../components/Navigation";
 import Loading from "./loading";
+import {Footer} from "../components/Footer";
 
 function LeaderboardContent() {
   const searchParams = useSearchParams();
@@ -203,6 +204,9 @@ function LeaderboardContent() {
           </div>
         )}
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }
