@@ -5,6 +5,7 @@ import React, {useEffect, useMemo, useState} from "react";
 import {uniteaSans} from "@/app/fonts";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
 import {Navigation} from "@/app/components/Navigation";
+import {getRacesCountForYear} from "@/app/lib/bumps/utils"; // Adjust path as needed
 
 interface Props {
   params: {riderId: string};
@@ -86,32 +87,60 @@ export default function RiderProfilePage({params}: Props) {
     }
   }, [rider]);
 
-  const {availableYears, filteredResults, earliestYear} = useMemo(() => {
-    if (!rider?.results || rider.results.length === 0) {
-      return {availableYears: [], filteredResults: [], earliestYear: null};
-    }
+  const {availableYears, filteredResults, earliestYear, seasonTotal} =
+    useMemo(() => {
+      if (!rider?.results || rider.results.length === 0) {
+        return {
+          availableYears: [],
+          filteredResults: [],
+          earliestYear: null,
+          seasonTotal: 0,
+        };
+      }
 
-    const yearNumbers = rider.results.map((r) => Number(r.year));
+      const yearNumbers = rider.results.map((r) => Number(r.year));
 
-    // Get unique years and sort them descending for the dropdown
-    const years = Array.from(new Set(yearNumbers))
-      .sort((a, b) => b - a)
-      .map(String);
+      // Get unique years and sort them descending for the dropdown
+      const years = Array.from(new Set(yearNumbers))
+        .sort((a, b) => b - a)
+        .map(String);
 
-    // Find the minimum year for the "Since" text
-    const earliest = Math.min(...yearNumbers);
+      // Find the minimum year for the "Since" text
+      const earliest = Math.min(...yearNumbers);
 
-    // Filter results based on selectedYear
-    const filtered = rider.results.filter(
-      (r) => String(r.year) === selectedYear,
-    );
+      // Filter results for the current year
+      const resultsForYear = rider.results.filter(
+        (r) => String(r.year) === selectedYear,
+      );
 
-    return {
-      availableYears: years,
-      filteredResults: filtered,
-      earliestYear: earliest,
-    };
-  }, [rider, selectedYear]);
+      // Get the max count for this year
+      const maxCount = getRacesCountForYear(Number(selectedYear));
+
+      // Sort by points descending to determine which ones count toward the total
+      const sortedByPoints = [...resultsForYear].sort(
+        (a, b) => b.points - a.points,
+      );
+
+      const scoringIds = new Set(
+        sortedByPoints.slice(0, maxCount).map((r) => r.race_id), // Assuming each result has a unique 'id'
+      );
+
+      // Calculate total based only on the top 'maxCount' results
+      const total = sortedByPoints
+        .slice(0, maxCount)
+        .reduce((sum, r) => sum + (r.points || 0), 0);
+
+      const filtered = resultsForYear.map((r) => {
+        return {...r, countsTowardTotal: scoringIds.has(r.race_id)};
+      });
+
+      return {
+        availableYears: years,
+        filteredResults: filtered,
+        earliestYear: earliest,
+        seasonTotal: total,
+      };
+    }, [rider, selectedYear]);
 
   return (
     <div className={uniteaSans.className}>
@@ -144,26 +173,37 @@ export default function RiderProfilePage({params}: Props) {
             </div>
           ) : rider ? (
             <div>
-              <p className="mt-2">Age: {rider.age ?? "—"}</p>
+              <div className="flex flex-col lg:flex-row gap-8 mt-4 justify-between">
+                <div className="inline-flex flex-col gap-2 ">
+                  <label
+                    htmlFor="year-filter"
+                    className="text-xs uppercase tracking-widest text-gray-300 font-semibold"
+                  >
+                    Season
+                  </label>
+                  <select
+                    id="year-filter"
+                    value={selectedYear}
+                    onChange={(e) => setSelectedYear(e.target.value)}
+                  >
+                    {availableYears.map((y) => (
+                      <option key={y} value={y}>
+                        {y}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-              <div className="inline-flex flex-col gap-2 mt-4">
-                <label
-                  htmlFor="year-filter"
-                  className="text-xs uppercase tracking-widest text-gray-500 font-semibold"
-                >
-                  Season
-                </label>
-                <select
-                  id="year-filter"
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(e.target.value)}
-                >
-                  {availableYears.map((y) => (
-                    <option key={y} value={y}>
-                      {y}
-                    </option>
-                  ))}
-                </select>
+                <div>
+                  <div className="inline-flex flex-col gap-2">
+                    <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
+                      Season Total
+                    </p>
+                    <p className="text-3xl font-bold font-mono text-white">
+                      {seasonTotal}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="text-white rounded-lg overflow-hidden mt-8">
@@ -197,10 +237,17 @@ export default function RiderProfilePage({params}: Props) {
                     {filteredResults?.map((r, i) => (
                       <tr
                         key={r.event_name + r.year}
-                        className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
+                        className={`border-b border-gray-800 hover:bg-gray-900 transition-colors ${
+                          !r.countsTowardTotal ? "opacity-60" : "opacity-100"
+                        }`}
                       >
                         <td className="py-4 px-6 font-bold text-lg">
                           {r.event_name}
+                          {!r.countsTowardTotal && (
+                            <span className="text-sm block uppercase tracking-tighter  font-normal">
+                              Dropped Score
+                            </span>
+                          )}
                         </td>
 
                         <td className="py-4 px-6 text-center font-mono text-lg font-semibold">
