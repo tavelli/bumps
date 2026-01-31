@@ -118,6 +118,7 @@ select {
   font-weight: 700;
   text-transform: uppercase;
   color: #1e1e1e;
+  letter-spacing: 6px;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -248,7 +249,7 @@ nav a:hover {
 }
 
 .page-header {
-  min-height: 175px;
+  min-height: 200px;
 }
 
 @media only screen and (min-width: 1024px) {
