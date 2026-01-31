@@ -112,7 +112,7 @@ select {
 }
 
 .h1-heading {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 100%;
   font-family: var(--font-unbounded);
   font-weight: 700;
