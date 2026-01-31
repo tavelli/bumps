@@ -65,7 +65,7 @@ SELECT
     *,
     -- Calculate Overall Standing Rank per year
     RANK() OVER (
-        PARTITION BY year 
+        PARTITION BY year , gender
         ORDER BY season_points DESC
     ) as overall_standing_rank,
     -- Calculate Category Standing Rank per year
