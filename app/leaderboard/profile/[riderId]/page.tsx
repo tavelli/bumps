@@ -7,6 +7,7 @@ import leaderboardBanner from "@/public/leaderboard_banner.svg";
 import {Navigation} from "@/app/components/Navigation";
 import {getRacesCountForYear} from "@/app/lib/bumps/utils"; // Adjust path as needed
 import {Footer} from "@/app/components/Footer";
+import Link from "next/link";
 
 interface Props {
   params: {riderId: string};
@@ -106,6 +107,8 @@ export default function RiderProfilePage({params}: Props) {
       );
       setSelectedYear(String(years[0]));
     }
+
+    document.title = `${rider?.name} - BUMPS Results` || "Race Results";
   }, [rider]);
 
   const {availableYears, filteredResults, earliestYear, seasonStandings} =
@@ -277,7 +280,13 @@ export default function RiderProfilePage({params}: Props) {
                         }`}
                       >
                         <td className="py-4 px-6 font-bold text-lg">
-                          {r.event_name}
+                          <Link
+                            href={`/leaderboard/race/${r.race_id}`}
+                            className="underline"
+                          >
+                            {" "}
+                            {r.event_name}
+                          </Link>
                           {!r.countsTowardTotal && (
                             <span className="text-sm block uppercase tracking-tighter  font-normal">
                               Dropped Score

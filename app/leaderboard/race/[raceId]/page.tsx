@@ -1,19 +1,31 @@
+// Try fetching from a dedicated riders table first
 "use client";
 
-import {useSearchParams} from "next/navigation";
-import Link from "next/link";
-import {Suspense, useState, useEffect} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {uniteaSans} from "@/app/fonts";
-import Filters from "@/app/components/Filters";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
-
-import {Navigation} from "../../components/Navigation";
-import Loading from "./loading";
-import {Footer} from "../../components/Footer";
+import {Navigation} from "@/app/components/Navigation";
+import {getRacesCountForYear} from "@/app/lib/bumps/utils"; // Adjust path as needed
+import {Footer} from "@/app/components/Footer";
 import {categories, years} from "@/app/lib/bumps/const";
 
-function LeaderboardContent() {
+import {useSearchParams} from "next/navigation";
+import Filters from "@/app/components/Filters";
+import Link from "next/link";
+import {format} from "date-fns";
+
+interface Props {
+  params: {raceId: string};
+}
+
+export default function RaceResultPage({params}: Props) {
   const searchParams = useSearchParams();
+  const [resolvedRaceId, setResolvedRaceId] = useState<string | null>(null);
+  const [race, setRace] = useState<{
+    name: string;
+    date: string;
+  } | null>(null);
+
   const [results, setResults] = useState<any[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -23,32 +35,81 @@ function LeaderboardContent() {
   const selectedYear = searchParams.get("year") || "2025";
   const selectedCat = searchParams.get("category") || "Overall Men";
 
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedYear, selectedCat]);
 
+  // Resolve params which may be a Promise in some Next.js runtimes
   useEffect(() => {
-    // Fetch leaderboard data
-    const fetchResults = async () => {
+    let cancelled = false;
+    (async () => {
       try {
-        const response = await fetch(
-          `/api/leaderboard?year=${selectedYear}&category=${encodeURIComponent(
-            selectedCat,
-          )}&page=${currentPage}`,
-        );
-        const data = await response.json();
+        const p = await (params as any);
+        if (!cancelled) setResolvedRaceId(p?.raceId ?? null);
+      } catch {
+        if (!cancelled) setResolvedRaceId(null);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [params]);
+
+  useEffect(() => {
+    if (!resolvedRaceId) return;
+    let cancelled = false;
+    setLoading(true);
+
+    fetch(
+      `/api/race/${resolvedRaceId}?year=${selectedYear}&category=${encodeURIComponent(
+        selectedCat,
+      )}&page=${currentPage}`,
+    )
+      .then((res) => {
+        console.log(res);
+        if (!res.ok) throw res;
+        return res.json();
+      })
+      .then((data) => {
+        if (cancelled) return;
         setResults(data.results);
         setTotalCount(data.count);
-      } catch (error) {
-        console.error("Error fetching leaderboard:", error);
-        setResults([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+        setRace({
+          name: data.results[0]?.event_name || "",
+          date: data.results[0]?.race_date
+            ? format(new Date(data.results[0]?.race_date), "MM/dd/yyyy")
+            : "",
+        });
+      })
+      .catch(async (err) => {
+        if (cancelled) return;
+        try {
+          if (err instanceof Response) {
+            const body = await err.json().catch(() => ({}));
+            setError(body?.error || "failed");
+          } else {
+            setError("failed");
+          }
+        } catch {
+          setError("failed");
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
 
-    fetchResults();
-  }, [selectedYear, selectedCat, currentPage]);
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedYear, selectedCat, currentPage, resolvedRaceId]);
+
+  useEffect(() => {
+    document.title =
+      `${race?.name} ${race?.date ? new Date(race.date).getFullYear() : ""} - BUMPS Results` ||
+      "Race Results";
+  }, [race]);
 
   return (
     <div className={uniteaSans.className}>
@@ -62,15 +123,19 @@ function LeaderboardContent() {
         className="page-header flex flex-col"
       >
         <Navigation inverse={true} showLogo={true} />
-        <h1 className="h1-heading text-center">Leaderboard</h1>
+        <h1 className="h1-heading text-center">{race && race.name}</h1>
+
+        <p className="text-gray-600 font-medium  uppercase tracking-widest text-center mt-2 text-md lg:text-xl">
+          {race?.date}
+        </p>
       </header>
 
       <main className="max-w-4xl mx-auto">
         <div className="mt-8 ml-4 lg:ml-0">
-          <Filters years={years} categories={categories} />
+          <Filters years={[]} categories={categories} />
         </div>
         {loading ? (
-          <Loading />
+          <div>Loading...</div>
         ) : (
           <div className="text-white rounded-lg overflow-hidden">
             <table className="w-full">
@@ -97,12 +162,6 @@ function LeaderboardContent() {
                   >
                     Age
                   </th>
-                  <th
-                    className="hidden lg:table-cell py-4 px-6 text-left text-sm uppercase tracking-wide"
-                    style={{width: "175px"}}
-                  >
-                    Races Entered
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -115,7 +174,7 @@ function LeaderboardContent() {
                       {(currentPage - 1) * itemsPerPage + i + 1}
                     </td>
                     <td className="py-4 px-6 font-mono text-base">
-                      {r.season_points}
+                      {r.points}
                     </td>
                     <td className="py-4 px-6 font-semibold">
                       <Link
@@ -126,10 +185,9 @@ function LeaderboardContent() {
                       </Link>
                     </td>
                     <td className="hidden lg:table-cell py-4 px-6 text-gray-300 font-mono text-base">
-                      {r.age_at_race}
-                    </td>
-                    <td className="hidden lg:table-cell py-4 px-6 text-center text-gray-300 font-mono text-base">
-                      {r.total_races}
+                      {selectedYear
+                        ? parseInt(selectedYear) - parseInt(r.birth_year)
+                        : "--"}
                     </td>
                   </tr>
                 ))}
@@ -176,13 +234,5 @@ function LeaderboardContent() {
         <Footer />
       </footer>
     </div>
-  );
-}
-
-export default function LeaderboardPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LeaderboardContent />
-    </Suspense>
   );
 }
