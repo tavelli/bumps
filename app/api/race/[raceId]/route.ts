@@ -44,14 +44,6 @@ export async function GET(request: NextRequest, context: any) {
       query = query.eq("gender", gender);
     }
 
-    // Apply Category Logic
-    if (!selectedCat.includes("Overall")) {
-      query = query.eq("category_label", selectedCat);
-    } else {
-      const gender = selectedCat.includes("Men") ? "M" : "W";
-      query = query.eq("gender", gender);
-    }
-
     const {data: results, error, count} = await query;
 
     if (error) {
