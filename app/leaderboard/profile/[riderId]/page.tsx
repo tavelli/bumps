@@ -304,7 +304,9 @@ export default function RiderProfilePage({params}: Props) {
                               </span>
                             </div>
                             <div className="lg:hidden py-4 font-mono text-sm">
-                              <div className="font-normal">Age group</div>
+                              <div className="font-normal">
+                                {seasonStandings?.category_label || "Age Group"}
+                              </div>
                               <span className="font-semibold text-lg">
                                 {r.category_rank}{" "}
                               </span>
