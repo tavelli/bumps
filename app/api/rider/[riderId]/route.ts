@@ -31,6 +31,7 @@ export async function GET(request: NextRequest, context: any) {
           year,
           overall_standing_rank,
           category_standing_rank,
+          category_label,
           season_points
         `,
         )

@@ -1,6 +1,9 @@
+-- 1. Drop existing view
 DROP VIEW IF EXISTS rider_race_history;
+DROP MATERIALIZED VIEW IF EXISTS rider_race_history;
 
-CREATE VIEW rider_race_history AS
+-- 2. Create the Materialized View
+CREATE MATERIALIZED VIEW rider_race_history AS
 WITH RaceRankings AS (
     SELECT 
         res.year,
@@ -36,3 +39,6 @@ WITH RaceRankings AS (
     JOIN events e ON ra.event_id = e.id
 )
 SELECT * FROM RaceRankings;
+
+CREATE INDEX idx_rider_history_rider_id 
+ON rider_race_history (rider_id);

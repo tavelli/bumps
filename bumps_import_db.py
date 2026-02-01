@@ -174,3 +174,7 @@ def scrape_and_upload(year, gender):
 if __name__ == "__main__":
     scrape_and_upload(2025, "M")
     scrape_and_upload(2025, "W")
+
+    # REFRESH MATERIALIZED VIEW CONCURRENTLY rider_race_history;
+
+    # REFRESH MATERIALIZED VIEW categorized_results;

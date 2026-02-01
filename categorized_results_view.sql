@@ -1,8 +1,9 @@
--- 1. Drop the existing view
+-- 1. Drop existing view if it exists (must specify if it was a standard view)
 DROP VIEW IF EXISTS categorized_results;
+DROP MATERIALIZED VIEW IF EXISTS categorized_results;
 
--- 2. Create the updated view with Ranking logic
-CREATE VIEW categorized_results AS
+-- 2. Create the Materialized View
+CREATE MATERIALIZED VIEW categorized_results AS
 WITH RankedResults AS (
     SELECT 
         res.*,
@@ -74,3 +75,6 @@ SELECT
         ORDER BY season_points DESC
     ) as category_standing_rank
 FROM AggregatedTotals;
+
+-- 3. Create an index on the materialized view for fast rider lookups
+CREATE INDEX idx_categorized_results_rider_id ON categorized_results (rider_id);
