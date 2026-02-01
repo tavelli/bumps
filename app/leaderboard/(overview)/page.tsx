@@ -7,9 +7,9 @@ import {uniteaSans} from "@/app/fonts";
 import Filters from "@/app/components/Filters";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
 
-import {Navigation} from "../components/Navigation";
+import {Navigation} from "../../components/Navigation";
 import Loading from "./loading";
-import {Footer} from "../components/Footer";
+import {Footer} from "../../components/Footer";
 
 function LeaderboardContent() {
   const searchParams = useSearchParams();
@@ -140,7 +140,7 @@ function LeaderboardContent() {
               <tbody>
                 {results?.map((r, i) => (
                   <tr
-                    key={r.id}
+                    key={r.rider_id + "-selectedCat"}
                     className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
                   >
                     <td className="py-4 px-6 font-mono text-base font-semibold">

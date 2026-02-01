@@ -35,6 +35,7 @@ export default function RiderProfilePage({params}: Props) {
       overall_standing_rank: any;
       category_standing_rank: any;
       season_points: any;
+      category_label: any;
     }[];
   } | null>(null);
   const [loading, setLoading] = useState(true);
@@ -231,7 +232,7 @@ export default function RiderProfilePage({params}: Props) {
                   </div>
                   <div className="inline-flex flex-col gap-2 text-center">
                     <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
-                      Age Group
+                      {seasonStandings?.category_label || "Age Group"}
                     </p>
                     <p className="text-3xl font-bold font-mono text-white">
                       {seasonStandings?.category_standing_rank || "--"}
@@ -263,7 +264,7 @@ export default function RiderProfilePage({params}: Props) {
                         className="hidden lg:table-cell py-4 px-6 text-center text-sm uppercase tracking-wide font-normal"
                         style={{width: "175px"}}
                       >
-                        Age Group
+                        {seasonStandings?.category_label || "Age Group"}
                       </th>
                     </tr>
                   </thead>
