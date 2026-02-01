@@ -21,27 +21,28 @@ export default function Filters({
   return (
     <div className="flex gap-8 mb-8 flex-col">
       <div className="flex gap-4">
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="seasonDropdown"
-            className="text-sm uppercase font-semibold tracking-wide text-gray-300"
-          >
-            Season
-          </label>
-          <select
-            value={searchParams?.get("year") || "2025"}
-            onChange={(e) => updateFilter("year", e.target.value)}
-            className=""
-            id="seasonDropdown"
-          >
-            {years.map((y: string) => (
-              <option key={y} value={y}>
-                {y}
-              </option>
-            ))}
-          </select>
-        </div>
-
+        {years.length > 1 && (
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="seasonDropdown"
+              className="text-sm uppercase font-semibold tracking-wide text-gray-300"
+            >
+              Season
+            </label>
+            <select
+              value={searchParams?.get("year") || "2025"}
+              onChange={(e) => updateFilter("year", e.target.value)}
+              className=""
+              id="seasonDropdown"
+            >
+              {years.map((y: string) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
         <div className="flex flex-col gap-2">
           <label
             htmlFor="categoryDropdown"

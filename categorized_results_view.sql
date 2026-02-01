@@ -1,5 +1,4 @@
 -- 1. Drop existing view if it exists (must specify if it was a standard view)
-DROP VIEW IF EXISTS categorized_results;
 DROP MATERIALIZED VIEW IF EXISTS categorized_results;
 
 -- 2. Create the Materialized View
