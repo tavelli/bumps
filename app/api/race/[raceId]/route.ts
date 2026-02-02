@@ -7,7 +7,6 @@ export async function GET(request: NextRequest, context: any) {
     const searchParams = request.nextUrl.searchParams;
     const params = await context.params;
     const {raceId} = params as {raceId: string};
-    const selectedYear = searchParams.get("year") || "2025";
     const selectedCat = searchParams.get("category") || "Overall Men";
     const page = parseInt(searchParams.get("page") || "1", 10);
     const itemsPerPage = 10;

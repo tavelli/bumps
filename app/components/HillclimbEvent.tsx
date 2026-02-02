@@ -17,9 +17,6 @@ export interface HillclimbEvent {
   gradientProfile: {
     url: string;
   };
-  aiCoverPhoto: {
-    url: string;
-  };
   aiCoverPhotoAlt: {
     url: string;
   };

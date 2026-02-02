@@ -27,9 +27,6 @@ const HOMEPAGE_QUERY = `query Events {
       gradientProfile {
         url
       }
-      aiCoverPhoto {
-        url
-      }
       aiCoverPhotoAlt {
         url
       }
