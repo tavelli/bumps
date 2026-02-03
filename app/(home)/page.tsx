@@ -4,9 +4,10 @@ import {request} from "@/app/lib/datocms";
 
 import bumpsInfographic from "@/public/bumps shapes.svg";
 
-import {HillclimbLink, HillclimbEvent} from "@/app/components/HillclimbLink";
+import {HillclimbLink} from "@/app/components/HillclimbLink";
 import {Header} from "@/app/components/Header";
 import {Footer} from "@/app/components/Footer";
+import {HillclimbEvent} from "../lib/bumps/model";
 
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
