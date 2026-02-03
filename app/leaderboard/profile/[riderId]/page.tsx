@@ -22,6 +22,7 @@ export default function RiderProfilePage({params}: Props) {
       rider_name: any;
       birth_year: any;
       event_name: any;
+      event_slug: string;
       race_date: any;
       race_id: any;
       points: any;
@@ -281,7 +282,7 @@ export default function RiderProfilePage({params}: Props) {
                       >
                         <td className="py-4 px-6 font-bold text-lg">
                           <Link
-                            href={`/leaderboard/race/${r.race_id}`}
+                            href={`/event/${r.event_slug}`}
                             className="underline"
                           >
                             {" "}

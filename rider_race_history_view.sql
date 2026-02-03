@@ -32,6 +32,7 @@ WITH RaceRankings AS (
         r.gender,
         -- Event and Race Details
         e.name as event_name,
+        e.slug as event_slug,
         ra.event_date as race_date,
         -- Category Label logic
         CASE 

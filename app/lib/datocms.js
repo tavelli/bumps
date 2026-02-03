@@ -1,7 +1,7 @@
-import { GraphQLClient } from "graphql-request";
-export function request({ query, variables, includeDrafts, excludeInvalid }) {
+import {GraphQLClient} from "graphql-request";
+export function request({query, variables, includeDrafts, excludeInvalid}) {
   const headers = {
-    authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
+    authorization: `Bearer ${process.env.NEXT_PUBLIC_DATOCMS_READONLY_TOKEN}`,
   };
   if (includeDrafts) {
     headers["X-Include-Drafts"] = "true";
@@ -9,6 +9,6 @@ export function request({ query, variables, includeDrafts, excludeInvalid }) {
   if (excludeInvalid) {
     headers["X-Exclude-Invalid"] = "true";
   }
-  const client = new GraphQLClient("https://graphql.datocms.com", { headers });
+  const client = new GraphQLClient("https://graphql.datocms.com", {headers});
   return client.request(query, variables);
 }

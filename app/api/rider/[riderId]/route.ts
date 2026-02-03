@@ -14,9 +14,18 @@ export async function GET(request: NextRequest, context: any) {
         .from("rider_race_history")
         .select(
           `
-          rider_name, birth_year, event_name, race_date, race_id, 
-          points, overall_rank, overall_total, category_total, 
-          category_rank, year
+          rider_name,
+          birth_year,
+          event_name,
+          event_slug,
+          race_date,
+          race_id, 
+          points,
+          overall_rank,
+          overall_total,
+          category_total, 
+          category_rank,
+          year
         `,
         )
         .eq("rider_id", riderId)
