@@ -4,7 +4,7 @@ import {request} from "@/app/lib/datocms";
 
 import bumpsInfographic from "@/public/bumps shapes.svg";
 
-import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
+import {HillclimbLink, HillclimbEvent} from "@/app/components/HillclimbLink";
 import {Header} from "@/app/components/Header";
 import {Footer} from "@/app/components/Footer";
 
@@ -30,6 +30,7 @@ const HOMEPAGE_QUERY = `query Events {
       aiCoverPhotoAlt {
         url
       }
+      slug
     }
 }`;
 
@@ -109,7 +110,12 @@ export default async function Home() {
             {data.allEvents
               .sort((a, b) => a.date.localeCompare(b.date))
               .map((event) => {
-                return <Hillclimb key={event.title} event={event}></Hillclimb>;
+                return (
+                  <HillclimbLink
+                    key={event.title}
+                    event={event}
+                  ></HillclimbLink>
+                );
               })}
           </section>
           <section className="mt-16">

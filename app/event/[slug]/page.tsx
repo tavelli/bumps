@@ -13,11 +13,12 @@ import {categories, years} from "@/app/lib/bumps/const";
 import {useSearchParams} from "next/navigation";
 import Filters from "@/app/components/Filters";
 import Link from "next/link";
-import {format} from "date-fns";
-import {Hillclimb, HillclimbEvent} from "@/app/components/HillclimbEvent";
 
-const EVENT_QUERY = `query Events($eventId: IntType) {
-    event(filter: {eventId: {eq: $eventId}}) {
+import {HillclimbPage} from "@/app/components/HillclimbPage";
+import {HillclimbEvent} from "@/app/lib/bumps/model";
+
+const EVENT_QUERY = `query Events($slug: String) {
+    event(filter: {slug: {eq: $slug}}) {
       date
       location
       title
@@ -45,11 +46,11 @@ interface Props {
   params: {slug: string};
 }
 
-async function getEventData(eventId: number): Promise<EventQuery> {
+async function getEventData(slug: string): Promise<EventQuery> {
   const data = await request({
     query: EVENT_QUERY,
     variables: {
-      eventId: eventId,
+      slug: slug,
     },
     includeDrafts: true,
     excludeInvalid: true,
@@ -157,17 +158,16 @@ export default function EventPage({params}: Props) {
   }, [resolvedEventSlug]);
 
   useEffect(() => {
-    if (!event?.event_id) return;
+    if (!resolvedEventSlug) return;
 
-    getEventData(event.event_id)
+    getEventData(resolvedEventSlug)
       .then((data) => {
-        console.log(data);
         setDatoData(data.event);
       })
       .catch((err) => {
         console.error("Error fetching event data:", err);
       });
-  }, [event?.event_id]);
+  }, [resolvedEventSlug]);
 
   useEffect(() => {
     // find race id in event races by matching year
@@ -239,10 +239,10 @@ export default function EventPage({params}: Props) {
         </p> */}
       </header>
 
-      <main className="max-w-4xl mx-auto">
-        {datoData && <Hillclimb event={datoData} />}
+      <main className="max-w-5xl mx-auto">
+        {datoData && <HillclimbPage event={datoData} />}
 
-        <h2 className="subcategory-heading" id="results">
+        <h2 className="subcategory-heading mt-12 ml-4 lg:ml-0" id="results">
           Results
         </h2>
         <div className="mt-8 ml-4 lg:ml-0">
