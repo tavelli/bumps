@@ -159,12 +159,16 @@ export default function LeaderboardContent({params}: Props) {
               <tbody>
                 {results?.map((r, i) => (
                   <tr
-                    key={r.rider_id + "-selectedCat"}
+                    key={r.rider_id + "-" + selectedCat}
                     className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
                   >
                     <td className="py-4 px-6 font-mono text-base font-semibold">
                       <RiderRank
-                        rank={(currentPage - 1) * itemsPerPage + i + 1}
+                        rank={
+                          selectedCat.includes("Overall")
+                            ? r.overall_standing_rank
+                            : r.category_standing_rank
+                        }
                       />
                     </td>
                     <td className="py-4 px-6 font-mono text-base">

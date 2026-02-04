@@ -17,6 +17,7 @@ import Link from "next/link";
 import {HillclimbPage} from "@/app/components/HillclimbPage";
 import {HillclimbEvent} from "@/app/lib/bumps/model";
 import {RiderRank} from "@/app/components/RiderRank";
+import {Racetime} from "@/app/components/RaceTIme";
 
 const EVENT_QUERY = `query Events($slug: String) {
     event(filter: {slug: {eq: $slug}}) {
@@ -266,6 +267,9 @@ export default function EventPage({params}: Props) {
                   >
                     Rank
                   </th>
+                  <th className="py-4 px-6 text-sm uppercase tracking-wide">
+                    Time
+                  </th>
                   <th
                     className="py-4 px-6 text-right text-sm uppercase tracking-wide"
                     style={{width: "80px"}}
@@ -293,6 +297,9 @@ export default function EventPage({params}: Props) {
                       <RiderRank
                         rank={(currentPage - 1) * itemsPerPage + i + 1}
                       />
+                    </td>
+                    <td className="py-4 px-6 font-mono text-base">
+                      <Racetime time={r.race_time} />
                     </td>
                     <td className="py-4 px-6 font-mono text-base">
                       {r.points}

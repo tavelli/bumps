@@ -27,6 +27,7 @@ export async function GET(request: NextRequest, context: any) {
         event_name,
         birth_year,
         rider_id,
+        race_time,
         race_date
       `,
         {count: "exact"},
