@@ -304,7 +304,7 @@ export default function EventPage({params}: Props) {
                     <td className="py-4 px-6 font-mono text-base">
                       <Racetime time={r.race_time} />
 
-                      <div className="md:hidden mt-2">{r.points} points</div>
+                      <div className="md:hidden mt-2">{r.points} pts</div>
                     </td>
                     <td className="hidden md:table-cell py-4 px-6 font-mono text-base">
                       {r.points}
