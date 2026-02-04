@@ -267,11 +267,14 @@ export default function EventPage({params}: Props) {
                   >
                     Rank
                   </th>
-                  <th className="py-4 px-6 text-sm uppercase tracking-wide">
+                  <th
+                    className="py-4 px-6 text-sm uppercase tracking-wide"
+                    style={{width: "100px"}}
+                  >
                     Time
                   </th>
                   <th
-                    className="py-4 px-6 text-right text-sm uppercase tracking-wide"
+                    className="hidden md:table-cell  py-4 px-6 text-right text-sm uppercase tracking-wide"
                     style={{width: "80px"}}
                   >
                     Points
@@ -300,8 +303,10 @@ export default function EventPage({params}: Props) {
                     </td>
                     <td className="py-4 px-6 font-mono text-base">
                       <Racetime time={r.race_time} />
+
+                      <div className="md:hidden mt-2">{r.points} points</div>
                     </td>
-                    <td className="py-4 px-6 font-mono text-base">
+                    <td className="hidden md:table-cell py-4 px-6 font-mono text-base">
                       {r.points}
                     </td>
                     <td className="py-4 px-6 font-semibold">
