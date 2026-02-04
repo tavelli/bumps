@@ -299,6 +299,13 @@ export default function RiderProfilePage({params}: Props) {
                             </span>
                           )}
 
+                          <div className=" py-4 lg:hidden  font-mono text-sm">
+                            <div className="font-normal">Time</div>
+                            <span className="font-normal text-lg">
+                              <Racetime time={r.race_time} />
+                            </span>
+                          </div>
+
                           <div className="flex lg:hidden gap-8">
                             <div className=" py-4  font-mono text-sm">
                               <div className="font-normal">Overall</div>
@@ -318,12 +325,6 @@ export default function RiderProfilePage({params}: Props) {
                               </span>
                               <span className="text-gray-300">
                                 / {r.category_total}
-                              </span>
-                            </div>
-                            <div className=" py-4  font-mono text-sm">
-                              <div className="font-normal">Time</div>
-                              <span className="font-normal text-lg">
-                                <Racetime time={r.race_time} />
                               </span>
                             </div>
                           </div>
