@@ -15,9 +15,10 @@ import Filters from "@/app/components/Filters";
 import Link from "next/link";
 
 import {HillclimbPage} from "@/app/components/HillclimbPage";
-import {HillclimbEvent} from "@/app/lib/bumps/model";
+import {HillclimbEvent, CourseRecords} from "@/app/lib/bumps/model";
 import {RiderRank} from "@/app/components/RiderRank";
 import {Racetime} from "@/app/components/RaceTIme";
+import {EventCourseRecords} from "@/app/components/CourseRecords";
 
 const EVENT_QUERY = `query Events($slug: String) {
     event(filter: {slug: {eq: $slug}}) {
@@ -75,6 +76,8 @@ export default function EventPage({params}: Props) {
       race_year: number;
     }[];
   } | null>(null);
+
+  const [records, setRecords] = useState<CourseRecords | null>(null);
 
   const [datoData, setDatoData] = useState<HillclimbEvent | null>(null);
   const [results, setResults] = useState<any[]>([]);
@@ -138,6 +141,7 @@ export default function EventPage({params}: Props) {
           event_id: data.races[0]?.event_id || 0,
           races: data?.races || [],
         });
+        setRecords(data.records);
       })
       .catch(async (err) => {
         if (cancelled) return;
@@ -246,7 +250,16 @@ export default function EventPage({params}: Props) {
       <main className="max-w-5xl mx-auto">
         {datoData && <HillclimbPage event={datoData} />}
 
-        <h2 className="subcategory-heading mt-12 ml-4 lg:ml-0" id="results">
+        {records && (
+          <div className="ml-4 mr-4 lg:ml-0 lg:mr-0">
+            <h2 className="subcategory-heading mt-16 mb-6" id="results">
+              Course Records
+            </h2>
+            <EventCourseRecords records={records} />
+          </div>
+        )}
+
+        <h2 className="subcategory-heading mt-16 ml-4 lg:ml-0" id="results">
           Results
         </h2>
         <div className="mt-8 ml-4 lg:ml-0">

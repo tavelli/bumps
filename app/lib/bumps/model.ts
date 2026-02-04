@@ -26,3 +26,18 @@ export interface PodiumRider {
   rider_id: string;
   category_display: string;
 }
+
+export interface CourseRecords {
+  male: {
+    rider_name: string;
+    rider_id: string;
+    race_time: string;
+    year: string;
+  };
+  female: {
+    rider_name: string;
+    rider_id: string;
+    race_time: string;
+    year: string;
+  };
+}
