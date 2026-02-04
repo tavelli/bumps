@@ -14,7 +14,7 @@ dotenv_path = '.env.local'
 load_dotenv(dotenv_path=dotenv_path)
 
 # --- CONFIGURATION ---
-TRIAL_MODE = True 
+TRIAL_MODE = False 
 SUPABASE_URL = "https://odwyxdiizeyeznymzwds.supabase.co"
 SUPABASE_KEY = os.getenv('SUPBASE_SECRETY_KEY')
 
@@ -38,6 +38,35 @@ EVENT_NAME_MAP = {
     "Newton": "Newton's Revenge",
     "Bird":"Mt. Washington Early Bird"
 }
+
+def parse_to_interval(raw_time):
+    if not raw_time:
+        return None
+        
+    # 1. Clean up: Remove AM/PM and extra spaces
+    clean = raw_time.upper().replace('AM', '').replace('PM', '').strip()
+    
+    # 2. Split into parts
+    # Splits by colon or dot to analyze segments
+    parts = clean.split(':')
+    
+    try:
+        if len(parts) == 3:
+            h, m, s = parts
+            # Logic: If 'hours' > 24, it's likely MM:SS:ms (common in your list)
+            if int(h) >= 5: # Assuming no rider takes 5+ hours for these hill climbs
+                # Re-interpret as Minutes:Seconds.Milliseconds
+                return f"00:{h}:{m}.{s.replace('.', '')}"
+            return f"{h.zfill(2)}:{m.zfill(2)}:{s}"
+            
+        elif len(parts) == 2:
+            m, s = parts
+            # Handle formats like 45:38.3
+            return f"00:{m.zfill(2)}:{s}"
+            
+        return clean # Fallback for formats already correct
+    except ValueError:
+        return clean # Return as-is if parsing fails
 
 def get_canonical_name(raw_name):
     for keyword, canonical in EVENT_NAME_MAP.items():
@@ -168,13 +197,15 @@ def scrape_and_upload(year, gender):
                 if p_text and p_text not in ['DNS', 'DNF', '']:
                     # Get time from our lookup map
                     race_id = info["race_id"]
-                    actual_time = race_time_lookups.get(race_id, {}).get(r_id)
+                    raw_time = race_time_lookups.get(race_id, {}).get(r_id)
+
+                    actual_time = parse_to_interval(raw_time)
                     
                     results_to_upsert.append({
                         "rider_id": r_id, 
                         "race_id": race_id, 
                         "points": float(p_text), 
-                        "race_time": actual_time, # NEW FIELD
+                        "race_time": actual_time,
                         "year": year
                     })
 
@@ -195,6 +226,7 @@ def scrape_and_upload(year, gender):
         print("[TRIAL] Sample Rider:", list(riders_to_upsert.values())[0] if riders_to_upsert else "None")
         print(f"[TRIAL] Would upsert {len(results_to_upsert)} results.")
         print(f"[TRIAL] Sample Result with Time: {results_to_upsert[0] if results_to_upsert else 'None'}")
+        print("Trial mode enabled; no data was uploaded.")
     else:
         supabase.table("races").upsert(races_to_upsert).execute()
         supabase.table("riders").upsert(list(riders_to_upsert.values())).execute()
@@ -202,20 +234,21 @@ def scrape_and_upload(year, gender):
             supabase.table("results").upsert(results_to_upsert[i:i+500], on_conflict="rider_id, race_id").execute()
         print("Successfully uploaded all data.")
 
-    if TRIAL_MODE:
-        print("Trial mode enabled; no data was uploaded.")
-
-    else:
-        trigger_view_refresh()
+        try:
+            response = supabase.rpc('refresh_all_reporting_views_standard').execute()
+            print("Successfully triggered refresh.")
+        except Exception as e:
+            print(f"Error refreshing view: {e}")
+   
+        
 
        
-def trigger_view_refresh():
-    try:
-        response = supabase.rpc('refresh_all_reporting_views_standard').execute()
-        print("Successfully triggered refresh.")
-    except Exception as e:
-        print(f"Error refreshing view: {e}")
-
 if __name__ == "__main__":
-   #  scrape_and_upload(2025, "M")
-    scrape_and_upload(2025, "W")
+    # scrape_and_upload(2014, "M")
+    # scrape_and_upload(2014, "W")
+    years = [2013, 2014, 2015,2018,2019,2021, 2022, 2023, 2024, 2025]
+
+# The loop stays exactly the same
+for year in years:
+    for gender in ["M", "W"]:
+        scrape_and_upload(year, gender)
