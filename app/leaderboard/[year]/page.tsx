@@ -8,11 +8,28 @@ import Filters from "@/app/components/Filters";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
 
 import {Navigation} from "../../components/Navigation";
-import Loading from "./loading";
+
 import {Footer} from "../../components/Footer";
 import {categories, years} from "@/app/lib/bumps/const";
 import {RiderRank} from "@/app/components/RiderRank";
 
+const TableLoading = () => {
+  return (
+    <div className="animate-pulse p-4">
+      {/* Table Placeholder */}
+      <div className="space-y-4">
+        {[...Array(10)].map((_, i) => (
+          <div key={i} className="flex gap-4 items-center border-b pb-4">
+            <div className="h-8 w-8 bg-slate-100 rounded"></div>
+            <div className="h-8 w-full bg-slate-100 rounded"></div>
+            <div className="h-8 w-12 bg-slate-100 rounded"></div>
+            <div className="h-8 w-16 bg-slate-100 rounded"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 interface Props {
   params: {year: string};
 }
@@ -104,7 +121,7 @@ export default function LeaderboardContent({params}: Props) {
           </div>
         )}
         {loading ? (
-          <Loading />
+          <TableLoading />
         ) : (
           <div className="text-white rounded-lg overflow-hidden">
             <table className="w-full">
