@@ -9,6 +9,7 @@ WITH RaceRankings AS (
         res.rider_id,
         res.race_id,
         res.points,
+        res.race_time,
         -- Ranks
         RANK() OVER (
             PARTITION BY res.race_id 

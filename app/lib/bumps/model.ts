@@ -17,3 +17,12 @@ export interface HillclimbEvent {
   };
   slug: string;
 }
+
+export interface PodiumRider {
+  rider_name: string;
+  rank: number;
+  year: number;
+  season_points: number;
+  rider_id: string;
+  category_display: string;
+}

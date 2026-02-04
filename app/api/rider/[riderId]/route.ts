@@ -19,6 +19,7 @@ export async function GET(request: NextRequest, context: any) {
           event_name,
           event_slug,
           race_date,
+          race_time,
           race_id, 
           points,
           overall_rank,

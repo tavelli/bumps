@@ -1,0 +1,22 @@
+45:38.3 // 45 minutes 38 seconds 3 tenths
+
+1:04:52.6 // 1 hour four minutes 52 seconds 6 tenths second
+
+34:14.40 // 34 minutes 14 seconds 4 tenths second
+
+00:35:07.3 // 35 minutes 7 seconds 3 tenths second
+
+1:00:30.00 // 1 hour 30 seconds
+
+32:34.7 // 32 minutes 34seconds 7 tenths second
+
+45:59 // 45 minutes 59 seconds
+
+1:00:12 // 1 hour 12 seconds
+
+51:22.0 // 51 minutes 22 seconds
+1:00:45 // 1 hour 45 seconds
+
+30:42:00 // 30 minutes 42 seconds
+
+53:34:00 // 53 minutes 34 seconds

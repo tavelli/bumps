@@ -5,9 +5,10 @@ import React, {useEffect, useMemo, useState} from "react";
 import {uniteaSans} from "@/app/fonts";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
 import {Navigation} from "@/app/components/Navigation";
-import {getRacesCountForYear} from "@/app/lib/bumps/utils"; // Adjust path as needed
+import {formatRaceTime, getRacesCountForYear} from "@/app/lib/bumps/utils"; // Adjust path as needed
 import {Footer} from "@/app/components/Footer";
 import Link from "next/link";
+import {Racetime} from "@/app/components/RaceTIme";
 
 interface Props {
   params: {riderId: string};
@@ -24,6 +25,7 @@ export default function RiderProfilePage({params}: Props) {
       event_name: any;
       event_slug: string;
       race_date: any;
+      race_time: string;
       race_id: any;
       points: any;
       overall_rank: any;
@@ -252,6 +254,9 @@ export default function RiderProfilePage({params}: Props) {
                       <th className="py-4 px-6 text-left text-sm uppercase tracking-wide font-normal">
                         Event
                       </th>
+                      <th className="hidden lg:table-cell py-4 px-6 text-sm uppercase tracking-wide font-normal">
+                        Time
+                      </th>
                       <th
                         className="py-4 px-6 text-center text-sm uppercase tracking-wide font-normal"
                         style={{width: "80px"}}
@@ -294,6 +299,13 @@ export default function RiderProfilePage({params}: Props) {
                             </span>
                           )}
 
+                          <div className=" py-4 lg:hidden  font-mono text-sm">
+                            <div className="font-normal">Time</div>
+                            <span className="font-normal text-lg">
+                              <Racetime time={r.race_time} />
+                            </span>
+                          </div>
+
                           <div className="flex lg:hidden gap-8">
                             <div className=" py-4  font-mono text-sm">
                               <div className="font-normal">Overall</div>
@@ -304,7 +316,7 @@ export default function RiderProfilePage({params}: Props) {
                                 / {r.overall_total}
                               </span>
                             </div>
-                            <div className="lg:hidden py-4 font-mono text-sm">
+                            <div className="py-4 font-mono text-sm">
                               <div className="font-normal">
                                 {seasonStandings?.category_label || "Age Group"}
                               </div>
@@ -318,6 +330,9 @@ export default function RiderProfilePage({params}: Props) {
                           </div>
                         </td>
 
+                        <td className="hidden lg:table-cell py-4 px-6 font-mono text-base">
+                          <Racetime time={r.race_time} />
+                        </td>
                         <td className="py-4 px-6 text-center font-mono text-lg font-semibold">
                           {r.points}
                         </td>

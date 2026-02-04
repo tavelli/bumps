@@ -5,17 +5,30 @@ import {useRouter, useSearchParams} from "next/navigation";
 export default function Filters({
   years,
   categories,
+  currentYear,
+  isLeaderboard = false,
 }: {
   years: string[];
   categories: string[];
+  currentYear?: string;
+  isLeaderboard?: boolean;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const updateFilter = (key: string, value: string) => {
+    if (isLeaderboard && key === "year") {
+      updateYear(value);
+    } else {
+      const params = new URLSearchParams(searchParams?.toString());
+      params.set(key, value);
+      router.push(`?${params.toString()}`, {scroll: false});
+    }
+  };
+
+  const updateYear = (year: string) => {
     const params = new URLSearchParams(searchParams?.toString());
-    params.set(key, value);
-    router.push(`?${params.toString()}`);
+    router.push(`/leaderboard/${year}/?${params.toString()}`);
   };
 
   return (
@@ -30,7 +43,11 @@ export default function Filters({
               Season
             </label>
             <select
-              value={searchParams?.get("year") || "2025"}
+              value={
+                isLeaderboard
+                  ? currentYear
+                  : searchParams?.get("year") || years[0]
+              }
               onChange={(e) => updateFilter("year", e.target.value)}
               className=""
               id="seasonDropdown"

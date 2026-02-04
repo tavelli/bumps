@@ -37,3 +37,20 @@ const RACES_BY_YEAR: Record<number, number> = {
 export const getRacesCountForYear = (year: number): number => {
   return RACES_BY_YEAR[year] ?? 5;
 };
+
+export const formatRaceTime = (timeString: string) => {
+  if (!timeString) return "--:--.00";
+
+  // 1. Remove the leading "00:" hours if they exist
+  let cleanTime = timeString.replace(/^00:/, "");
+
+  // 2. Check for decimal point
+  if (!cleanTime.includes(".")) {
+    // No decimal? Add .00
+    return `${cleanTime}.00`;
+  } else {
+    // Has decimal? Ensure it has 2 digits (e.g., .4 becomes .40)
+    const [time, ms] = cleanTime.split(".");
+    return `${time}.${ms.padEnd(2, "0").substring(0, 2)}`;
+  }
+};
