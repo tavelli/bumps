@@ -5,9 +5,11 @@ import {useRouter, useSearchParams} from "next/navigation";
 export default function Filters({
   years,
   categories,
+  currentYear,
 }: {
   years: string[];
   categories: string[];
+  currentYear: string;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -16,6 +18,11 @@ export default function Filters({
     const params = new URLSearchParams(searchParams?.toString());
     params.set(key, value);
     router.push(`?${params.toString()}`);
+  };
+
+  const updateYear = (year: string) => {
+    const params = new URLSearchParams(searchParams?.toString());
+    router.push(`/leaderboard/${year}/?${params.toString()}`);
   };
 
   return (
@@ -30,8 +37,8 @@ export default function Filters({
               Season
             </label>
             <select
-              value={searchParams?.get("year") || "2025"}
-              onChange={(e) => updateFilter("year", e.target.value)}
+              value={currentYear}
+              onChange={(e) => updateYear(e.target.value)}
               className=""
               id="seasonDropdown"
             >

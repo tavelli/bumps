@@ -30,7 +30,6 @@ AggregatedTotals AS (
         rider_id,
         rider_name,
         gender,
-        race_time,
         year - birth_year AS age_at_race,
         SUM(points) AS total_points,
         -- Calculate season points based on the "Best of X"
@@ -60,8 +59,7 @@ AggregatedTotals AS (
         rider_id, 
         rider_name, 
         gender, 
-        birth_year,
-        race_time
+        birth_year
 )
 SELECT 
     *,

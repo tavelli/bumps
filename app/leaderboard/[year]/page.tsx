@@ -11,8 +11,13 @@ import {Navigation} from "../../components/Navigation";
 import Loading from "./loading";
 import {Footer} from "../../components/Footer";
 import {categories, years} from "@/app/lib/bumps/const";
+import {RiderRank} from "@/app/components/RiderRank";
 
-function LeaderboardContent() {
+interface Props {
+  params: {year: string};
+}
+
+export default function LeaderboardContent({params}: Props) {
   const searchParams = useSearchParams();
   const [results, setResults] = useState<any[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -20,14 +25,34 @@ function LeaderboardContent() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const selectedYear = searchParams.get("year") || "2025";
+  const [selectedYear, setSelectedYear] = useState<string | null>(null);
+
   const selectedCat = searchParams.get("category") || "Overall Men";
 
+  // Resolve params which may be a Promise in some Next.js runtimes
   useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const p = await (params as any);
+        if (!cancelled) setSelectedYear(p?.year ?? years[0]);
+      } catch (err) {
+        if (!cancelled) setSelectedYear(years[0]);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [params]);
+
+  useEffect(() => {
+    if (!selectedYear) return;
     setCurrentPage(1);
   }, [selectedYear, selectedCat]);
 
   useEffect(() => {
+    if (!selectedYear) return;
+
     // Fetch leaderboard data
     const fetchResults = async () => {
       try {
@@ -62,13 +87,21 @@ function LeaderboardContent() {
         className="page-header flex flex-col"
       >
         <Navigation inverse={true} showLogo={true} />
-        <h1 className="h1-heading text-center">Leaderboard</h1>
+        <h1 className="h1-heading text-center">
+          {selectedYear || ""} Leaderboard
+        </h1>
       </header>
 
       <main className="max-w-4xl mx-auto">
-        <div className="mt-8 ml-4 lg:ml-0">
-          <Filters years={years} categories={categories} />
-        </div>
+        {selectedYear && (
+          <div className="mt-8 ml-4 lg:ml-0">
+            <Filters
+              years={years}
+              categories={categories}
+              currentYear={selectedYear}
+            />
+          </div>
+        )}
         {loading ? (
           <Loading />
         ) : (
@@ -112,7 +145,9 @@ function LeaderboardContent() {
                     className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
                   >
                     <td className="py-4 px-6 font-mono text-base font-semibold">
-                      {(currentPage - 1) * itemsPerPage + i + 1}
+                      <RiderRank
+                        rank={(currentPage - 1) * itemsPerPage + i + 1}
+                      />
                     </td>
                     <td className="py-4 px-6 font-mono text-base">
                       {r.season_points}
@@ -176,13 +211,5 @@ function LeaderboardContent() {
         <Footer />
       </footer>
     </div>
-  );
-}
-
-export default function LeaderboardPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LeaderboardContent />
-    </Suspense>
   );
 }

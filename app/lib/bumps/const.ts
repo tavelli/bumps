@@ -19,7 +19,8 @@ export const categories = [
   "40-49 Men",
   "50-59 Men",
   "60-69 Men",
-  "70-79 Men",
+  "70-74 Men",
+  "75-79 Men",
   "80+ Men",
   "Under 20 Women",
   "20-29 Women",
@@ -27,6 +28,7 @@ export const categories = [
   "40-49 Women",
   "50-59 Women",
   "60-69 Women",
-  "70-79 Women",
+  "70-74 Women",
+  "75-79 Women",
   "80+ Women",
 ];
