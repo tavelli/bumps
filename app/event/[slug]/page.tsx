@@ -82,7 +82,7 @@ export default function EventPage({params}: Props) {
   const [pageLoading, setPageLoading] = useState(true);
   const [raceLoading, setRaceLoading] = useState(false);
 
-  const selectedYear = searchParams.get("year") || "2025";
+  const selectedYear = searchParams.get("year");
   const selectedCat = searchParams.get("category") || "Overall Men";
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -95,6 +95,8 @@ export default function EventPage({params}: Props) {
       .sort((a, b) => parseInt(b) - parseInt(a));
     return yrs;
   }, [event]);
+
+  const raceYear = selectedYear ? selectedYear : raceYears[0];
 
   const [error, setError] = useState<string | null>(null);
 
@@ -174,8 +176,8 @@ export default function EventPage({params}: Props) {
   useEffect(() => {
     // find race id in event races by matching year
     const selectedRaceId =
-      event?.races.find((r) => r.race_year.toString() === selectedYear)
-        ?.race_id || null;
+      event?.races.find((r) => r.race_year.toString() === raceYear)?.race_id ||
+      null;
 
     if (!selectedRaceId) return;
 
@@ -318,8 +320,8 @@ export default function EventPage({params}: Props) {
                       </Link>
                     </td>
                     <td className="hidden lg:table-cell py-4 px-6 text-gray-300 font-mono text-base">
-                      {selectedYear
-                        ? parseInt(selectedYear) - parseInt(r.birth_year)
+                      {raceYear
+                        ? parseInt(raceYear) - parseInt(r.birth_year)
                         : "--"}
                     </td>
                   </tr>
