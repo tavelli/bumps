@@ -6,18 +6,24 @@ export default function Filters({
   years,
   categories,
   currentYear,
+  isLeaderboard = false,
 }: {
   years: string[];
   categories: string[];
-  currentYear: string;
+  currentYear?: string;
+  isLeaderboard?: boolean;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const updateFilter = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams?.toString());
-    params.set(key, value);
-    router.push(`?${params.toString()}`);
+    if (isLeaderboard && key === "year") {
+      updateYear(value);
+    } else {
+      const params = new URLSearchParams(searchParams?.toString());
+      params.set(key, value);
+      router.push(`?${params.toString()}`, {scroll: false});
+    }
   };
 
   const updateYear = (year: string) => {
@@ -37,8 +43,12 @@ export default function Filters({
               Season
             </label>
             <select
-              value={currentYear}
-              onChange={(e) => updateYear(e.target.value)}
+              value={
+                isLeaderboard
+                  ? currentYear
+                  : searchParams?.get("year") || years[0]
+              }
+              onChange={(e) => updateFilter("year", e.target.value)}
               className=""
               id="seasonDropdown"
             >

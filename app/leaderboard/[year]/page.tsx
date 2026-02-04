@@ -99,6 +99,7 @@ export default function LeaderboardContent({params}: Props) {
               years={years}
               categories={categories}
               currentYear={selectedYear}
+              isLeaderboard={true}
             />
           </div>
         )}
