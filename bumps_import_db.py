@@ -43,30 +43,28 @@ def parse_to_interval(raw_time):
     if not raw_time:
         return None
         
-    # 1. Clean up: Remove AM/PM and extra spaces
+    # 1. Clean up
     clean = raw_time.upper().replace('AM', '').replace('PM', '').strip()
-    
-    # 2. Split into parts
-    # Splits by colon or dot to analyze segments
     parts = clean.split(':')
     
     try:
         if len(parts) == 3:
             h, m, s = parts
-            # Logic: If 'hours' > 24, it's likely MM:SS:ms (common in your list)
-            if int(h) >= 5: # Assuming no rider takes 5+ hours for these hill climbs
-                # Re-interpret as Minutes:Seconds.Milliseconds
-                return f"00:{h}:{m}.{s.replace('.', '')}"
-            return f"{h.zfill(2)}:{m.zfill(2)}:{s}"
+            # If the first part is suspiciously high, it's MM:SS:ms
+            if int(h) >= 5: 
+                # Format as 'MM minutes SS.ms seconds'
+                return f"{h} minutes {m}.{s.replace('.', '')} seconds"
+            
+            # If it's a normal small hour (like 1:04:52)
+            return f"{h} hours {m} minutes {s} seconds"
             
         elif len(parts) == 2:
             m, s = parts
-            # Handle formats like 45:38.3
-            return f"00:{m.zfill(2)}:{s}"
+            return f"{m} minutes {s} seconds"
             
-        return clean # Fallback for formats already correct
+        return clean
     except ValueError:
-        return clean # Return as-is if parsing fails
+        return None
 
 def get_canonical_name(raw_name):
     for keyword, canonical in EVENT_NAME_MAP.items():
@@ -244,9 +242,7 @@ def scrape_and_upload(year, gender):
 
        
 if __name__ == "__main__":
-    # scrape_and_upload(2014, "M")
-    # scrape_and_upload(2014, "W")
-    years = [2013, 2014, 2015,2018,2019,2021, 2022, 2023, 2024, 2025]
+    years = [2013, 2014, 2015, 2018, 2019, 2021, 2022, 2023, 2024, 2025]
 
 # The loop stays exactly the same
 for year in years:
