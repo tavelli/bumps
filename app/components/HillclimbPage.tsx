@@ -62,7 +62,7 @@ export const HillclimbPage: FunctionComponent<Props> = ({
         </div>
         <HillPhoto event={event} />
         <div className="absolute" style={{left: "10px", bottom: "5px"}}>
-          <div className={`text-2xl md:text-3xl lg:p-4 `}>
+          <div className={`text-xl md:text-3xl lg:p-4 `}>
             <span className="font-bold">{event.distance}</span> mi{" "}
             <span className="pl-2 pr-2">•</span>{" "}
             <span className="font-bold">
