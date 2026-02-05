@@ -33,7 +33,7 @@ export async function GET(request: NextRequest, context: any) {
         {count: "exact"},
       )
       .eq("race_id", raceId)
-      .order("overall_rank", {ascending: true})
+      .order("race_time", {ascending: true})
       .range(offset, offset + itemsPerPage - 1);
 
     // Apply Category Logic
