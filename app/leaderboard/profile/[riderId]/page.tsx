@@ -170,7 +170,7 @@ export default function RiderProfilePage({params}: Props) {
           ...r,
           countsTowardTotal: scoringIds.has(r.race_id),
           isPr:
-            eventPrs[r.event_slug].entry_count > 1 &&
+            // eventPrs[r.event_slug].entry_count > 1 &&
             r.race_time === eventPrs[r.event_slug].fastest_time,
         };
       });
