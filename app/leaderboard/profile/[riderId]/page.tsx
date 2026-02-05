@@ -9,6 +9,7 @@ import {formatRaceTime, getRacesCountForYear} from "@/app/lib/bumps/utils"; // A
 import {Footer} from "@/app/components/Footer";
 import Link from "next/link";
 import {Racetime} from "@/app/components/RaceTIme";
+import {RiderStatsLifetime} from "@/app/components/RiderLifetimeStats";
 
 interface Props {
   params: {riderId: string};
@@ -198,51 +199,63 @@ export default function RiderProfilePage({params}: Props) {
             </div>
           ) : rider ? (
             <div>
-              <div className="flex flex-col lg:flex-row gap-8 mt-4 justify-between px-6">
-                <div className="inline-flex flex-col gap-2 ">
-                  <label
-                    htmlFor="year-filter"
-                    className="text-xs uppercase tracking-widest text-gray-300 font-semibold"
-                  >
-                    Season
-                  </label>
-                  <select
-                    id="year-filter"
-                    value={selectedYear}
-                    onChange={(e) => setSelectedYear(e.target.value)}
-                  >
-                    {availableYears.map((y) => (
-                      <option key={y} value={y}>
-                        {y}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              <div className="ml-4 lg:ml-0 lg:px-6">
+                <h2 className="subcategory-heading mt-16 mb-4" id="results">
+                  Lifetime Stats
+                </h2>
 
-                <div className="flex gap-8 items-center">
-                  <div className="inline-flex flex-col gap-2 text-center">
-                    <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
-                      Points
-                    </p>
-                    <p className="text-3xl font-bold font-mono text-white">
-                      {seasonStandings?.season_points}
-                    </p>
+                <RiderStatsLifetime results={rider.results || []} />
+
+                <h2 className="subcategory-heading mt-16 " id="results">
+                  Results
+                </h2>
+
+                <div className="flex flex-col lg:flex-row gap-8 mt-4 justify-between">
+                  <div className="inline-flex flex-col gap-2 ">
+                    <label
+                      htmlFor="year-filter"
+                      className="text-xs uppercase tracking-widest text-gray-300 font-semibold"
+                    >
+                      Season
+                    </label>
+                    <select
+                      id="year-filter"
+                      value={selectedYear}
+                      onChange={(e) => setSelectedYear(e.target.value)}
+                    >
+                      {availableYears.map((y) => (
+                        <option key={y} value={y}>
+                          {y}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  <div className="inline-flex flex-col gap-2 text-center">
-                    <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
-                      Overall
-                    </p>
-                    <p className="text-3xl font-bold font-mono text-white">
-                      {seasonStandings?.overall_standing_rank || "--"}
-                    </p>
-                  </div>
-                  <div className="inline-flex flex-col gap-2 text-center">
-                    <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
-                      {seasonStandings?.category_label || "Age Group"}
-                    </p>
-                    <p className="text-3xl font-bold font-mono text-white">
-                      {seasonStandings?.category_standing_rank || "--"}
-                    </p>
+
+                  <div className="flex gap-8 items-center">
+                    <div className="inline-flex flex-col gap-2 text-center">
+                      <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
+                        Points
+                      </p>
+                      <p className="text-3xl font-bold font-mono text-white">
+                        {seasonStandings?.season_points}
+                      </p>
+                    </div>
+                    <div className="inline-flex flex-col gap-2 text-center">
+                      <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
+                        Overall
+                      </p>
+                      <p className="text-3xl font-bold font-mono text-white">
+                        {seasonStandings?.overall_standing_rank || "--"}
+                      </p>
+                    </div>
+                    <div className="inline-flex flex-col gap-2 text-center">
+                      <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
+                        {seasonStandings?.category_label || "Age Group"}
+                      </p>
+                      <p className="text-3xl font-bold font-mono text-white">
+                        {seasonStandings?.category_standing_rank || "--"}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
