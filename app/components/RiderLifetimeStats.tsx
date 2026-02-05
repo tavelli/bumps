@@ -44,8 +44,8 @@ export const RiderStatsLifetime: FunctionComponent<Props> = ({results}) => {
             climbing
           </p>
           <p className="text-3xl font-bold font-mono text-white">
-            {totalHeight.toLocaleString("en-US")}{" "}
-            <span className="text-xl opacity-80">ft</span>
+            {totalHeight.toLocaleString("en-US")}
+            <span className="text-xl opacity-80 ml-1">ft</span>
           </p>
         </div>
       </div>
