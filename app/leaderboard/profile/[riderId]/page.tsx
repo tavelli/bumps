@@ -10,7 +10,9 @@ import {Footer} from "@/app/components/Footer";
 import Link from "next/link";
 import {Racetime} from "@/app/components/RaceTIme";
 import {RiderStatsLifetime} from "@/app/components/RiderLifetimeStats";
-
+import {PrStats, RiderResult} from "@/app/lib/bumps/model";
+import PrBadge from "../../../../public/pr-badge.svg";
+import Image from "next/image";
 interface Props {
   params: {riderId: string};
 }
@@ -20,21 +22,7 @@ export default function RiderProfilePage({params}: Props) {
   const [rider, setRider] = useState<{
     name: string;
     age?: number | null;
-    results?: {
-      rider_name: any;
-      birth_year: any;
-      event_name: any;
-      event_slug: string;
-      race_date: any;
-      race_time: string;
-      race_id: any;
-      points: any;
-      overall_rank: any;
-      overall_total: any;
-      category_total: any;
-      category_rank: any;
-      year: any;
-    }[];
+    results?: RiderResult[];
     standings?: {
       year: any;
       overall_standing_rank: any;
@@ -125,6 +113,31 @@ export default function RiderProfilePage({params}: Props) {
         };
       }
 
+      const eventPrs = (rider.results || []).reduce<Record<string, PrStats>>(
+        (acc, entry) => {
+          const slug = entry.event_slug;
+          const time = entry.race_time;
+
+          if (!acc[slug]) {
+            acc[slug] = {
+              event_slug: slug,
+              fastest_time: time,
+              entry_count: 1,
+            };
+          } else {
+            acc[slug].entry_count++;
+
+            // Ensure we handle potential null/undefined times if your data allows them
+            if (time < acc[slug].fastest_time) {
+              acc[slug].fastest_time = time;
+            }
+          }
+
+          return acc;
+        },
+        {},
+      );
+
       const yearNumbers = rider.results.map((r) => Number(r.year));
 
       // Get unique years and sort them descending for the dropdown
@@ -153,7 +166,13 @@ export default function RiderProfilePage({params}: Props) {
       );
 
       const filtered = resultsForYear.map((r) => {
-        return {...r, countsTowardTotal: scoringIds.has(r.race_id)};
+        return {
+          ...r,
+          countsTowardTotal: scoringIds.has(r.race_id),
+          isPr:
+            eventPrs[r.event_slug].entry_count > 1 &&
+            r.race_time === eventPrs[r.event_slug].fastest_time,
+        };
       });
 
       const standingsForYear = rider.standings?.find(
@@ -267,7 +286,10 @@ export default function RiderProfilePage({params}: Props) {
                       <th className="py-4 px-6 text-left text-sm uppercase tracking-wide font-normal">
                         Event
                       </th>
-                      <th className="hidden lg:table-cell py-4 px-6 text-sm uppercase tracking-wide font-normal">
+                      <th
+                        className="hidden lg:table-cell py-4 px-6 text-sm uppercase tracking-wide font-normal"
+                        style={{width: "150px"}}
+                      >
                         Time
                       </th>
                       <th
@@ -316,6 +338,18 @@ export default function RiderProfilePage({params}: Props) {
                             <div className="font-normal">Time</div>
                             <span className="font-normal text-lg">
                               <Racetime time={r.race_time} />
+                              {r.isPr && (
+                                <div className="inline ml-4">
+                                  <Image
+                                    src={PrBadge}
+                                    alt="Personal record"
+                                    width={24}
+                                    height={24}
+                                    priority
+                                    style={{display: "inline"}}
+                                  />
+                                </div>
+                              )}
                             </span>
                           </div>
 
@@ -345,6 +379,18 @@ export default function RiderProfilePage({params}: Props) {
 
                         <td className="hidden lg:table-cell py-4 px-6 font-mono text-base">
                           <Racetime time={r.race_time} />
+                          {r.isPr && (
+                            <div className="inline ml-4">
+                              <Image
+                                src={PrBadge}
+                                alt="Personal record"
+                                width={24}
+                                height={24}
+                                priority
+                                style={{display: "inline"}}
+                              />
+                            </div>
+                          )}
                         </td>
                         <td className="py-4 px-6 text-center font-mono text-lg font-semibold">
                           {r.points}

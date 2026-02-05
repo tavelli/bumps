@@ -63,3 +63,9 @@ export interface EventStats {
   slug: string;
   elevationGain: number;
 }
+
+export interface PrStats {
+  event_slug: string;
+  fastest_time: string;
+  entry_count: number;
+}
