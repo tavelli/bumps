@@ -49,9 +49,12 @@ export const HillclimbPage: FunctionComponent<Props> = ({
         <span className="disabled-link">{event.note}</span>
       )}
     </div>
-    <div className={`text-center mt-8 mb-10 text-2xl p-4 event-blurb`}>
-      <Markdown value={event.blurb} openLinksInNewTab={true} />
-    </div>
+    {event.blurb && (
+      <div className={`text-center mt-8 mb-10 text-2xl p-4 event-blurb`}>
+        <Markdown value={event.blurb} openLinksInNewTab={true} />
+      </div>
+    )}
+
     <div className="mb-4 md:mb-6">
       <div className="relative">
         <div

@@ -3,6 +3,7 @@ export interface HillclimbEvent {
   blurb: string;
   date: string;
   location: string;
+  state: string;
   registration: string;
   results: string;
   note: string;
