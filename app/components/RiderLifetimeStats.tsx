@@ -39,7 +39,7 @@ export const RiderStatsLifetime: FunctionComponent<Props> = ({results}) => {
         </div>
         <div className="inline-flex flex-col gap-2">
           <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
-            Total ft
+            Total elevation
             <br />
             climbed
           </p>
