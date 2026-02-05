@@ -286,10 +286,7 @@ export default function RiderProfilePage({params}: Props) {
                       <th className="py-4 px-6 text-left text-sm uppercase tracking-wide font-normal">
                         Event
                       </th>
-                      <th
-                        className="hidden lg:table-cell py-4 px-6 text-sm uppercase tracking-wide font-normal"
-                        style={{width: "150px"}}
-                      >
+                      <th className="hidden lg:table-cell py-4 px-6 text-sm uppercase tracking-wide font-normal">
                         Time
                       </th>
                       <th
