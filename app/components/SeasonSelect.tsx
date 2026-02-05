@@ -57,7 +57,7 @@ export const SeasonGridSelector: React.FunctionComponent<{
 
         {/* The Grid Popover */}
         {isOpen && (
-          <div className="absolute z-50 mt-3 left-1/2 -translate-x-1/2 w-72 p-2 bg-neutral-950 border border-neutral-800 rounded-2xl shadow-2xl animate-in fade-in zoom-in duration-150">
+          <div className="absolute z-50 mt-3 left-1/2 -translate-x-1/2 w-72 p-2 bg-neutral-950 border border-neutral-500 rounded-2xl shadow-2xl animate-in fade-in zoom-in duration-150">
             <div className="grid grid-cols-3 gap-1.5">
               {years.map((year) => (
                 <button
@@ -71,7 +71,7 @@ export const SeasonGridSelector: React.FunctionComponent<{
                     ${
                       currentYear === year
                         ? "bg-white text-black"
-                        : "text-neutral-500 hover:bg-neutral-800 hover:text-white"
+                        : "text-neutral-300 hover:bg-neutral-800 hover:text-white"
                     }
                   `}
                 >
