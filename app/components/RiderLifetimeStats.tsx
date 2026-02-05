@@ -16,12 +16,12 @@ export const RiderStatsLifetime: FunctionComponent<Props> = ({results}) => {
 
   return (
     <div>
-      <div className="flex gap-12 items-center">
+      <div className="flex gap-8 flex-wrap items-center">
         <div className="inline-flex flex-col gap-2 ">
           <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
             Years
             <br />
-            participated
+            competed
           </p>
           <p className="text-3xl font-bold font-mono text-white">
             {uniqueYearsCount}
@@ -44,7 +44,8 @@ export const RiderStatsLifetime: FunctionComponent<Props> = ({results}) => {
             climbing
           </p>
           <p className="text-3xl font-bold font-mono text-white">
-            {totalHeight.toLocaleString("en-US")} ft
+            {totalHeight.toLocaleString("en-US")}{" "}
+            <span className="text-xl opacity-80">ft</span>
           </p>
         </div>
       </div>

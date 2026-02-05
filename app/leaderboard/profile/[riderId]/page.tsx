@@ -199,7 +199,7 @@ export default function RiderProfilePage({params}: Props) {
             </div>
           ) : rider ? (
             <div>
-              <div className="ml-4 lg:ml-0 lg:px-6">
+              <div className="ml-4 mr-4 lg:ml-0 lg:mr-0 lg:px-6">
                 <h2 className="subcategory-heading mt-16 mb-4" id="results">
                   Lifetime Stats
                 </h2>
