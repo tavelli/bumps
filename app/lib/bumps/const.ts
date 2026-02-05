@@ -1,3 +1,5 @@
+import {EventStats} from "./model";
+
 export const years = [
   "2025",
   "2024",
@@ -32,3 +34,66 @@ export const categories = [
   "75-79 Women",
   "80+ Women",
 ];
+
+export const eventStats: EventStats[] = [
+  {
+    slug: "high-point",
+    elevationGain: 1511,
+  },
+  {
+    slug: "prospect",
+    elevationGain: 1610,
+  },
+  {
+    slug: "ascutney",
+    elevationGain: 2279,
+  },
+  {
+    slug: "allen-clark",
+    elevationGain: 1600,
+  },
+  {
+    slug: "greylock",
+    elevationGain: 2805,
+  },
+  {
+    slug: "mt-washington",
+    elevationGain: 4678,
+  },
+  {
+    slug: "mt-washington-earlybird",
+    elevationGain: 4678,
+  },
+  {
+    slug: "newtons-revenge",
+    elevationGain: 4678,
+  },
+  {
+    slug: "kearsarge",
+    elevationGain: 2156,
+  },
+  {
+    slug: "whiteface",
+    elevationGain: 3500,
+  },
+  {
+    slug: "crank-the-kanc",
+    elevationGain: 2340,
+  },
+  {
+    slug: "wachusett",
+    elevationGain: 1067,
+  },
+  {
+    slug: "okemmo",
+    elevationGain: 2096,
+  },
+  {
+    slug: "equinox",
+    elevationGain: 3143,
+  },
+];
+
+export const eventElevationMap = new Map(
+  eventStats.map((item) => [item.slug, item.elevationGain]),
+);

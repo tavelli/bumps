@@ -9,6 +9,7 @@ import {formatRaceTime, getRacesCountForYear} from "@/app/lib/bumps/utils"; // A
 import {Footer} from "@/app/components/Footer";
 import Link from "next/link";
 import {Racetime} from "@/app/components/RaceTIme";
+import {RiderStatsLifetime} from "@/app/components/RiderLifetimeStats";
 
 interface Props {
   params: {riderId: string};
@@ -198,6 +199,23 @@ export default function RiderProfilePage({params}: Props) {
             </div>
           ) : rider ? (
             <div>
+              <h2
+                className="subcategory-heading mt-16 ml-4 lg:ml-0 px-6 mb-4"
+                id="results"
+              >
+                Lifetime Stats
+              </h2>
+              <div className="px-6">
+                <RiderStatsLifetime results={rider.results || []} />
+              </div>
+
+              <h2
+                className="subcategory-heading mt-16 ml-4 lg:ml-0 px-6"
+                id="results"
+              >
+                Results
+              </h2>
+
               <div className="flex flex-col lg:flex-row gap-8 mt-4 justify-between px-6">
                 <div className="inline-flex flex-col gap-2 ">
                   <label

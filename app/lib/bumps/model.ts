@@ -42,3 +42,24 @@ export interface CourseRecords {
     year: string;
   };
 }
+
+export interface RiderResult {
+  rider_name: string;
+  birth_year: number;
+  event_name: string;
+  event_slug: string;
+  race_date: string;
+  race_time: string;
+  race_id: string;
+  points: number;
+  overall_rank: number;
+  overall_total: number;
+  category_total: number;
+  category_rank: number;
+  year: number;
+}
+
+export interface EventStats {
+  slug: string;
+  elevationGain: number;
+}
