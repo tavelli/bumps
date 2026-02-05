@@ -4,6 +4,7 @@ import Image from "next/image";
 import {format, parseISO} from "date-fns";
 import Link from "next/link";
 import {HillclimbEvent} from "@/app/lib/bumps/model";
+import Markdown from "marked-react";
 
 type Props = {
   event: HillclimbEvent;
@@ -29,7 +30,7 @@ export const HillclimbPage: FunctionComponent<Props> = ({
   event,
   showLink = false,
 }) => (
-  <div className="p-4 lg:p-0">
+  <div className="">
     <p className="text-2xl lg:text-3xl text-center mt-10">
       {format(parseISO(event.date), "PP")} <span className="pl-2 pr-2">•</span>{" "}
       {event.location}
@@ -48,6 +49,9 @@ export const HillclimbPage: FunctionComponent<Props> = ({
         <span className="disabled-link">{event.note}</span>
       )}
     </div>
+    <div className={`text-center mt-8 mb-10 text-2xl p-4 event-blurb`}>
+      <Markdown value={event.blurb} openLinksInNewTab={true} />
+    </div>
     <div className="mb-4 md:mb-6">
       <div className="relative">
         <div
@@ -58,7 +62,7 @@ export const HillclimbPage: FunctionComponent<Props> = ({
         </div>
         <HillPhoto event={event} />
         <div className="absolute" style={{left: "10px", bottom: "5px"}}>
-          <div className={`text-lg md:text-3xl lg:p-4 `}>
+          <div className={`text-2xl md:text-3xl lg:p-4 `}>
             <span className="font-bold">{event.distance}</span> mi{" "}
             <span className="pl-2 pr-2">•</span>{" "}
             <span className="font-bold">

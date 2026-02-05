@@ -127,6 +127,10 @@ select {
   letter-spacing: 6px;
 }
 
+.h1-heading--big {
+  font-size: 32px;
+}
+
 @media only screen and (min-width: 1024px) {
   .h1-heading {
     font-size: 48px;
@@ -342,4 +346,8 @@ nav a:hover {
 
 .bumps-rank-cell {
   margin-left: -4px;
+}
+
+.event-blurb a {
+  text-decoration: underline;
 }
