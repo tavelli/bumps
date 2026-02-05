@@ -39,9 +39,9 @@ export const RiderStatsLifetime: FunctionComponent<Props> = ({results}) => {
         </div>
         <div className="inline-flex flex-col gap-2">
           <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
-            Total elevation
+            Total
             <br />
-            climbed
+            climbing
           </p>
           <p className="text-3xl font-bold font-mono text-white">
             {totalHeight.toLocaleString("en-US")} ft
