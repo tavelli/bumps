@@ -24,6 +24,7 @@ const EVENT_QUERY = `query Events($slug: String) {
     event(filter: {slug: {eq: $slug}}) {
       date
       location
+      state
       title
       blurb
       registration
@@ -245,9 +246,9 @@ export default function EventPage({params}: Props) {
           {event && event.name}
         </h1>
 
-        {/* <p className="text-gray-800 text-lg  uppercase tracking-widest text-center mt-2 text-md lg:text-xl">
-          {datoData && datoData.location}
-        </p> */}
+        <p className="text-gray-800 text-lg  uppercase tracking-widest text-center mt-2 text-md lg:text-xl">
+          {datoData && datoData.state}
+        </p>
       </header>
 
       <main className="max-w-5xl mx-auto">
