@@ -181,7 +181,7 @@ export default function RiderProfilePage({params}: Props) {
         <Navigation inverse={true} showLogo={true} />
         <h1 className="h1-heading text-center">{rider && rider.name}</h1>
         {earliestYear && (
-          <p className="text-gray-600 font-medium  uppercase tracking-widest text-center mt-2 text-md lg:text-xl">
+          <p className="text-gray-800 font-medium  uppercase tracking-widest text-center mt-2 text-md lg:text-xl">
             Since {earliestYear}
           </p>
         )}

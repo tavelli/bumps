@@ -25,6 +25,7 @@ const EVENT_QUERY = `query Events($slug: String) {
       date
       location
       title
+      blurb
       registration
       results
       note
@@ -240,10 +241,12 @@ export default function EventPage({params}: Props) {
         className="page-header flex flex-col"
       >
         <Navigation inverse={true} showLogo={true} />
-        <h1 className="h1-heading text-center">{event && event.name}</h1>
+        <h1 className="h1-heading h1-heading--big text-center">
+          {event && event.name}
+        </h1>
 
-        {/* <p className="text-gray-600 font-medium  uppercase tracking-widest text-center mt-2 text-md lg:text-xl">
-          {event?.date}
+        {/* <p className="text-gray-800 text-lg  uppercase tracking-widest text-center mt-2 text-md lg:text-xl">
+          {datoData && datoData.location}
         </p> */}
       </header>
 
