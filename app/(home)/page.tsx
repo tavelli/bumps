@@ -325,11 +325,7 @@ export default async function Home() {
                   <tbody>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2025"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2025">
                           2025
                         </a>
                       </td>
@@ -338,11 +334,7 @@ export default async function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2024"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2024">
                           2024
                         </a>
                       </td>
@@ -351,11 +343,7 @@ export default async function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2023"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2023">
                           2023
                         </a>
                       </td>
@@ -364,11 +352,7 @@ export default async function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2022"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2022">
                           2022
                         </a>
                       </td>
@@ -377,11 +361,7 @@ export default async function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2021"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2021">
                           2021
                         </a>
                       </td>
@@ -390,11 +370,7 @@ export default async function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2019"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2019">
                           2019
                         </a>
                       </td>
@@ -403,11 +379,7 @@ export default async function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2018"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2018">
                           2018
                         </a>
                       </td>
@@ -416,11 +388,7 @@ export default async function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2015"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2015">
                           2015
                         </a>
                       </td>
@@ -429,11 +397,7 @@ export default async function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2014"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2014">
                           2014
                         </a>
                       </td>
@@ -442,11 +406,7 @@ export default async function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <a
-                          className="body-link"
-                          href="https://www.road-results.com/?n=series&sn=bumps&y=2013"
-                          target="_blank"
-                        >
+                        <a className="body-link" href="/leaderboard/2013">
                           2013
                         </a>
                       </td>
