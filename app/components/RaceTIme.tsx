@@ -7,11 +7,17 @@ type Props = {
 
 export const Racetime: FunctionComponent<Props> = ({time}) => {
   const formatted = formatRaceTime(time);
-  const [main, ms] = formatted.split(".");
+
+  // Remove leading zero specifically at the start of the string
+  // Use .replace(/^0/, "") to only strip the very first character if it's a zero
+  const trimmed = formatted.replace(/^0/, "");
+
+  const [main, ms] = trimmed.split(".");
+
   return (
     <span className="font-mono font-bold">
       {main}
-      <span className="text-xs opacity-60">.{ms}</span>
+      {ms && <span className="text-xs opacity-60">.{ms}</span>}
     </span>
   );
 };
