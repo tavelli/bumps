@@ -18,30 +18,41 @@ const Badge: React.FC<BadgeProps> = ({badge}) => {
   return (
     <div
       className="flex flex-col items-center justify-center space-y-2 md:space-y-4 w-24 md:w-32 group"
-      title={isCompleted ? `Completed ${completedCount}x` : "Not completed"}
+      title={
+        isCompleted ? `Completed ${completedCount} times` : "Not completed"
+      }
     >
       {/* Responsive Badge Circle: 5rem (80px) on mobile, 6rem (96px) on MD+ */}
       <div
         className={`
-          relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center overflow-hidden
+          relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center
           transition-all duration-300 ease-in-out
           ${
             isCompleted
               ? "border-0"
-              : "border-2 border-gray-600 bg-transparent opacity-50 group-hover:opacity-80"
+              : "border-2 border-gray-600 bg-transparent opacity-50 group-hover:opacity-80 overflow-hidden"
           }
         `}
       >
         {isCompleted && svg ? (
-          <Image
-            src={`/badges/${svg}`}
-            alt={name}
-            className="w-full h-full object-cover"
-            height={96}
-            width={96}
-          />
+          <div>
+            <span
+              className="absolute bg-gray-900 monospace text-center rounded-md tracking-widest text-sm md:text-base"
+              style={{top: 0, right: 0, width: "28px"}}
+            >
+              {completedCount}
+              <span className="opacity-80">x</span>
+            </span>
+            <Image
+              src={`/badges/${svg}`}
+              alt={name}
+              className="w-full h-full object-cover"
+              height={96}
+              width={96}
+            />
+          </div>
         ) : (
-          <div className="w-full h-full bg-neutral-900" />
+          <div className="w-full h-full bg-neutral-900 monospace font-semibold" />
         )}
       </div>
 
@@ -85,7 +96,7 @@ export const BadgeList: React.FC<BadgeListProps> = ({badges, results}) => {
   const legacyBadges = processedBadges.filter((b) => b.isLegacy);
 
   return (
-    <div className="p-4 lg:p-0 flex flex-wrap gap-3 md:gap-4 items-start justify-center">
+    <div className="p-4 lg:p-0 flex flex-wrap gap-3 md:gap-4 items-start justify-between md:justify-center">
       {activeBadges.map((badge) => (
         <Link href={`/event/${badge.slug}`} key={badge.slug}>
           <Badge badge={badge} />
@@ -110,7 +121,7 @@ export const BadgeList: React.FC<BadgeListProps> = ({badges, results}) => {
             </span>
           </div>
           <span className="text-center text-[9px] md:text-[10px] font-bold tracking-widest uppercase text-gray-500 group-hover:text-gray-300 leading-tight">
-            Show Legacy
+            Show Legacy Events
           </span>
         </button>
       )}
