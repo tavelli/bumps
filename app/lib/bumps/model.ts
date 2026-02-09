@@ -76,6 +76,7 @@ export interface BadgeData {
   altSlugs?: string[];
   name: string;
   svg: string;
+  isLegacy: boolean;
   isCompleted?: boolean;
-  bestTime?: string;
+  completedCount?: number;
 }
