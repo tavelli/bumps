@@ -37,7 +37,7 @@ const Badge: React.FC<BadgeProps> = ({badge}) => {
         {isCompleted && svg ? (
           <div>
             <span
-              className="absolute bg-gray-800 monospace text-center rounded-md tracking-widest text-sm md:text-base border border-gray-800"
+              className="absolute bg-gray-800 monospace text-center rounded-md tracking-widest text-sm md:text-base "
               style={{top: 0, right: 0, width: "28px"}}
             >
               {completedCount}
