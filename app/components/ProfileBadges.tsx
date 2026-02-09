@@ -96,7 +96,7 @@ export const BadgeList: React.FC<BadgeListProps> = ({badges, results}) => {
   const legacyBadges = processedBadges.filter((b) => b.isLegacy);
 
   return (
-    <div className="p-4 lg:p-0 flex flex-wrap gap-3 md:gap-4 items-start justify-between md:justify-center">
+    <div className="p-4 lg:p-0 flex flex-wrap gap-3 md:gap-4 items-start">
       {activeBadges.map((badge) => (
         <Link href={`/event/${badge.slug}`} key={badge.slug}>
           <Badge badge={badge} />
