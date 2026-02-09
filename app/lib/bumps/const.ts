@@ -1,4 +1,4 @@
-import {EventStats} from "./model";
+import {BadgeData, EventStats} from "./model";
 
 export const years = [
   "2025",
@@ -97,3 +97,68 @@ export const eventStats: EventStats[] = [
 export const eventElevationMap = new Map(
   eventStats.map((item) => [item.slug, item.elevationGain]),
 );
+
+export const badgeList: BadgeData[] = [
+  {
+    slug: "high-point",
+    name: "High Point",
+    svg: "highpoint.svg",
+  },
+  {
+    slug: "crank-the-kanc",
+    name: "Krank the Kank",
+    svg: "kanc.svg",
+  },
+  {
+    slug: "whiteface",
+    name: "Whiteface",
+    svg: "whiteface.svg",
+  },
+  {
+    slug: "ascutney",
+    name: "Mt. Ascutney",
+    svg: "ascutney.svg",
+  },
+  {
+    slug: "kearsarge",
+    name: "Mt. Kearsarge",
+    svg: "kearsarge.svg",
+  },
+  {
+    slug: "mt-washington",
+    altSlugs: ["mt-washington-earlybird", "newtons-revenge"],
+    name: "Mt. Washington",
+    svg: "mtwashington.svg",
+  },
+
+  {
+    slug: "greylock",
+    name: "Mt. Greylock",
+    svg: "greylock.svg",
+  },
+  {
+    slug: "prospect",
+    name: "Prospect Mountain",
+    svg: "prospect.svg",
+  },
+  {
+    slug: "allen-clark",
+    name: "Appalachian Gap",
+    svg: "appgap.svg",
+  },
+  {
+    slug: "wachusett",
+    name: "Mt. Wachusett",
+    svg: "wachusett.svg",
+  },
+  {
+    slug: "okemo",
+    name: "Mt. Okemo",
+    svg: "okemo.svg",
+  },
+  {
+    slug: "equinox",
+    name: "Mt. Equinox",
+    svg: "equinox.svg",
+  },
+];

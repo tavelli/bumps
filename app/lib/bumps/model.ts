@@ -70,3 +70,12 @@ export interface PrStats {
   fastest_time: string;
   entry_count: number;
 }
+
+export interface BadgeData {
+  slug: string;
+  altSlugs?: string[];
+  name: string;
+  svg: string;
+  isCompleted?: boolean;
+  bestTime?: string;
+}
