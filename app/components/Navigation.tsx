@@ -4,6 +4,7 @@ import {FunctionComponent, useState} from "react";
 import Image from "next/image";
 import facebookLogo from "../../public/facebook.svg";
 import instagramLogo from "../../public/instagram.svg";
+import substackLogo from "../../public/substack.svg";
 import bumpsLogo from "../../public/bumps-logo-letters-2.svg";
 
 interface NavigationProps {
@@ -122,7 +123,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
               </a>
             </div>
           )}
-          <div className="flex gap-4 justify-end">
+          <div className="flex gap-6 justify-end">
             <a
               href="https://www.facebook.com/BikeUpTheMountainPointSeries"
               target="_blank"
@@ -147,6 +148,19 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
                 alt="instagram logo"
                 width={30}
                 height={30}
+              />
+            </a>
+            <a
+              href="https://bumpshillclimb.substack.com/"
+              target="_blank"
+              rel="noopener"
+              style={inverse ? {filter: "invert(1)"} : {}}
+            >
+              <Image
+                src={substackLogo}
+                alt="substack logo"
+                width={24}
+                height={27}
               />
             </a>
           </div>
