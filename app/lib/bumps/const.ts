@@ -12,7 +12,7 @@ export const years = [
   "2014",
   "2013",
 ];
-export const categories = [
+export const categories: string[] = [
   "Overall Men",
   "Overall Women",
   "Under 20 Men",
@@ -34,6 +34,8 @@ export const categories = [
   "75-79 Women",
   "80+ Women",
 ];
+
+export const latestYear = years[0];
 
 export const eventStats: EventStats[] = [
   {

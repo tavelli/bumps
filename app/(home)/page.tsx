@@ -8,6 +8,8 @@ import {HillclimbLink} from "@/app/components/HillclimbLink";
 import {Header} from "@/app/components/Header";
 import {Footer} from "@/app/components/Footer";
 import {HillclimbEvent} from "../lib/bumps/model";
+import {categories, latestYear} from "../lib/bumps/const";
+import Link from "next/link";
 
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
@@ -49,6 +51,19 @@ async function getHomeData(): Promise<HomepageQuery> {
 
 export default async function Home() {
   const data = await getHomeData();
+
+  const maleCategories = categories
+    .filter((c) => c.includes("Men"))
+    .map((c) => ({
+      label: c.replace(" Men", ""),
+      value: c,
+    }));
+  const femaleCategories = categories
+    .filter((c) => c.includes("Women"))
+    .map((c) => ({
+      label: c.replace(" Women", ""),
+      value: c,
+    }));
 
   return (
     <div className={`full-height ${uniteaSans.className}`}>
@@ -246,6 +261,53 @@ export default async function Home() {
 
             <div className="grid md:grid-cols-2 mt-8 gap-5">
               <div>
+                <h3 className="subcategory-heading">Categories</h3>
+
+                <div className="grid grid-cols-2 pl-4 pr-4">
+                  <div>
+                    <div className={`pt-2 `}>
+                      <div className="font-bold uppercase">Male</div>
+                    </div>
+                    <ul className="list-disc">
+                      {maleCategories.map((cat) => (
+                        <li key={cat.value} className="p-1">
+                          <Link
+                            href={`/leaderboard/${latestYear}?category=${encodeURIComponent(cat.value)}`}
+                            className="underline"
+                          >
+                            {cat.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div className={`pt-2 `}>
+                      <div className="font-bold uppercase">Female</div>
+                    </div>
+                    <ul className="list-disc">
+                      {femaleCategories.map((cat) => (
+                        <li key={cat.value} className="p-1 ">
+                          <Link
+                            href={`/leaderboard/${latestYear}?category=${encodeURIComponent(cat.value)}`}
+                            className="underline"
+                          >
+                            {cat.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <p className="pt-4">
+                  * Age categories are determined by a rider&apos;s{" "}
+                  <strong>age at the end of the year</strong>. Please note that
+                  your age category for individual races may differ from that of
+                  the BUMPS series.
+                </p>
+              </div>
+              <div>
                 <h3 className="subcategory-heading">Points System</h3>
                 <p className="pt-2 pb-2">
                   To calculate your points, use this equation:
@@ -268,44 +330,6 @@ export default async function Home() {
                   race scores counting towards each rider&apos;s total.
                   Participation in any of the series events automatically
                   qualifies racers for the BUMPS series.
-                </p>
-              </div>
-              <div>
-                <h3 className="subcategory-heading">Categories</h3>
-
-                <div>
-                  <div className={`pt-2 `}>
-                    <em>Male</em>
-                  </div>
-                  <div>
-                    Overall, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
-                    75-79, 80+
-                  </div>
-                </div>
-
-                <div>
-                  <div className={`pt-2 `}>
-                    <em>Female</em>
-                  </div>
-                  <div>
-                    Overall, Under 20, 20-29, 30-39, 40-49, 50-59, 60-69, 70-74,
-                    75-79, 80+
-                  </div>
-                </div>
-
-                <div className={`pt-2 `}>
-                  <em>Overall unicycle</em>
-                </div>
-
-                <div className={`pt-2 `}>
-                  <em>Overall tandem</em>
-                </div>
-
-                <p className="pt-4">
-                  * Age categories are determined by a rider&apos;s{" "}
-                  <strong>age at the end of the year</strong>. Please note that
-                  your age category for individual races may differ from that of
-                  the BUMPS series.
                 </p>
               </div>
             </div>

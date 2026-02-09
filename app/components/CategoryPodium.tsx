@@ -2,6 +2,7 @@ import {PodiumRider} from "../lib/bumps/model";
 import React, {FunctionComponent} from "react";
 import {RiderName} from "./RiderName";
 import Link from "next/link";
+import {latestYear} from "../lib/bumps/const";
 
 type Props = {
   categoryName: string;
@@ -14,7 +15,7 @@ export const CategoryPodium: FunctionComponent<Props> = ({
   riders,
   abbreviated = true,
 }: Props) => {
-  const year = riders[0]?.year || "2025";
+  const year = riders[0]?.year || latestYear;
 
   return (
     <div className="border border-neutral-800 rounded-xl p-4 shadow-sm bg-black">

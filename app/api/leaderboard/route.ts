@@ -1,3 +1,4 @@
+import {latestYear} from "@/app/lib/bumps/const";
 import {createClient} from "@/app/lib/supbase/server";
 import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
@@ -5,7 +6,7 @@ import {NextRequest, NextResponse} from "next/server";
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const selectedYear = searchParams.get("year") || "2025";
+    const selectedYear = searchParams.get("year") || latestYear;
     const selectedCat = searchParams.get("category") || "Overall Men";
     const page = parseInt(searchParams.get("page") || "1", 10);
     const itemsPerPage = 10;
