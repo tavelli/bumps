@@ -123,7 +123,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
               </a>
             </div>
           )}
-          <div className="flex gap-6 justify-end">
+          <div className="flex gap-3 md:gap-6 justify-end">
             <a
               href="https://www.facebook.com/BikeUpTheMountainPointSeries"
               target="_blank"
@@ -159,8 +159,8 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
               <Image
                 src={substackLogo}
                 alt="substack logo"
-                width={24}
-                height={27}
+                width={27}
+                height={30}
               />
             </a>
           </div>

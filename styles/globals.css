@@ -125,6 +125,7 @@ select {
   text-transform: uppercase;
   color: #1e1e1e;
   letter-spacing: 6px;
+  padding: 0 6px;
 }
 
 .h1-heading--big {
@@ -134,6 +135,7 @@ select {
 @media only screen and (min-width: 1024px) {
   .h1-heading {
     font-size: 48px;
+    padding: 0;
   }
 }
 
