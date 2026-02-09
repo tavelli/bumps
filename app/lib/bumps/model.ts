@@ -44,6 +44,13 @@ export interface CourseRecords {
   };
 }
 
+export interface ProfileCourseRecord {
+  event_name: string;
+  event_slug: string;
+  race_time: string;
+  year: string;
+}
+
 export interface RiderResult {
   rider_name: string;
   birth_year: number;
