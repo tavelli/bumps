@@ -8,12 +8,13 @@ export async function GET(request: NextRequest, context: any) {
     const supabase = await createClient();
 
     // Run both queries in parallel for better performance
-    const [historyResponse, standingsResponse] = await Promise.all([
-      // Query 1: Individual Race History
-      supabase
-        .from("rider_race_history")
-        .select(
-          `
+    const [historyResponse, standingsResponse, courseRecordsResponse] =
+      await Promise.all([
+        // Query 1: Individual Race History
+        supabase
+          .from("rider_race_history")
+          .select(
+            `
           rider_name,
           birth_year,
           event_name,
@@ -28,26 +29,30 @@ export async function GET(request: NextRequest, context: any) {
           category_rank,
           year
         `,
-        )
-        .eq("rider_id", riderId)
-        .order("year", {ascending: false})
-        .order("race_date", {ascending: true}),
+          )
+          .eq("rider_id", riderId)
+          .order("year", {ascending: false})
+          .order("race_date", {ascending: true}),
 
-      // Query 2: Season Standings (from categorized_results view)
-      supabase
-        .from("categorized_results")
-        .select(
-          `
+        // Query 2: Season Standings (from categorized_results view)
+        supabase
+          .from("categorized_results")
+          .select(
+            `
           year,
           overall_standing_rank,
           category_standing_rank,
           category_label,
           season_points
         `,
-        )
-        .eq("rider_id", riderId)
-        .order("year", {ascending: false}),
-    ]);
+          )
+          .eq("rider_id", riderId)
+          .order("year", {ascending: false}),
+
+        supabase.rpc("get_rider_course_records", {
+          target_rider_id: riderId,
+        }),
+      ]);
 
     if (
       historyResponse.error ||
@@ -57,6 +62,8 @@ export async function GET(request: NextRequest, context: any) {
       return NextResponse.json({error: "rider_not_found"}, {status: 404});
     }
 
+    console.log(courseRecordsResponse);
+
     return NextResponse.json({
       name: historyResponse.data[0].rider_name,
       age: historyResponse.data[0].birth_year
@@ -64,6 +71,7 @@ export async function GET(request: NextRequest, context: any) {
         : null,
       results: historyResponse.data,
       standings: standingsResponse.data || [], // Returns their rank per year
+      courseRecords: courseRecordsResponse.data || [],
     });
   } catch (err) {
     console.error(err);

@@ -15,6 +15,7 @@ import PrBadge from "../../../../public/pr-badge.svg";
 import Image from "next/image";
 import BadgeList from "@/app/components/ProfileBadges";
 import {badgeList} from "@/app/lib/bumps/const";
+import {ProfileCR} from "@/app/components/ProfileCourseRecord";
 interface Props {
   params: {riderId: string};
 }
@@ -31,6 +32,12 @@ export default function RiderProfilePage({params}: Props) {
       category_standing_rank: any;
       season_points: any;
       category_label: any;
+    }[];
+    courseRecords?: {
+      out_event_name: string;
+      out_event_slug: string;
+      out_race_time: string;
+      out_year: string;
     }[];
   } | null>(null);
   const [loading, setLoading] = useState(true);
@@ -69,6 +76,7 @@ export default function RiderProfilePage({params}: Props) {
           age: data.age ?? null,
           results: data.results,
           standings: data.standings,
+          courseRecords: data.courseRecords,
         });
       })
       .catch(async (err) => {
@@ -221,6 +229,27 @@ export default function RiderProfilePage({params}: Props) {
           ) : rider ? (
             <div>
               <div className="ml-4 mr-4 lg:ml-0 lg:mr-0 lg:px-6 max-w-4xl">
+                {rider.courseRecords && rider.courseRecords.length > 0 && (
+                  <>
+                    <h2 className="subcategory-heading mt-16 " id="records">
+                      Course Records
+                    </h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                      {rider.courseRecords.map((r) => (
+                        <ProfileCR
+                          key={r.out_event_slug}
+                          record={{
+                            event_name: r.out_event_name,
+                            event_slug: r.out_event_slug,
+                            race_time: r.out_race_time,
+                            year: r.out_year,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
                 <h2 className="subcategory-heading mt-16 mb-4" id="results">
                   Lifetime Stats
                 </h2>
