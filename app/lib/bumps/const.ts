@@ -1,4 +1,4 @@
-import {EventStats} from "./model";
+import {BadgeData, EventStats} from "./model";
 
 export const years = [
   "2025",
@@ -97,3 +97,80 @@ export const eventStats: EventStats[] = [
 export const eventElevationMap = new Map(
   eventStats.map((item) => [item.slug, item.elevationGain]),
 );
+
+export const badgeList: BadgeData[] = [
+  {
+    slug: "high-point",
+    name: "High Point",
+    svg: "highpoint.svg",
+    isLegacy: false,
+  },
+  {
+    slug: "crank-the-kanc",
+    name: "Krank the Kank",
+    svg: "kanc.svg",
+    isLegacy: false,
+  },
+  {
+    slug: "whiteface",
+    name: "Whiteface",
+    svg: "whiteface.svg",
+    isLegacy: false,
+  },
+  {
+    slug: "ascutney",
+    name: "Mt. Ascutney",
+    svg: "ascutney.svg",
+    isLegacy: false,
+  },
+  {
+    slug: "kearsarge",
+    name: "Mt. Kearsarge",
+    svg: "kearsarge.svg",
+    isLegacy: false,
+  },
+  {
+    slug: "mt-washington",
+    altSlugs: ["mt-washington-earlybird", "newtons-revenge"],
+    name: "Mt. Washington",
+    svg: "mtwashington.svg",
+    isLegacy: false,
+  },
+
+  {
+    slug: "greylock",
+    name: "Mt. Greylock",
+    svg: "greylock.svg",
+    isLegacy: false,
+  },
+  {
+    slug: "prospect",
+    name: "Prospect Mountain",
+    svg: "prospect.svg",
+    isLegacy: false,
+  },
+  {
+    slug: "allen-clark",
+    name: "Appalachian Gap",
+    svg: "appgap.svg",
+    isLegacy: false,
+  },
+  {
+    slug: "wachusett",
+    name: "Mt. Wachusett",
+    svg: "wachusett.svg",
+    isLegacy: true,
+  },
+  {
+    slug: "okemo",
+    name: "Mt. Okemo",
+    svg: "okemo.svg",
+    isLegacy: true,
+  },
+  {
+    slug: "equinox",
+    name: "Mt. Equinox",
+    svg: "equinox.svg",
+    isLegacy: true,
+  },
+];

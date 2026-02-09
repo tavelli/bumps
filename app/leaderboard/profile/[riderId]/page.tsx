@@ -13,6 +13,8 @@ import {RiderStatsLifetime} from "@/app/components/RiderLifetimeStats";
 import {PrStats, RiderResult} from "@/app/lib/bumps/model";
 import PrBadge from "../../../../public/pr-badge.svg";
 import Image from "next/image";
+import BadgeList from "@/app/components/ProfileBadges";
+import {badgeList} from "@/app/lib/bumps/const";
 interface Props {
   params: {riderId: string};
 }
@@ -207,7 +209,7 @@ export default function RiderProfilePage({params}: Props) {
         )}
       </header>
 
-      <main className="lg:p-8 max-w-4xl mx-auto">
+      <main className="lg:p-8 max-w-5xl mx-auto">
         <section className="text-white">
           {loading ? (
             <p className="px-6 mt-4">Loading...</p>
@@ -218,12 +220,18 @@ export default function RiderProfilePage({params}: Props) {
             </div>
           ) : rider ? (
             <div>
-              <div className="ml-4 mr-4 lg:ml-0 lg:mr-0 lg:px-6">
+              <div className="ml-4 mr-4 lg:ml-0 lg:mr-0 lg:px-6 max-w-4xl">
                 <h2 className="subcategory-heading mt-16 mb-4" id="results">
                   Lifetime Stats
                 </h2>
 
                 <RiderStatsLifetime results={rider.results || []} />
+
+                {rider.results && (
+                  <div className="mt-4 md:mt-8">
+                    <BadgeList badges={badgeList} results={rider.results} />
+                  </div>
+                )}
 
                 <h2 className="subcategory-heading mt-16 " id="results">
                   Results
@@ -331,23 +339,25 @@ export default function RiderProfilePage({params}: Props) {
                             </span>
                           )}
 
-                          <div className=" py-4 lg:hidden  font-mono text-sm">
-                            <div className="font-normal">Time</div>
-                            <span className="font-normal text-lg">
-                              <Racetime time={r.race_time} />
-                              {r.isPr && (
-                                <div className="inline ml-4">
-                                  <Image
-                                    src={PrBadge}
-                                    alt="Personal record"
-                                    width={24}
-                                    height={24}
-                                    priority
-                                    style={{display: "inline"}}
-                                  />
-                                </div>
-                              )}
-                            </span>
+                          <div className="py-4 lg:hidden  font-mono text-sm flex items-center flex-column">
+                            <div>
+                              <div className="font-normal">Time</div>
+                              <div className="font-normal text-lg">
+                                <Racetime time={r.race_time} />
+                              </div>
+                            </div>
+                            {r.isPr && (
+                              <div className="inline ml-4">
+                                <Image
+                                  src={PrBadge}
+                                  alt="Personal record"
+                                  width={24}
+                                  height={24}
+                                  priority
+                                  style={{display: "inline"}}
+                                />
+                              </div>
+                            )}
                           </div>
 
                           <div className="flex lg:hidden gap-8">
