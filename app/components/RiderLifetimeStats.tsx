@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from "react";
 import {RiderResult} from "../lib/bumps/model";
-import {eventStats, eventElevationMap} from "../lib/bumps/const";
+import {eventStats, eventElevationMap, badgeList} from "../lib/bumps/const";
 
 type Props = {
   results: RiderResult[];
@@ -13,6 +13,16 @@ export const RiderStatsLifetime: FunctionComponent<Props> = ({results}) => {
     const height = eventElevationMap.get(event.event_slug) || 0; // Use 0 if ID not found
     return sum + height;
   }, 0);
+
+  const eventsCompleted =
+    badgeList.filter(
+      (b) =>
+        b.isLegacy === false && results.some((r) => r.event_slug === b.slug),
+    ).length || 0;
+
+  const totalActiveEvents = badgeList.filter(
+    (b) => b.isLegacy === false,
+  ).length;
 
   return (
     <div>
@@ -35,6 +45,17 @@ export const RiderStatsLifetime: FunctionComponent<Props> = ({results}) => {
           </p>
           <p className="text-3xl font-bold font-mono text-white">
             {results.length}
+          </p>
+        </div>
+        <div className="inline-flex flex-col gap-2">
+          <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
+            Events
+            <br />
+            completed
+          </p>
+          <p className="text-3xl font-bold font-mono text-white">
+            {eventsCompleted}/
+            <span className="text-gray-300">{totalActiveEvents}</span>
           </p>
         </div>
         <div className="inline-flex flex-col gap-2">

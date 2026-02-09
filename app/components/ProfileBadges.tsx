@@ -17,12 +17,13 @@ const Badge: React.FC<BadgeProps> = ({badge}) => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center space-y-4 w-32 group"
-      title={isCompleted ? `Completed ${completedCount}x` : "Never completed"}
+      className="flex flex-col items-center justify-center space-y-2 md:space-y-4 w-24 md:w-32 group"
+      title={isCompleted ? `Completed ${completedCount}x` : "Not completed"}
     >
+      {/* Responsive Badge Circle: 5rem (80px) on mobile, 6rem (96px) on MD+ */}
       <div
         className={`
-          relative w-24 h-24 rounded-full flex items-center justify-center overflow-hidden
+          relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center overflow-hidden
           transition-all duration-300 ease-in-out
           ${
             isCompleted
@@ -44,10 +45,11 @@ const Badge: React.FC<BadgeProps> = ({badge}) => {
         )}
       </div>
 
+      {/* Responsive Label Text */}
       <span
         className={`
-        text-center text-[10px] font-bold tracking-widest uppercase break-words px-2 leading-tight
-        ${isCompleted ? "text-white" : "text-gray-500"}
+        text-center text-[9px] md:text-[10px] font-bold tracking-widest uppercase break-words px-1 md:px-2 leading-tight
+        ${isCompleted ? "text-white" : "text-gray-400"}
       `}
       >
         {name}
@@ -59,7 +61,6 @@ const Badge: React.FC<BadgeProps> = ({badge}) => {
 export const BadgeList: React.FC<BadgeListProps> = ({badges, results}) => {
   const [showLegacy, setShowLegacy] = useState(false);
 
-  // 1. Process completion logic
   const processedBadges = badges.map((b) => {
     const completed = results.some((r) =>
       b.altSlugs
@@ -80,20 +81,17 @@ export const BadgeList: React.FC<BadgeListProps> = ({badges, results}) => {
     };
   });
 
-  // 2. Separate into Active and Legacy groups
   const activeBadges = processedBadges.filter((b) => !b.isLegacy);
   const legacyBadges = processedBadges.filter((b) => b.isLegacy);
 
   return (
-    <div className="p-4 lg:p-0 flex flex-wrap gap-4 items-start justify-center">
-      {/* Render Active Badges */}
+    <div className="p-4 lg:p-0 flex flex-wrap gap-3 md:gap-4 items-start justify-center">
       {activeBadges.map((badge) => (
         <Link href={`/event/${badge.slug}`} key={badge.slug}>
           <Badge badge={badge} />
         </Link>
       ))}
 
-      {/* Render Legacy Badges if toggled */}
       {showLegacy &&
         legacyBadges.map((badge) => (
           <Link href={`/event/${badge.slug}`} key={badge.slug}>
@@ -101,19 +99,18 @@ export const BadgeList: React.FC<BadgeListProps> = ({badges, results}) => {
           </Link>
         ))}
 
-      {/* "Show Legacy" Toggle Button - Sized exactly like a Badge */}
       {!showLegacy && legacyBadges.length > 0 && (
         <button
           onClick={() => setShowLegacy(true)}
-          className="flex flex-col items-center justify-center space-y-4 w-32 group outline-none"
+          className="flex flex-col items-center justify-center space-y-2 md:space-y-4 w-24 md:w-32 group outline-none"
         >
-          <div className="w-24 h-24 rounded-full border-2 border-dashed border-gray-600 flex items-center justify-center transition-colors group-hover:border-gray-400">
-            <span className="text-gray-500 text-2xl group-hover:text-gray-300 font-light">
+          <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-dashed border-gray-600 flex items-center justify-center transition-colors group-hover:border-gray-400">
+            <span className="text-gray-500 text-xl md:text-2xl group-hover:text-gray-300 font-light">
               +
             </span>
           </div>
-          <span className="text-center text-[10px] font-bold tracking-widest uppercase text-gray-500 group-hover:text-gray-300 leading-tight">
-            Legacy events
+          <span className="text-center text-[9px] md:text-[10px] font-bold tracking-widest uppercase text-gray-500 group-hover:text-gray-300 leading-tight">
+            Show Legacy
           </span>
         </button>
       )}

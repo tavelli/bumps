@@ -228,7 +228,7 @@ export default function RiderProfilePage({params}: Props) {
                 <RiderStatsLifetime results={rider.results || []} />
 
                 {rider.results && (
-                  <div className="mt-10">
+                  <div className="mt-6">
                     <BadgeList badges={badgeList} results={rider.results} />
                   </div>
                 )}
