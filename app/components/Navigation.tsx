@@ -12,6 +12,45 @@ interface NavigationProps {
   showLogo?: boolean;
 }
 
+const SocialLinks: FunctionComponent<{
+  inverse: boolean;
+  inHeader?: boolean;
+}> = ({inverse, inHeader}) => {
+  return (
+    <div className={`flex gap-6 ${inHeader ? "justify-end" : ""}`}>
+      <a
+        href="https://www.facebook.com/BikeUpTheMountainPointSeries"
+        target="_blank"
+        rel="noopener"
+        style={inverse ? {filter: "invert(1)"} : {}}
+      >
+        <Image src={facebookLogo} alt="facebook logo" width={30} height={30} />
+      </a>
+      <a
+        href="https://www.instagram.com/bumpshillclimb/"
+        target="_blank"
+        rel="noopener"
+        style={inverse ? {filter: "invert(1)"} : {}}
+      >
+        <Image
+          src={instagramLogo}
+          alt="instagram logo"
+          width={30}
+          height={30}
+        />
+      </a>
+      <a
+        href="https://bumpshillclimb.substack.com/"
+        target="_blank"
+        rel="noopener"
+        style={inverse ? {filter: "invert(1)"} : {}}
+      >
+        <Image src={substackLogo} alt="substack logo" width={27} height={30} />
+      </a>
+    </div>
+  );
+};
+
 export const Navigation: FunctionComponent<NavigationProps> = ({
   inverse = false,
   showLogo = false,
@@ -69,6 +108,9 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
           >
             Info
           </a>
+          <div className="mt-6">
+            <SocialLinks inverse={inverse} />
+          </div>
         </div>
       </nav>
 
@@ -123,46 +165,10 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
               </a>
             </div>
           )}
-          <div className="flex gap-3 md:gap-6 justify-end">
-            <a
-              href="https://www.facebook.com/BikeUpTheMountainPointSeries"
-              target="_blank"
-              rel="noopener"
-              style={inverse ? {filter: "invert(1)"} : {}}
-            >
-              <Image
-                src={facebookLogo}
-                alt="facebook logo"
-                width={30}
-                height={30}
-              />
-            </a>
-            <a
-              href="https://www.instagram.com/bumpshillclimb/"
-              target="_blank"
-              rel="noopener"
-              style={inverse ? {filter: "invert(1)"} : {}}
-            >
-              <Image
-                src={instagramLogo}
-                alt="instagram logo"
-                width={30}
-                height={30}
-              />
-            </a>
-            <a
-              href="https://bumpshillclimb.substack.com/"
-              target="_blank"
-              rel="noopener"
-              style={inverse ? {filter: "invert(1)"} : {}}
-            >
-              <Image
-                src={substackLogo}
-                alt="substack logo"
-                width={27}
-                height={30}
-              />
-            </a>
+          <div>
+            <div className={!inverse ? "" : "hidden md:inline"}>
+              <SocialLinks inverse={inverse} inHeader={true} />
+            </div>
           </div>
         </div>
       </div>
