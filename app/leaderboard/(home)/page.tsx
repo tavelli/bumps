@@ -6,7 +6,7 @@ import {uniteaSans} from "@/app/fonts";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
 import {Navigation} from "@/app/components/Navigation";
 import {Footer} from "@/app/components/Footer";
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {PodiumRider} from "@/app/lib/bumps/model";
 import {CategoryPodium} from "@/app/components/CategoryPodium";
 import {latestYear, years} from "@/app/lib/bumps/const";
@@ -17,6 +17,7 @@ interface Props {
 }
 
 export default function LeadersPage({params}: Props) {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [podium, setPodium] = useState<{
     results?: PodiumRider[];
@@ -24,7 +25,7 @@ export default function LeadersPage({params}: Props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const selectedYear = searchParams.get("year") || latestYear;
 
   const groupedData = podium?.results
     ? podium.results.reduce<Record<string, PodiumRider[]>>((acc, rider) => {
@@ -66,24 +67,10 @@ export default function LeadersPage({params}: Props) {
 
   // navigate to year route with nextjs
   const updateYear = (year: string) => {
-    setSelectedYear(year);
+    const params = new URLSearchParams(searchParams?.toString());
+    params.set("year", year);
+    router.push(`?${params.toString()}`, {scroll: false});
   };
-
-  // Resolve params which may be a Promise in some Next.js runtimes
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const p = await (params as any);
-        if (!cancelled) setSelectedYear(p?.year ?? years[0]);
-      } catch (err) {
-        if (!cancelled) setSelectedYear(years[0]);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [params]);
 
   useEffect(() => {
     if (!selectedYear) return;
@@ -179,6 +166,7 @@ export default function LeadersPage({params}: Props) {
                       riders={riders}
                       abbreviated={false}
                       isLoading={loading}
+                      year={selectedYear}
                     />
                   ))}
                 </div>
@@ -190,6 +178,7 @@ export default function LeadersPage({params}: Props) {
                     categoryName={category}
                     riders={riders}
                     isLoading={loading}
+                    year={selectedYear}
                   />
                 ))}
               </div>
