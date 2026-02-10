@@ -12,11 +12,7 @@ import {CategoryPodium} from "@/app/components/CategoryPodium";
 import {latestYear, years} from "@/app/lib/bumps/const";
 import {SeasonGridSelector} from "@/app/components/SeasonSelect";
 
-interface Props {
-  params: {year: string};
-}
-
-export default function LeadersPage({params}: Props) {
+export default function LeadersPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [podium, setPodium] = useState<{
