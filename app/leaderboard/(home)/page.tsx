@@ -9,7 +9,7 @@ import {Footer} from "@/app/components/Footer";
 import {useRouter} from "next/navigation";
 import {PodiumRider} from "@/app/lib/bumps/model";
 import {CategoryPodium} from "@/app/components/CategoryPodium";
-import {years} from "@/app/lib/bumps/const";
+import {latestYear, years} from "@/app/lib/bumps/const";
 import {SeasonGridSelector} from "@/app/components/SeasonSelect";
 
 interface Props {
@@ -35,7 +35,26 @@ export default function LeadersPage({params}: Props) {
         acc[category].push(rider);
         return acc;
       }, {}) // The initial value {} is now typed by the generic above
-    : {};
+    : {
+        "Overall Men": [],
+        "Overall Women": [],
+        "Under 20 Men": [],
+        "Under 20 Women": [],
+        "20-29 Men": [],
+        "20-29 Women": [],
+        "30-39 Men": [],
+        "30-39 Women": [],
+        "40-49 Men": [],
+        "40-49 Women": [],
+        "50-59 Men": [],
+        "50-59 Women": [],
+        "60-69 Men": [],
+        "60-69 Women": [],
+        "70-74 Men": [],
+        "70-74 Women": [],
+        "75-79 Men": [],
+        "80+ Men": [],
+      };
 
   const entries = Object.entries(groupedData);
 
@@ -137,47 +156,19 @@ export default function LeadersPage({params}: Props) {
 
       <main className="p-4 lg:p-0 lg:pt-8 max-w-5xl mx-auto">
         <section className="text-white">
-          {selectedYear && (
-            <div className="mt-4 mb-4 lg:mt-8 lg:mb-8">
-              <SeasonGridSelector
-                currentYear={selectedYear}
-                onChange={updateYear}
-              />
-            </div>
-          )}
-          {/* <div className="flex flex-col gap-2 justify-center mb-8 align-items-center text-center">
-            {selectedYear && (
-              <div className="">
-                <label
-                  htmlFor="seasonDropdown"
-                  className="text-sm uppercase font-semibold tracking-wide text-gray-300 block mb-2"
-                >
-                  Season
-                </label>
-                <select
-                  value={selectedYear}
-                  onChange={(e) => updateYear(e.target.value)}
-                  className="jumbo-select"
-                  id="seasonDropdown"
-                >
-                  {years.map((y: string) => (
-                    <option key={y} value={y}>
-                      {y}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div> */}
+          <div className="mt-4 mb-4 lg:mt-8 lg:mb-8">
+            <SeasonGridSelector
+              currentYear={selectedYear || latestYear}
+              onChange={updateYear}
+            />
+          </div>
 
-          {loading ? (
-            <p className="px-6 mt-4">Loading...</p>
-          ) : error ? (
+          {error ? (
             <div>
               <h2 className="section-heading">Error</h2>
               <p className="mt-2">{error}</p>
             </div>
-          ) : podium?.results && podium.results.length > 0 ? (
+          ) : (
             <div>
               <div className="p-4 lg:p-8 mb-4 lg:mb-8">
                 <div className="podium-grid podium-grid--overall">
@@ -187,6 +178,7 @@ export default function LeadersPage({params}: Props) {
                       categoryName={category}
                       riders={riders}
                       abbreviated={false}
+                      isLoading={loading}
                     />
                   ))}
                 </div>
@@ -197,13 +189,10 @@ export default function LeadersPage({params}: Props) {
                     key={category}
                     categoryName={category}
                     riders={riders}
+                    isLoading={loading}
                   />
                 ))}
               </div>
-            </div>
-          ) : (
-            <div>
-              <h2 className="section-heading"> not found</h2>
             </div>
           )}
         </section>

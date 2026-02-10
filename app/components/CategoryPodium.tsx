@@ -6,20 +6,22 @@ import {latestYear} from "../lib/bumps/const";
 
 type Props = {
   categoryName: string;
-  riders: PodiumRider[];
+  riders?: PodiumRider[]; // Made optional for loading state
   abbreviated?: boolean;
+  isLoading?: boolean; // Added loading prop
 };
 
 export const CategoryPodium: FunctionComponent<Props> = ({
   categoryName,
-  riders,
+  riders = [],
   abbreviated = true,
+  isLoading = false,
 }: Props) => {
   const year = riders[0]?.year || latestYear;
 
   return (
     <div className="border border-neutral-800 rounded-xl p-4 shadow-sm bg-black">
-      {/* Option 1: The Pill/Badge Header */}
+      {/* Header - Stays active as categoryName is available */}
       <div className="mb-4">
         <Link
           href={`/leaderboard/${year}?category=${encodeURIComponent(categoryName)}`}
@@ -29,7 +31,6 @@ export const CategoryPodium: FunctionComponent<Props> = ({
             {categoryName.replace("Under 20", "U20")}
           </span>
           <span className="text-neutral-400 group-hover:text-white group-hover:translate-x-0.5 transition-transform flex items-center">
-            {/* Using a cleaner Chevron Icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -48,26 +49,46 @@ export const CategoryPodium: FunctionComponent<Props> = ({
       </div>
 
       <div className="space-y-2">
-        {riders.map((rider) => (
-          <div
-            key={rider.rider_name}
-            className="flex justify-between items-center py-1 px-1"
-          >
-            <div className="flex gap-3">
-              <span className="text-xl">
-                {rider.rank === 1 ? "🥇" : rider.rank === 2 ? "🥈" : "🥉"}
-              </span>
-              <RiderName
-                name={rider.rider_name}
-                rider_id={rider.rider_id}
-                abbreviated={abbreviated}
-              />
-            </div>
-            <span className="font-mono text-neutral-300 font-medium">
-              {rider.season_points}
-            </span>
-          </div>
-        ))}
+        {isLoading
+          ? // Skeleton State: 3 rows
+            Array(categoryName === "Overall Women" ? 4 : 3)
+              .fill(0)
+              .map((_, i) => (
+                <div
+                  key={i}
+                  className="flex justify-between items-center py-1 px-1 animate-pulse"
+                >
+                  <div className="flex gap-3">
+                    {/* Rank Circle Placeholder */}
+                    <div className="w-6 h-6 bg-neutral-800 rounded-full" />
+                    {/* Name Placeholder */}
+                    <div className="h-7 w-32 bg-neutral-800 rounded py-1 px-1" />
+                  </div>
+                  {/* Points Placeholder */}
+                  <div className="h-6 w-10 bg-neutral-800 rounded" />
+                </div>
+              ))
+          : // Actual Data State
+            riders.map((rider) => (
+              <div
+                key={rider.rider_name}
+                className="flex justify-between items-center py-1 px-1"
+              >
+                <div className="flex gap-3">
+                  <span className="text-xl">
+                    {rider.rank === 1 ? "🥇" : rider.rank === 2 ? "🥈" : "🥉"}
+                  </span>
+                  <RiderName
+                    name={rider.rider_name}
+                    rider_id={rider.rider_id}
+                    abbreviated={abbreviated}
+                  />
+                </div>
+                <span className="font-mono text-neutral-300 font-medium">
+                  {rider.season_points}
+                </span>
+              </div>
+            ))}
       </div>
     </div>
   );
