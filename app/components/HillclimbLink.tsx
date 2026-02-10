@@ -28,7 +28,11 @@ export const HillclimbLink: FunctionComponent<Props> = ({event}) => (
   <div className="mb-4 md:mb-6 hill-event">
     <div className="hill-header pb-2">
       <h3 className={`hill-title pt-2 pb-1`}>
-        <Link href={`/event/${event.slug}`} className="underline">
+        <Link
+          href={`/event/${event.slug}`}
+          className="underline"
+          prefetch={false}
+        >
           {event.title}
         </Link>
       </h3>
@@ -37,7 +41,7 @@ export const HillclimbLink: FunctionComponent<Props> = ({event}) => (
         <span className="pl-2 pr-2">•</span> {event.location}
       </p>
     </div>
-    <Link href={`/event/${event.slug}`} className="underline">
+    <Link href={`/event/${event.slug}`} className="underline" prefetch={false}>
       <div className="relative">
         <div
           className="absolute hill-category"
