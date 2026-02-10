@@ -5,39 +5,48 @@ import Link from "next/link";
 
 interface BadgeProps {
   badge: BadgeData;
+  isLoading?: boolean; // Added isLoading prop
 }
 
 export interface BadgeListProps {
   badges: BadgeData[];
   results: RiderResult[];
+  isLoading?: boolean; // Added isLoading prop
 }
 
-const Badge: React.FC<BadgeProps> = ({badge}) => {
+const Badge: React.FC<BadgeProps> = ({badge, isLoading}) => {
   const {name, svg, isCompleted, completedCount} = badge;
+
+  // Pulse if loading, otherwise use opacity for uncompleted badges
+  const stateClasses = isLoading
+    ? "animate-pulse border-gray-700 bg-neutral-800 border-1 overflow-hidden"
+    : isCompleted
+      ? "border-0"
+      : "border-2 border-gray-600 bg-transparent opacity-50 group-hover:opacity-80 overflow-hidden";
 
   return (
     <div
       className="flex flex-col items-center justify-center space-y-2 md:space-y-4 w-24 md:w-32 group"
       title={
-        isCompleted ? `Completed ${completedCount} times` : "Not completed"
+        isLoading
+          ? "Loading..."
+          : isCompleted
+            ? `Completed ${completedCount} times`
+            : "Not completed"
       }
     >
-      {/* Responsive Badge Circle: 5rem (80px) on mobile, 6rem (96px) on MD+ */}
       <div
         className={`
           relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center
-          transition-all duration-300 ease-in-out
-          ${
-            isCompleted
-              ? "border-0"
-              : "border-2 border-gray-600 bg-transparent opacity-50 group-hover:opacity-80 overflow-hidden"
-          }
+          transition-all duration-300 ease-in-out   
+          ${stateClasses}
         `}
       >
-        {isCompleted && svg ? (
+        {/* Only show content if not loading and completed */}
+        {!isLoading && isCompleted && svg ? (
           <div>
             <span
-              className="absolute bg-gray-800 monospace text-center rounded-md tracking-widest text-sm md:text-base "
+              className="absolute z-10 bg-gray-800 monospace text-center rounded-md tracking-widest text-sm md:text-base"
               style={{top: 0, right: 0, width: "28px"}}
             >
               {completedCount}
@@ -52,15 +61,15 @@ const Badge: React.FC<BadgeProps> = ({badge}) => {
             />
           </div>
         ) : (
+          /* Placeholder for loading or uncompleted state */
           <div className="w-full h-full bg-neutral-900 monospace font-semibold" />
         )}
       </div>
 
-      {/* Responsive Label Text */}
       <span
         className={`
         text-center text-[9px] md:text-[10px] font-bold tracking-widest uppercase break-words px-1 md:px-2 leading-tight
-        ${isCompleted ? "text-white" : "text-gray-400"}
+        ${isLoading || !isCompleted ? "text-gray-500" : "text-white"}
       `}
       >
         {name}
@@ -69,7 +78,11 @@ const Badge: React.FC<BadgeProps> = ({badge}) => {
   );
 };
 
-export const BadgeList: React.FC<BadgeListProps> = ({badges, results}) => {
+export const BadgeList: React.FC<BadgeListProps> = ({
+  badges,
+  results,
+  isLoading,
+}) => {
   const [showLegacy, setShowLegacy] = useState(false);
 
   const processedBadges = badges.map((b) => {
@@ -98,19 +111,23 @@ export const BadgeList: React.FC<BadgeListProps> = ({badges, results}) => {
   return (
     <div className="p-4 lg:p-0 flex flex-wrap gap-3 md:gap-4 items-start">
       {activeBadges.map((badge) => (
-        <Link href={`/event/${badge.slug}`} key={badge.slug}>
-          <Badge badge={badge} />
+        <Link
+          href={`/event/${badge.slug}`}
+          key={badge.slug}
+          className={isLoading ? "pointer-events-none" : ""} // Disable clicks while loading
+        >
+          <Badge badge={badge} isLoading={isLoading} />
         </Link>
       ))}
 
       {showLegacy &&
         legacyBadges.map((badge) => (
           <Link href={`/event/${badge.slug}`} key={badge.slug}>
-            <Badge badge={badge} />
+            <Badge badge={badge} isLoading={isLoading} />
           </Link>
         ))}
 
-      {!showLegacy && legacyBadges.length > 0 && (
+      {!showLegacy && legacyBadges.length > 0 && !isLoading && (
         <button
           onClick={() => setShowLegacy(true)}
           className="flex flex-col items-center justify-center space-y-2 md:space-y-4 w-24 md:w-32 group outline-none"
