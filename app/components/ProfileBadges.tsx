@@ -112,6 +112,7 @@ export const BadgeList: React.FC<BadgeListProps> = ({
     <div className="p-4 lg:p-0 flex flex-wrap gap-3 md:gap-4 items-start">
       {activeBadges.map((badge) => (
         <Link
+          prefetch={false}
           href={`/event/${badge.slug}`}
           key={badge.slug}
           className={isLoading ? "pointer-events-none" : ""} // Disable clicks while loading
@@ -122,7 +123,7 @@ export const BadgeList: React.FC<BadgeListProps> = ({
 
       {showLegacy &&
         legacyBadges.map((badge) => (
-          <Link href={`/event/${badge.slug}`} key={badge.slug}>
+          <Link href={`/event/${badge.slug}`} key={badge.slug} prefetch={false}>
             <Badge badge={badge} isLoading={isLoading} />
           </Link>
         ))}

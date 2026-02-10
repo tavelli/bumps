@@ -178,6 +178,7 @@ export default function LeaderboardContent({params}: Props) {
                       <Link
                         href={`/leaderboard/profile/${r.rider_id}`}
                         className="underline"
+                        prefetch={false}
                       >
                         {r.rider_name}
                       </Link>
