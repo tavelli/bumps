@@ -109,7 +109,7 @@ export const badgeList: BadgeData[] = [
   },
   {
     slug: "crank-the-kanc",
-    name: "Krank the Kank",
+    name: "Kankamangus Pass",
     svg: "kanc.svg",
     isLegacy: false,
   },
