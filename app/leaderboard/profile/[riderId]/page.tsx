@@ -16,9 +16,43 @@ import Image from "next/image";
 import BadgeList from "@/app/components/ProfileBadges";
 import {badgeList} from "@/app/lib/bumps/const";
 import {ProfileCR} from "@/app/components/ProfileCourseRecord";
+import {LoadingText} from "@/app/components/LoadingText";
 interface Props {
   params: {riderId: string};
 }
+
+const SkeletonResultRow = () => (
+  <tr className="border-b border-gray-800 animate-pulse">
+    {/* Event Name & Mobile Stats Column */}
+    <td className="py-4 px-6">
+      <div className="h-6 w-48 bg-gray-800 rounded mb-2" />
+      {/* Mobile-only pulses */}
+      <div className="lg:hidden flex flex-col gap-4 mt-4">
+        <div className="h-10 w-32 bg-gray-800 rounded" />
+        <div className="flex gap-8">
+          <div className="h-10 w-20 bg-gray-800 rounded" />
+          <div className="h-10 w-20 bg-gray-800 rounded" />
+        </div>
+      </div>
+    </td>
+    {/* Time Column (Desktop) */}
+    <td className="hidden lg:table-cell py-4 px-6">
+      <div className="h-6 w-24 bg-gray-800 rounded" />
+    </td>
+    {/* Points Column */}
+    <td className="py-4 px-6 text-center">
+      <div className="h-6 w-12 bg-gray-800 rounded mx-auto" />
+    </td>
+    {/* Overall Rank (Desktop) */}
+    <td className="hidden lg:table-cell py-4 px-6 text-center">
+      <div className="h-6 w-20 bg-gray-800 rounded mx-auto" />
+    </td>
+    {/* Category Rank (Desktop) */}
+    <td className="hidden lg:table-cell py-4 px-6 text-center">
+      <div className="h-6 w-20 bg-gray-800 rounded mx-auto" />
+    </td>
+  </tr>
+);
 
 export default function RiderProfilePage({params}: Props) {
   const [resolvedRiderId, setResolvedRiderId] = useState<string | null>(null);
@@ -209,27 +243,40 @@ export default function RiderProfilePage({params}: Props) {
         className="page-header flex flex-col"
       >
         <Navigation inverse={true} showLogo={true} />
-        <h1 className="h1-heading text-center">{rider && rider.name}</h1>
-        {earliestYear && (
+        <div className="flex flex-col items-center">
+          <h1 className="h1-heading text-center flex justify-center">
+            <LoadingText
+              isLoading={loading}
+              placeholder="BUMPS RIDER"
+              color="light"
+            >
+              {rider?.name}
+            </LoadingText>
+          </h1>
+
           <p className="text-gray-800 font-medium  uppercase tracking-widest text-center mt-2 text-md lg:text-xl">
-            Since {earliestYear}
+            <LoadingText
+              isLoading={loading}
+              placeholder="Since 2012"
+              color="light"
+            >
+              Since {earliestYear}
+            </LoadingText>
           </p>
-        )}
+        </div>
       </header>
 
       <main className="lg:p-8 max-w-5xl mx-auto">
         <section className="text-white">
-          {loading ? (
-            <p className="px-6 mt-4">Loading...</p>
-          ) : error ? (
+          {error ? (
             <div>
-              <h2 className="section-heading">Error</h2>
-              <p className="mt-2">{error}</p>
+              <h2 className="section-heading">Rider not found</h2>
+              <p className="mt-2">No rider found for ID {resolvedRiderId}.</p>
             </div>
-          ) : rider ? (
+          ) : (
             <div>
               <div className="ml-4 mr-4 lg:ml-0 lg:mr-0 lg:px-6 max-w-4xl">
-                {rider.courseRecords && rider.courseRecords.length > 0 && (
+                {rider?.courseRecords && rider.courseRecords.length > 0 && (
                   <>
                     <h2 className="subcategory-heading mt-16 " id="records">
                       Course Records
@@ -254,13 +301,18 @@ export default function RiderProfilePage({params}: Props) {
                   Lifetime Stats
                 </h2>
 
-                <RiderStatsLifetime results={rider.results || []} />
+                <RiderStatsLifetime
+                  results={rider?.results || []}
+                  isLoading={loading}
+                />
 
-                {rider.results && (
-                  <div className="mt-4 md:mt-8">
-                    <BadgeList badges={badgeList} results={rider.results} />
-                  </div>
-                )}
+                <div className="mt-4 md:mt-8">
+                  <BadgeList
+                    badges={badgeList}
+                    results={rider?.results || []}
+                    isLoading={loading}
+                  />
+                </div>
 
                 <h2 className="subcategory-heading mt-16 " id="results">
                   Results
@@ -274,17 +326,24 @@ export default function RiderProfilePage({params}: Props) {
                     >
                       Season
                     </label>
-                    <select
-                      id="year-filter"
-                      value={selectedYear}
-                      onChange={(e) => setSelectedYear(e.target.value)}
-                    >
-                      {availableYears.map((y) => (
-                        <option key={y} value={y}>
-                          {y}
-                        </option>
-                      ))}
-                    </select>
+                    {loading ? (
+                      <div
+                        style={{width: "84.5px", height: "42px"}}
+                        className="bg-gray-700/50 animate-pulse rounded border border-gray-600 shadow-sm"
+                      />
+                    ) : (
+                      <select
+                        id="year-filter"
+                        value={selectedYear}
+                        onChange={(e) => setSelectedYear(e.target.value)}
+                      >
+                        {availableYears.map((y) => (
+                          <option key={y} value={y}>
+                            {y}
+                          </option>
+                        ))}
+                      </select>
+                    )}
                   </div>
 
                   <div className="flex gap-8 items-center">
@@ -293,7 +352,9 @@ export default function RiderProfilePage({params}: Props) {
                         Points
                       </p>
                       <p className="text-3xl font-bold font-mono text-white">
-                        {seasonStandings?.season_points}
+                        <LoadingText isLoading={loading} placeholder="100">
+                          {seasonStandings?.season_points ?? 0}
+                        </LoadingText>
                       </p>
                     </div>
                     <div className="inline-flex flex-col gap-2 text-center">
@@ -301,15 +362,20 @@ export default function RiderProfilePage({params}: Props) {
                         Overall
                       </p>
                       <p className="text-3xl font-bold font-mono text-white">
-                        {seasonStandings?.overall_standing_rank || "--"}
+                        <LoadingText isLoading={loading} placeholder="100">
+                          {seasonStandings?.overall_standing_rank || "--"}
+                        </LoadingText>
                       </p>
                     </div>
                     <div className="inline-flex flex-col gap-2 text-center">
                       <p className="text-xs uppercase tracking-widest text-gray-300 font-semibold">
                         {seasonStandings?.category_label || "Age Group"}
                       </p>
+
                       <p className="text-3xl font-bold font-mono text-white">
-                        {seasonStandings?.category_standing_rank || "--"}
+                        <LoadingText isLoading={loading} placeholder="100">
+                          {seasonStandings?.category_standing_rank || "--"}
+                        </LoadingText>
                       </p>
                     </div>
                   </div>
@@ -347,116 +413,119 @@ export default function RiderProfilePage({params}: Props) {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredResults?.map((r, i) => (
-                      <tr
-                        key={r.event_name + r.year}
-                        className={`border-b border-gray-800 hover:bg-gray-900 transition-colors ${
-                          !r.countsTowardTotal ? "opacity-60" : "opacity-100"
-                        }`}
-                      >
-                        <td className="py-4 px-6 font-bold text-lg">
-                          <Link
-                            href={`/event/${r.event_slug}`}
-                            className="underline"
+                    {loading
+                      ? // Create an array of 4 items to map over
+                        Array(4)
+                          .fill(0)
+                          .map((_, i) => <SkeletonResultRow key={i} />)
+                      : filteredResults?.map((r, i) => (
+                          <tr
+                            key={r.event_name + r.year}
+                            className={`border-b border-gray-800 hover:bg-gray-900 transition-colors ${
+                              !r.countsTowardTotal
+                                ? "opacity-60"
+                                : "opacity-100"
+                            }`}
                           >
-                            {" "}
-                            {r.event_name}
-                          </Link>
-                          {!r.countsTowardTotal && (
-                            <span className="text-sm block uppercase tracking-tighter  font-normal">
-                              Dropped Score
-                            </span>
-                          )}
+                            <td className="py-4 px-6 font-bold text-lg">
+                              <Link
+                                href={`/event/${r.event_slug}`}
+                                className="underline"
+                              >
+                                {" "}
+                                {r.event_name}
+                              </Link>
+                              {!r.countsTowardTotal && (
+                                <span className="text-sm block uppercase tracking-tighter  font-normal">
+                                  Dropped Score
+                                </span>
+                              )}
 
-                          <div className="py-4 lg:hidden  font-mono text-sm flex items-center flex-column">
-                            <div>
-                              <div className="font-normal">Time</div>
-                              <div className="font-normal text-lg">
-                                <Racetime time={r.race_time} />
+                              <div className="py-4 lg:hidden  font-mono text-sm flex items-center flex-column">
+                                <div>
+                                  <div className="font-normal">Time</div>
+                                  <div className="font-normal text-lg">
+                                    <Racetime time={r.race_time} />
+                                  </div>
+                                </div>
+                                {r.isPr && (
+                                  <div className="inline ml-4">
+                                    <Image
+                                      src={PrBadge}
+                                      alt="Personal record"
+                                      width={24}
+                                      height={24}
+                                      priority
+                                      style={{display: "inline"}}
+                                    />
+                                  </div>
+                                )}
                               </div>
-                            </div>
-                            {r.isPr && (
-                              <div className="inline ml-4">
-                                <Image
-                                  src={PrBadge}
-                                  alt="Personal record"
-                                  width={24}
-                                  height={24}
-                                  priority
-                                  style={{display: "inline"}}
-                                />
-                              </div>
-                            )}
-                          </div>
 
-                          <div className="flex lg:hidden gap-8">
-                            <div className=" py-4  font-mono text-sm">
-                              <div className="font-normal">Overall</div>
+                              <div className="flex lg:hidden gap-8">
+                                <div className=" py-4  font-mono text-sm">
+                                  <div className="font-normal">Overall</div>
+                                  <span className="font-semibold text-lg">
+                                    {r.overall_rank}{" "}
+                                  </span>
+                                  <span className="text-gray-300">
+                                    / {r.overall_total}
+                                  </span>
+                                </div>
+                                <div className="py-4 font-mono text-sm">
+                                  <div className="font-normal">
+                                    {seasonStandings?.category_label ||
+                                      "Age Group"}
+                                  </div>
+                                  <span className="font-semibold text-lg">
+                                    {r.category_rank}{" "}
+                                  </span>
+                                  <span className="text-gray-300">
+                                    / {r.category_total}
+                                  </span>
+                                </div>
+                              </div>
+                            </td>
+
+                            <td className="hidden lg:table-cell py-4 px-6 font-mono text-base">
+                              <Racetime time={r.race_time} />
+                              {r.isPr && (
+                                <div className="inline ml-4">
+                                  <Image
+                                    src={PrBadge}
+                                    alt="Personal record"
+                                    width={24}
+                                    height={24}
+                                    priority
+                                    style={{display: "inline"}}
+                                  />
+                                </div>
+                              )}
+                            </td>
+                            <td className="py-4 px-6 text-center font-mono text-lg font-semibold">
+                              {r.points}
+                            </td>
+                            <td className="hidden lg:table-cell py-4 px-6 text-center  font-mono text-base">
                               <span className="font-semibold text-lg">
                                 {r.overall_rank}{" "}
                               </span>
                               <span className="text-gray-300">
                                 / {r.overall_total}
                               </span>
-                            </div>
-                            <div className="py-4 font-mono text-sm">
-                              <div className="font-normal">
-                                {seasonStandings?.category_label || "Age Group"}
-                              </div>
+                            </td>
+                            <td className="hidden lg:table-cell py-4 px-6 text-center text-gray-300 font-mono text-base">
                               <span className="font-semibold text-lg">
                                 {r.category_rank}{" "}
                               </span>
                               <span className="text-gray-300">
                                 / {r.category_total}
                               </span>
-                            </div>
-                          </div>
-                        </td>
-
-                        <td className="hidden lg:table-cell py-4 px-6 font-mono text-base">
-                          <Racetime time={r.race_time} />
-                          {r.isPr && (
-                            <div className="inline ml-4">
-                              <Image
-                                src={PrBadge}
-                                alt="Personal record"
-                                width={24}
-                                height={24}
-                                priority
-                                style={{display: "inline"}}
-                              />
-                            </div>
-                          )}
-                        </td>
-                        <td className="py-4 px-6 text-center font-mono text-lg font-semibold">
-                          {r.points}
-                        </td>
-                        <td className="hidden lg:table-cell py-4 px-6 text-center  font-mono text-base">
-                          <span className="font-semibold text-lg">
-                            {r.overall_rank}{" "}
-                          </span>
-                          <span className="text-gray-300">
-                            / {r.overall_total}
-                          </span>
-                        </td>
-                        <td className="hidden lg:table-cell py-4 px-6 text-center text-gray-300 font-mono text-base">
-                          <span className="font-semibold text-lg">
-                            {r.category_rank}{" "}
-                          </span>
-                          <span className="text-gray-300">
-                            / {r.category_total}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
+                            </td>
+                          </tr>
+                        ))}
                   </tbody>
                 </table>
               </div>
-            </div>
-          ) : (
-            <div>
-              <h2 className="section-heading">Rider not found</h2>
-              <p className="mt-2">No rider found for ID {resolvedRiderId}.</p>
             </div>
           )}
         </section>
