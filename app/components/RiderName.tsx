@@ -21,7 +21,11 @@ export const RiderName: FunctionComponent<Props> = ({
   const displayName = abbreviated ? `${firstInitial}. ${lastName}` : name;
 
   return (
-    <Link href={`/leaderboard/profile/${rider_id}`} className="underline">
+    <Link
+      href={`/leaderboard/profile/${rider_id}`}
+      className="underline"
+      prefetch={false}
+    >
       {displayName}
     </Link>
   );

@@ -274,6 +274,7 @@ export default async function Home() {
                           <Link
                             href={`/leaderboard/${latestYear}?category=${encodeURIComponent(cat.value)}`}
                             className="underline"
+                            prefetch={false}
                           >
                             {cat.label}
                           </Link>
@@ -292,6 +293,7 @@ export default async function Home() {
                           <Link
                             href={`/leaderboard/${latestYear}?category=${encodeURIComponent(cat.value)}`}
                             className="underline"
+                            prefetch={false}
                           >
                             {cat.label}
                           </Link>

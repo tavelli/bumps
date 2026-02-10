@@ -23,6 +23,7 @@ export const CategoryPodium: FunctionComponent<Props> = ({
       {/* Header - Stays active as categoryName is available */}
       <div className="mb-4">
         <Link
+          prefetch={false}
           href={`/leaderboard/${year}?category=${encodeURIComponent(categoryName)}`}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neutral-700 bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-500 transition-all group"
         >

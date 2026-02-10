@@ -431,6 +431,7 @@ export default function RiderProfilePage({params}: Props) {
                               <Link
                                 href={`/event/${r.event_slug}`}
                                 className="underline"
+                                prefetch={false}
                               >
                                 {" "}
                                 {r.event_name}

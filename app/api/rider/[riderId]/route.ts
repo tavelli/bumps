@@ -62,8 +62,6 @@ export async function GET(request: NextRequest, context: any) {
       return NextResponse.json({error: "rider_not_found"}, {status: 404});
     }
 
-    console.log(courseRecordsResponse);
-
     return NextResponse.json({
       name: historyResponse.data[0].rider_name,
       age: historyResponse.data[0].birth_year
