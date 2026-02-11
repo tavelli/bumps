@@ -3,22 +3,29 @@
 import {FunctionComponent, useEffect, useState} from "react";
 import Image from "next/image";
 import bumpsLogoLetters from "../../public/bumps-logo-letters.svg";
-import mavicLogo from "../../public/mavic-white.png";
+
 import {Navigation} from "./Navigation";
+import {RiderName} from "./RiderName";
 
 interface Champion {
   name: string;
+  gender: string;
   photoCredit: string;
+  riderId: string;
 }
 
-const cogburn: Champion = {
-  name: "Cameron Cogburn",
-  photoCredit: "Joe Viger Photography (JoeViger.com)",
+const josh: Champion = {
+  name: "Joshua McDougal",
+  gender: "Men's",
+  photoCredit: "Photo by Jeff Fowler Photography",
+  riderId: "363520",
 };
 
 const kristen: Champion = {
   name: "Kristen Kulchinsky",
+  gender: "Womens'",
   photoCredit: "Photo by Joe Viger Photography",
+  riderId: "280019",
 };
 
 export const Header: FunctionComponent = () => {
@@ -31,7 +38,7 @@ export const Header: FunctionComponent = () => {
   }, []);
 
   if (rando === 0) {
-    champ = cogburn;
+    champ = josh;
   } else {
     champ = kristen;
   }
@@ -72,28 +79,13 @@ export const Header: FunctionComponent = () => {
           A yearlong competition featuring some of the most challenging hill
           climb events in the United States.
         </p>
-        {/* <div className="pt-8 text-center">
-          <div className="uppercase text-sm">presented by</div>
-          <a href="https://www.mavic.com/en-us" target="_blank" rel="noopener">
-            <Image
-              src={mavicLogo}
-              alt="Mavic"
-              width={175}
-              className="pt-2"
-              priority
-            />
-          </a>
-        </div> */}
       </div>
       <div className="credits z-10">
-        <div className="champion-header">2024 Winner</div>
-        <div className="text-sm">{champ.name}</div>
-        <div className="text-sm">
-          Photo by{" "}
-          <a href="https://www.joeviger.com/" target="_blank">
-            Joe Viger
-          </a>
+        <div className="champion-header">
+          <RiderName name={champ.name} rider_id={champ.riderId} />
         </div>
+        <div className="">2025 {champ.gender} Overall Winner</div>
+        <div className="text-xs mt-2">{champ.photoCredit}</div>
       </div>
     </header>
   );

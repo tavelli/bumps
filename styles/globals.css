@@ -222,8 +222,14 @@ nav a:hover {
 }
 
 .bumps-main-header-champ-0 {
-  background-image: url("../public/headers/cogburn.webp");
-  background-position: center bottom;
+  background-image: url("../public/headers/josh.webp");
+  background-position: center center;
+}
+
+@media only screen and (min-width: 600px) {
+  .bumps-main-header-champ-0 {
+    background-position: cover;
+  }
 }
 
 .bumps-main-header-champ-1 {
