@@ -23,7 +23,7 @@ const josh: Champion = {
 
 const kristen: Champion = {
   name: "Kristen Kulchinsky",
-  gender: "Womens'",
+  gender: "Women's",
   photoCredit: "Photo by Joe Viger Photography",
   riderId: "280019",
 };
