@@ -128,7 +128,7 @@ export default function LeaderboardContent({params}: Props) {
               <thead>
                 <tr className="border-b border-gray-700">
                   <th
-                    className="py-4 px-6 text-left text-smuppercase tracking-wide"
+                    className="py-4 px-6 text-left text-sm uppercase tracking-wide"
                     style={{width: "80px"}}
                   >
                     Rank

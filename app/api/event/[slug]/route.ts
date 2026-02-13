@@ -36,11 +36,52 @@ export async function GET(request: NextRequest, context: any) {
       .limit(1)
       .single();
 
+    const localLegends = supabase
+      .from("event_participation_stats")
+      .select("*")
+      .eq("event_slug", slug)
+      .order("appearance_count", {ascending: false})
+      .order("most_recent_appearance", {ascending: false})
+      .limit(10);
+
+    const mostPoints = supabase
+      .from("event_participation_stats")
+      .select("*")
+      .eq("event_slug", slug)
+      .order("total_event_points", {ascending: false})
+      .limit(5);
+
+    const mostOverallWins = supabase
+      .from("event_participation_stats")
+      .select("*")
+      .eq("event_slug", slug)
+      .order("overall_wins", {ascending: false})
+      .limit(10);
+
+    const mostAgeGroupWins = supabase
+      .from("event_participation_stats")
+      .select("*")
+      .eq("event_slug", slug)
+      .order("category_wins", {ascending: false})
+      .limit(10);
+
     // Run queries in parallel for better performance
-    const [racesRes, maleRes, femaleRes] = await Promise.all([
+    const [
+      racesRes,
+      maleRes,
+      femaleRes,
+      legends,
+      points,
+      overallWins,
+      ageGroupWins,
+    ] = await Promise.all([
       raceQuery,
       maleRecordQuery,
       femaleRecordQuery,
+      localLegends,
+      mostPoints,
+      mostOverallWins,
+      mostAgeGroupWins,
     ]);
 
     if (racesRes.error) {
@@ -54,6 +95,10 @@ export async function GET(request: NextRequest, context: any) {
         male: maleRes.data || null,
         female: femaleRes.data || null,
       },
+      legends: legends.data,
+      mostPoints: points.data,
+      mostOverallWins: overallWins.data,
+      mostAgeGroupWins: ageGroupWins.data,
     });
   } catch (error) {
     console.error("Error fetching event data:", error);
