@@ -2,6 +2,7 @@ import {PodiumRider} from "../lib/bumps/model";
 import React, {FunctionComponent} from "react";
 import {RiderName} from "./RiderName";
 import Link from "next/link";
+import {RiderRank} from "./RiderRank";
 
 type Props = {
   categoryName: string;
@@ -62,7 +63,7 @@ export const CategoryPodium: FunctionComponent<Props> = ({
                     {/* Rank Circle Placeholder */}
                     <div className="w-6 h-6 bg-neutral-800 rounded-full" />
                     {/* Name Placeholder */}
-                    <div className="h-7 w-32 bg-neutral-800 rounded py-1 px-1" />
+                    <div className="h-6 w-32 bg-neutral-800 rounded py-1 px-1" />
                   </div>
                   {/* Points Placeholder */}
                   <div className="h-6 w-10 bg-neutral-800 rounded" />
@@ -76,7 +77,7 @@ export const CategoryPodium: FunctionComponent<Props> = ({
               >
                 <div className="flex gap-3">
                   <span className="text-xl">
-                    {rider.rank === 1 ? "🥇" : rider.rank === 2 ? "🥈" : "🥉"}
+                    <RiderRank rank={rider.rank} />
                   </span>
                   <RiderName
                     name={rider.rider_name}

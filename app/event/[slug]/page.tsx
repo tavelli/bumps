@@ -15,10 +15,15 @@ import Filters from "@/app/components/Filters";
 import Link from "next/link";
 
 import {HillclimbPage} from "@/app/components/HillclimbPage";
-import {HillclimbEvent, CourseRecords} from "@/app/lib/bumps/model";
+import {
+  HillclimbEvent,
+  CourseRecords,
+  EventLegend,
+} from "@/app/lib/bumps/model";
 import {RiderRank} from "@/app/components/RiderRank";
 import {Racetime} from "@/app/components/RaceTIme";
 import {EventCourseRecords} from "@/app/components/CourseRecords";
+import {getOnlyTopLegends} from "@/app/lib/bumps/utils";
 
 const EVENT_QUERY = `query Events($slug: String) {
     event(filter: {slug: {eq: $slug}}) {
@@ -80,6 +85,8 @@ export default function EventPage({params}: Props) {
   } | null>(null);
 
   const [records, setRecords] = useState<CourseRecords | null>(null);
+
+  const [legends, setLegends] = useState<EventLegend[] | null>(null);
 
   const [datoData, setDatoData] = useState<HillclimbEvent | null>(null);
   const [results, setResults] = useState<any[]>([]);
@@ -144,6 +151,7 @@ export default function EventPage({params}: Props) {
           races: data?.races || [],
         });
         setRecords(data.records);
+        setLegends(getOnlyTopLegends(data?.legends || []));
       })
       .catch(async (err) => {
         if (cancelled) return;
@@ -281,7 +289,7 @@ export default function EventPage({params}: Props) {
               <thead>
                 <tr className="border-b border-gray-700">
                   <th
-                    className="py-4 px-6 text-left text-smuppercase tracking-wide"
+                    className="py-4 px-6 text-left text-sm uppercase tracking-wide"
                     style={{width: "80px"}}
                   >
                     Rank
@@ -315,7 +323,7 @@ export default function EventPage({params}: Props) {
                     key={r.rider_id + "-selectedCat"}
                     className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
                   >
-                    <td className="py-4 px-6 font-mono text-base font-semibold">
+                    <td className="py-4 px-6 font-mono text-base font-bold text-center">
                       <RiderRank
                         rank={(currentPage - 1) * itemsPerPage + i + 1}
                       />

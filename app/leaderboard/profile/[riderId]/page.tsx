@@ -5,7 +5,11 @@ import React, {useEffect, useMemo, useState} from "react";
 import {uniteaSans} from "@/app/fonts";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
 import {Navigation} from "@/app/components/Navigation";
-import {formatRaceTime, getRacesCountForYear} from "@/app/lib/bumps/utils"; // Adjust path as needed
+import {
+  formatOrdinal,
+  formatRaceTime,
+  getRacesCountForYear,
+} from "@/app/lib/bumps/utils"; // Adjust path as needed
 import {Footer} from "@/app/components/Footer";
 import Link from "next/link";
 import {Racetime} from "@/app/components/RaceTIme";
@@ -363,7 +367,9 @@ export default function RiderProfilePage({params}: Props) {
                       </p>
                       <p className="text-3xl font-bold font-mono text-white">
                         <LoadingText isLoading={loading} placeholder="100">
-                          {seasonStandings?.overall_standing_rank || "--"}
+                          {formatOrdinal(
+                            seasonStandings?.overall_standing_rank || 0,
+                          )}
                         </LoadingText>
                       </p>
                     </div>
@@ -374,7 +380,9 @@ export default function RiderProfilePage({params}: Props) {
 
                       <p className="text-3xl font-bold font-mono text-white">
                         <LoadingText isLoading={loading} placeholder="100">
-                          {seasonStandings?.category_standing_rank || "--"}
+                          {formatOrdinal(
+                            seasonStandings?.category_standing_rank || 0,
+                          )}
                         </LoadingText>
                       </p>
                     </div>

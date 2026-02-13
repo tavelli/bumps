@@ -44,6 +44,12 @@ export interface CourseRecords {
   };
 }
 
+export interface EventLegend {
+  rider_id: string;
+  rider_name: string;
+  appearance_count: number;
+}
+
 export interface ProfileCourseRecord {
   event_name: string;
   event_slug: string;

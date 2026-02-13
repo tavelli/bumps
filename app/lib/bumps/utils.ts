@@ -1,3 +1,5 @@
+import {EventLegend} from "./model";
+
 export const getRiderCategory = (
   birthYear: number,
   gender: string,
@@ -53,4 +55,43 @@ export const formatRaceTime = (timeString: string) => {
     const [time, ms] = cleanTime.split(".");
     return `${time}.${ms.padEnd(2, "0").substring(0, 2)}`;
   }
+};
+
+export const getOnlyTopLegends = (data: EventLegend[]): EventLegend[] => {
+  return data.reduce(
+    (acc, current) => {
+      // 1. If this is the first item or higher than our current max
+      if (current.appearance_count > acc.max) {
+        return {
+          max: current.appearance_count,
+          items: [current], // Start a new list
+        };
+      }
+
+      // 2. If this matches our current max, add to the "Tie" list
+      if (current.appearance_count === acc.max && acc.max !== 0) {
+        return {
+          ...acc,
+          items: [...acc.items, current],
+        };
+      }
+
+      // 3. Otherwise, just keep what we have
+      return acc;
+    },
+    {max: 0, items: [] as EventLegend[]},
+  ).items;
+};
+
+export const formatOrdinal = (n: number, locale = "en-US"): string => {
+  const rules = new Intl.PluralRules(locale, {type: "ordinal"});
+  const suffix: Record<string, string> = {
+    one: "st",
+    two: "nd",
+    few: "rd",
+    other: "th",
+  };
+  // A mapping is needed because the 'select' result is a category ('one', 'two', etc.), not the suffix itself.
+  const category = rules.select(n);
+  return n + (suffix[category] || "th");
 };

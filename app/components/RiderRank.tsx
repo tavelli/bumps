@@ -6,8 +6,84 @@ type Props = {
 
 export const RiderRank: FunctionComponent<Props> = ({rank}) => {
   return (
-    <span className={rank <= 3 ? "text-xl bumps-rank-cell" : ""}>
-      {rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : rank}
-    </span>
+    <div className={rank <= 3 ? "text-xl bumps-rank-cell" : ""}>
+      {rank === 1 && (
+        <div
+          style={{color: "#F6C95F"}}
+          className="flex justify-center items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            color="currentColor"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+          >
+            <circle cx="12" cy="15.5" r="6.5" />
+            <path d="M9 9.5L5.5 2" />
+            <path d="M15 9.5L18.5 2" />
+            <path d="M15 2L14 4.5" />
+            <path d="M12.5 9L9.5 2" />
+            <path d="M11 18H12M12 18H13M12 18V13L11 13.5" />
+          </svg>
+        </div>
+      )}
+      {rank === 2 && (
+        <div
+          style={{color: "#A9B2BC"}}
+          className="flex justify-center items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            color="currentColor"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M10.5 14L11.0305 13.4285C11.653 12.799 12.6825 12.873 13.2107 13.5852C13.6233 14.1417 13.5915 14.915 13.1346 15.4349L10.5 18H13.4315" />
+            <circle cx="12" cy="15.5" r="6.5" />
+            <path d="M9 9.5L5.5 2" />
+            <path d="M15 9.5L18.5 2" />
+            <path d="M15 2L14 4.5" />
+            <path d="M12.5 9L9.5 2" />
+          </svg>
+        </div>
+      )}
+      {rank === 3 && (
+        <div
+          style={{color: "#CD7F32"}}
+          className="flex justify-center items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            color="currentColor"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M10.5 14C10.8265 13.347 11.2786 13 12 13C12.7296 13 13.5 13.4558 13.5 14.25C13.5 14.9404 12.9404 15.5 12.25 15.5C12.9404 15.5 13.5 16.0596 13.5 16.75C13.5 17.5442 12.7296 18 12 18C11.2786 18 10.8265 17.653 10.5 17" />
+            <circle cx="12" cy="15.5" r="6.5" />
+            <path d="M9 9.5L5.5 2" />
+            <path d="M15 9.5L18.5 2" />
+            <path d="M15 2L14 4.5" />
+            <path d="M12.5 9L9.5 2" />
+          </svg>
+        </div>
+      )}
+      {rank > 3 && rank}
+    </div>
   );
 };
