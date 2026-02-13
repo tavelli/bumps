@@ -162,7 +162,7 @@ export default function LeaderboardContent({params}: Props) {
                     key={r.rider_id + "-" + selectedCat}
                     className="border-b border-gray-800 hover:bg-gray-900 transition-colors"
                   >
-                    <td className="py-4 px-6 font-mono text-base font-semibold">
+                    <td className="py-4 px-6 font-mono text-base font-bold text-center">
                       <RiderRank
                         rank={
                           selectedCat.includes("Overall")

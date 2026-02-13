@@ -8,7 +8,10 @@ export const RiderRank: FunctionComponent<Props> = ({rank}) => {
   return (
     <div className={rank <= 3 ? "text-xl bumps-rank-cell" : ""}>
       {rank === 1 && (
-        <div style={{color: "#F6C95F"}}>
+        <div
+          style={{color: "#F6C95F"}}
+          className="flex justify-center items-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -29,7 +32,10 @@ export const RiderRank: FunctionComponent<Props> = ({rank}) => {
         </div>
       )}
       {rank === 2 && (
-        <div style={{color: "#A9B2BC"}}>
+        <div
+          style={{color: "#A9B2BC"}}
+          className="flex justify-center items-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -52,7 +58,10 @@ export const RiderRank: FunctionComponent<Props> = ({rank}) => {
         </div>
       )}
       {rank === 3 && (
-        <div style={{color: "#CD7F32"}}>
+        <div
+          style={{color: "#CD7F32"}}
+          className="flex justify-center items-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
