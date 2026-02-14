@@ -57,19 +57,29 @@ export const formatRaceTime = (timeString: string) => {
   }
 };
 
-export const getOnlyTopLegends = (data: EventLegend[]): EventLegend[] => {
+export const getOnlyTopLegends = (
+  data: EventLegend[],
+  field: keyof Pick<
+    EventLegend,
+    | "appearance_count"
+    | "total_event_points"
+    | "overall_wins"
+    | "max_age_attained"
+    | "min_age_attained"
+  >,
+): EventLegend[] => {
   return data.reduce(
     (acc, current) => {
       // 1. If this is the first item or higher than our current max
-      if (current.appearance_count > acc.max) {
+      if (current[field] > acc.max) {
         return {
-          max: current.appearance_count,
+          max: current[field],
           items: [current], // Start a new list
         };
       }
 
       // 2. If this matches our current max, add to the "Tie" list
-      if (current.appearance_count === acc.max && acc.max !== 0) {
+      if (current[field] === acc.max && acc.max !== 0) {
         return {
           ...acc,
           items: [...acc.items, current],

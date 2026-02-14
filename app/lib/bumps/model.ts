@@ -48,6 +48,11 @@ export interface EventLegend {
   rider_id: string;
   rider_name: string;
   appearance_count: number;
+  total_event_points: number;
+  overall_wins: number;
+  category_wins: number;
+  max_age_attained: number;
+  min_age_attained: number;
 }
 
 export interface ProfileCourseRecord {
