@@ -121,7 +121,7 @@ export const LegendCard = ({
       </div>
 
       {/* The Legend(s) Area */}
-      <div className="w-full pt-4 border-t border-neutral-800/50">
+      <div className="w-full pt-0 border-t border-neutral-800/50">
         <div className="flex flex-wrap justify-center gap-x-2 gap-y-1.5">
           {displayedRiders.map((r, idx) => (
             <div key={r.rider_id} className="flex items-center gap-2">
