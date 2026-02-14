@@ -24,6 +24,7 @@ import {RiderRank} from "@/app/components/RiderRank";
 import {Racetime} from "@/app/components/RaceTIme";
 import {EventCourseRecords} from "@/app/components/CourseRecords";
 import {getOnlyTopLegends} from "@/app/lib/bumps/utils";
+import {LegendCard} from "@/app/components/LegendCard";
 
 const EVENT_QUERY = `query Events($slug: String) {
     event(filter: {slug: {eq: $slug}}) {
@@ -86,7 +87,13 @@ export default function EventPage({params}: Props) {
 
   const [records, setRecords] = useState<CourseRecords | null>(null);
 
-  const [legends, setLegends] = useState<EventLegend[] | null>(null);
+  const [legends, setLegends] = useState<{
+    appearances: EventLegend[] | null;
+    points: EventLegend[] | null;
+    wins: EventLegend[] | null;
+    oldest: EventLegend[] | null;
+    youngest: EventLegend[] | null;
+  } | null>(null);
 
   const [datoData, setDatoData] = useState<HillclimbEvent | null>(null);
   const [results, setResults] = useState<any[]>([]);
@@ -151,7 +158,25 @@ export default function EventPage({params}: Props) {
           races: data?.races || [],
         });
         setRecords(data.records);
-        setLegends(getOnlyTopLegends(data?.legends || []));
+        setLegends({
+          appearances: getOnlyTopLegends(
+            data?.legends?.appearances || [],
+            "appearance_count",
+          ),
+          points: getOnlyTopLegends(
+            data?.legends?.points || [],
+            "total_event_points",
+          ),
+          wins: getOnlyTopLegends(data?.legends?.wins || [], "overall_wins"),
+          youngest: getOnlyTopLegends(
+            data?.legends?.youngest || [],
+            "min_age_attained",
+          ),
+          oldest: getOnlyTopLegends(
+            data?.legends?.oldest || [],
+            "max_age_attained",
+          ),
+        });
       })
       .catch(async (err) => {
         if (cancelled) return;
@@ -264,12 +289,66 @@ export default function EventPage({params}: Props) {
 
         {records && (
           <div className="ml-4 mr-4 lg:ml-0 lg:mr-0">
-            <h2 className="subcategory-heading mt-16 mb-6" id="results">
+            <h2 className="subcategory-heading mt-16 mb-6" id="records">
               Course Records
             </h2>
             <EventCourseRecords records={records} />
           </div>
         )}
+
+        <h2
+          className="subcategory-heading mt-16 ml-4 lg:ml-0 mb-6"
+          id="legends"
+        >
+          Hill Legends
+        </h2>
+        <div className="ml-4 mr-4 lg:ml-0 lg:mr-0">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <LegendCard
+              title="Most Appearances"
+              stat={
+                (legends?.appearances &&
+                  legends.appearances[0]?.appearance_count) ||
+                0
+              }
+              statLabel="x"
+              riders={legends?.appearances || []}
+              icon="appearances"
+            />
+            <LegendCard
+              title="Most Points"
+              stat={
+                (legends?.points && legends.points[0]?.total_event_points) || 0
+              }
+              statLabel="pts"
+              riders={legends?.points || []}
+              icon="points"
+            />
+            <LegendCard
+              title="Most Wins"
+              stat={(legends?.wins && legends.wins[0]?.overall_wins) || 0}
+              statLabel="x"
+              riders={legends?.wins || []}
+              icon="wins"
+            />
+            <LegendCard
+              title="Oldest Competitor"
+              stat={
+                (legends?.oldest && legends.oldest[0]?.max_age_attained) || 0
+              }
+              statLabel="yrs"
+              icon="age"
+              riders={legends?.oldest || []}
+            />
+          </div>
+        </div>
+        {/* <LegendCard 
+          title="Fastest Time"
+          stat={legends?.fastestTime?.time || 0}
+          statLabel="seconds"
+          riders={legends?.fastestTime?.riders || []}
+          icon="⏱️"
+        /> */}
 
         <h2 className="subcategory-heading mt-16 ml-4 lg:ml-0" id="results">
           Results

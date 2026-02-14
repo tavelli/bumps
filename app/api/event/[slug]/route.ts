@@ -42,7 +42,7 @@ export async function GET(request: NextRequest, context: any) {
       .eq("event_slug", slug)
       .order("appearance_count", {ascending: false})
       .order("most_recent_appearance", {ascending: false})
-      .limit(10);
+      .limit(20);
 
     const mostPoints = supabase
       .from("event_participation_stats")
@@ -58,11 +58,18 @@ export async function GET(request: NextRequest, context: any) {
       .order("overall_wins", {ascending: false})
       .limit(10);
 
-    const mostAgeGroupWins = supabase
+    const youngest = supabase
       .from("event_participation_stats")
       .select("*")
       .eq("event_slug", slug)
-      .order("category_wins", {ascending: false})
+      .order("min_age_attained", {ascending: true})
+      .limit(10);
+
+    const oldest = supabase
+      .from("event_participation_stats")
+      .select("*")
+      .eq("event_slug", slug)
+      .order("max_age_attained", {ascending: false})
       .limit(10);
 
     // Run queries in parallel for better performance
@@ -73,7 +80,8 @@ export async function GET(request: NextRequest, context: any) {
       legends,
       points,
       overallWins,
-      ageGroupWins,
+      youngestRes,
+      oldestRes,
     ] = await Promise.all([
       raceQuery,
       maleRecordQuery,
@@ -81,7 +89,8 @@ export async function GET(request: NextRequest, context: any) {
       localLegends,
       mostPoints,
       mostOverallWins,
-      mostAgeGroupWins,
+      youngest,
+      oldest,
     ]);
 
     if (racesRes.error) {
@@ -95,10 +104,13 @@ export async function GET(request: NextRequest, context: any) {
         male: maleRes.data || null,
         female: femaleRes.data || null,
       },
-      legends: legends.data,
-      mostPoints: points.data,
-      mostOverallWins: overallWins.data,
-      mostAgeGroupWins: ageGroupWins.data,
+      legends: {
+        appearances: legends.data,
+        points: points.data,
+        wins: overallWins.data,
+        youngest: youngestRes.data,
+        oldest: oldestRes.data,
+      },
     });
   } catch (error) {
     console.error("Error fetching event data:", error);
