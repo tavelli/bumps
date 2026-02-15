@@ -159,7 +159,7 @@ export const LegendCard = ({
 
           <div className="absolute top-full left-0 right-0 mt-2 z-20 bg-neutral-800 border border-neutral-700 rounded-xl shadow-2xl p-4  ">
             <div className="flex flex-col gap-2 text-left">
-              <div className="text-sm text-left uppercase font-bold text-neutral-300 mb-1 border-b border-neutral-700 pb-2 flex justify-between items-center">
+              <div className="text-xs text-left uppercase font-bold text-neutral-300 mb-1 border-b border-neutral-700 pb-2 flex justify-between items-center">
                 Joint Record Holders
                 {/* <button
                   onClick={() => setShowAll(!showAll)}
