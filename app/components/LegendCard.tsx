@@ -26,7 +26,7 @@ export const LegendCard = ({
   return (
     <div className="relative bg-slate-900 border border-white/50 rounded-2xl p-5 flex flex-col items-center text-center">
       {/* Icon & Title */}
-      <span className="mb-4">
+      <span className="mb-5">
         {icon === "appearances" && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -121,21 +121,17 @@ export const LegendCard = ({
       </div>
 
       {/* The Legend(s) Area */}
-      <div className="w-full pt-0 border-t border-neutral-800/50">
+      <div className="w-full pt-0 ">
         <div className="flex flex-wrap justify-center gap-x-2 gap-y-1.5">
           {displayedRiders.map((r, idx) => (
             <div key={r.rider_id} className="flex items-center gap-2">
-              <span className="text-md text-neutral-200 font-medium hover:text-amber-400 cursor-pointer transition-colors">
+              <span className="text-md text-neutral-200 font-medium cursor-pointer transition-colors">
                 <RiderName
                   name={r.rider_name}
                   rider_id={r.rider_id}
                   abbreviated
                 />
               </span>
-              {/* Add dot separator only between names, not after the last displayed name */}
-              {(idx < displayedRiders.length - 1 || hasMore) && (
-                <span className="text-neutral-700 text-xs">•</span>
-              )}
             </div>
           ))}
         </div>
@@ -144,7 +140,7 @@ export const LegendCard = ({
           <div>
             <button
               onClick={() => setShowAll(!showAll)}
-              className="text-xs font-bold text-amber-500 hover:text-amber-400 transition-colors underline-offset-4 hover:underline"
+              className="text-sm font-semibold text-neutral-200 transition-colors underline-offset-4 hover:underline mt-2"
             >
               +{remainingCount} more
             </button>
@@ -172,7 +168,11 @@ export const LegendCard = ({
                     key={r.rider_id}
                     className="text-md text-white py-1 border-b border-neutral-700/50 last:border-0 "
                   >
-                    <RiderName name={r.rider_name} rider_id={r.rider_id} />
+                    <RiderName
+                      name={r.rider_name}
+                      rider_id={r.rider_id}
+                      abbreviated
+                    />
                   </div>
                 ))}
               </div>
