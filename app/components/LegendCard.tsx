@@ -171,10 +171,7 @@ export const LegendCard = ({
 
               <div className="overflow-y-auto max-h-48">
                 {riders.map((r) => (
-                  <div
-                    key={r.rider_id}
-                    className="text-md text-white py-1 border-b border-neutral-700/50 last:border-0 "
-                  >
+                  <div key={r.rider_id} className="text-md text-white py-1">
                     <RiderName
                       name={r.rider_name}
                       rider_id={r.rider_id}

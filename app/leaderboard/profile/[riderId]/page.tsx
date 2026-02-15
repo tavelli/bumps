@@ -280,6 +280,23 @@ export default function RiderProfilePage({params}: Props) {
           ) : (
             <div>
               <div className="ml-4 mr-4 lg:ml-0 lg:mr-0 lg:px-6 max-w-4xl">
+                <h2 className="subcategory-heading mt-16 mb-4" id="results">
+                  Lifetime Stats
+                </h2>
+
+                <RiderStatsLifetime
+                  results={rider?.results || []}
+                  isLoading={loading}
+                />
+
+                <div className="mt-4 md:mt-8">
+                  <BadgeList
+                    badges={badgeList}
+                    results={rider?.results || []}
+                    isLoading={loading}
+                  />
+                </div>
+
                 {rider?.courseRecords && rider.courseRecords.length > 0 && (
                   <>
                     <h2 className="subcategory-heading mt-16 " id="records">
@@ -301,22 +318,6 @@ export default function RiderProfilePage({params}: Props) {
                     </div>
                   </>
                 )}
-                <h2 className="subcategory-heading mt-16 mb-4" id="results">
-                  Lifetime Stats
-                </h2>
-
-                <RiderStatsLifetime
-                  results={rider?.results || []}
-                  isLoading={loading}
-                />
-
-                <div className="mt-4 md:mt-8">
-                  <BadgeList
-                    badges={badgeList}
-                    results={rider?.results || []}
-                    isLoading={loading}
-                  />
-                </div>
 
                 <h2 className="subcategory-heading mt-16 " id="results">
                   Results
