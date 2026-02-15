@@ -125,7 +125,7 @@ export const LegendCard = ({
         <div className="flex flex-wrap justify-center gap-x-2 gap-y-1.5">
           {displayedRiders.map((r, idx) => (
             <div key={r.rider_id} className="flex items-center gap-2">
-              <span className="text-md text-neutral-200 font-medium cursor-pointer transition-colors">
+              <span className="text-md text-neutral-200 hover:text-neutral-100 font-medium cursor-pointer transition-colors">
                 <RiderName
                   name={r.rider_name}
                   rider_id={r.rider_id}
@@ -140,7 +140,7 @@ export const LegendCard = ({
           <div>
             <button
               onClick={() => setShowAll(!showAll)}
-              className="text-sm font-semibold text-neutral-200 transition-colors underline-offset-4 hover:underline mt-2"
+              className="text-sm font-semibold text-neutral-300 hover:text-neutral-100 transition-colors underline-offset-4 hover:underline mt-2"
             >
               +{remainingCount} more
             </button>
@@ -159,9 +159,16 @@ export const LegendCard = ({
 
           <div className="absolute top-full left-0 right-0 mt-2 z-20 bg-neutral-800 border border-neutral-700 rounded-xl shadow-2xl p-4  ">
             <div className="flex flex-col gap-2 text-left">
-              <p className="text-xs uppercase font-bold text-neutral-300 mb-1 border-b border-neutral-700 pb-1">
+              <div className="text-sm text-left uppercase font-bold text-neutral-300 mb-1 border-b border-neutral-700 pb-2 flex justify-between items-center">
                 Joint Record Holders
-              </p>
+                {/* <button
+                  onClick={() => setShowAll(!showAll)}
+                  className="text-sm border border-neutral-100 p-1 rounded font-semibold text-neutral-300 hover:text-neutral-100 transition-colors underline-offset-4 hover:underline"
+                >
+                  X
+                </button> */}
+              </div>
+
               <div className="overflow-y-auto max-h-48">
                 {riders.map((r) => (
                   <div
