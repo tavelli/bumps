@@ -166,14 +166,18 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
 
           {showLogo && (
             <div className="flex justify-center">
-              <a href="/" style={inverse ? {color: linkColor} : {}}>
+              <Link
+                href="/"
+                style={inverse ? {color: linkColor} : {}}
+                prefetch={false}
+              >
                 <Image
                   src={bumpsLogo}
                   alt="Bumps logo"
                   width={128}
                   height={48}
                 />
-              </a>
+              </Link>
             </div>
           )}
           <div>
