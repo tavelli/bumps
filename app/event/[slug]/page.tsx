@@ -2,6 +2,7 @@
 "use client";
 
 import {request} from "@/app/lib/datocms";
+<<<<<<< Updated upstream
 
 import React, {useEffect, useMemo, useState} from "react";
 import {uniteaSans} from "@/app/fonts";
@@ -25,6 +26,11 @@ import {Racetime} from "@/app/components/RaceTIme";
 import {EventCourseRecords} from "@/app/components/CourseRecords";
 import {getOnlyTopLegends} from "@/app/lib/bumps/utils";
 import {LegendCard} from "@/app/components/LegendCard";
+=======
+import {ALL_EVENTS_QUERY} from "@/app/lib/bumps/utils";
+import EventClientPage from "./EventClientPage";
+import {Metadata, ResolvingMetadata} from "next";
+>>>>>>> Stashed changes
 
 const EVENT_QUERY = `query Events($slug: String) {
     event(filter: {slug: {eq: $slug}}) {
@@ -57,7 +63,53 @@ interface Props {
   params: {slug: string};
 }
 
+<<<<<<< Updated upstream
 async function getEventData(slug: string): Promise<EventQuery> {
+=======
+export async function generateStaticParams() {
+  const data = await request({
+    query: ALL_EVENTS_QUERY,
+    variables: {},
+    includeDrafts: true,
+    excludeInvalid: false,
+  });
+
+  // Log this if it fails again to see the structure:
+  // console.log("Dato Response:", data);
+
+  // Safely access the array.
+  // Change 'allEvents' to match whatever the collection name is in your GraphQL query.
+  const events = data?.allEvents || [];
+
+  return events.map((event: any) => ({
+    slug: event.slug,
+  }));
+}
+
+export async function generateMetadata(
+  {params}: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const slug = (await params).slug;
+
+  const data = await request({
+    query: EVENT_QUERY,
+    variables: {slug},
+    includeDrafts: true,
+    excludeInvalid: true,
+  });
+
+  return {
+    title: data?.event?.title || "Bumps Hillclimb",
+    description: data?.event?.location || "",
+  };
+}
+
+export default async function EventPage({params}: Props) {
+  const {slug} = await params;
+
+  // Fetch initial DatoCMS data on the server
+>>>>>>> Stashed changes
   const data = await request({
     query: EVENT_QUERY,
     variables: {
