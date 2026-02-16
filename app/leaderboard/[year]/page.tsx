@@ -92,6 +92,12 @@ export default function LeaderboardContent({params}: Props) {
     fetchResults();
   }, [selectedYear, selectedCat, currentPage]);
 
+  useEffect(() => {
+    if (selectedYear) {
+      document.title = `${selectedYear} - BUMPS Leaderboard`;
+    }
+  }, [selectedYear]);
+
   return (
     <div className={uniteaSans.className}>
       <header
