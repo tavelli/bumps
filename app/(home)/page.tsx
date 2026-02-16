@@ -10,7 +10,7 @@ import {Footer} from "@/app/components/Footer";
 import {HillclimbEvent} from "../lib/bumps/model";
 import {categories, latestYear} from "../lib/bumps/const";
 import Link from "next/link";
-import {ALL_EVENTS_QUERY} from "../lib/bumps/utils";
+import {ACTIVE_EVENTS_QUERY} from "../lib/bumps/utils";
 
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
@@ -20,7 +20,7 @@ const numberOfRaces = "four";
 
 async function getHomeData(): Promise<HomepageQuery> {
   const data = await request({
-    query: ALL_EVENTS_QUERY,
+    query: ACTIVE_EVENTS_QUERY,
     variables: {},
     includeDrafts: true,
     excludeInvalid: true,

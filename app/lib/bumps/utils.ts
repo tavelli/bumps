@@ -127,3 +127,25 @@ export const ALL_EVENTS_QUERY = `query Events {
       slug
     }
 }`;
+
+export const ACTIVE_EVENTS_QUERY = `query Events {
+    allEvents(filter: {activeEvent: {eq: "true"}}) {
+      date
+      location
+      title
+      registration
+      results
+      note
+      category
+      gradient
+      distance
+      elevationGain
+      gradientProfile {
+        url
+      }
+      aiCoverPhotoAlt {
+        url
+      }
+      slug
+    }
+}`;

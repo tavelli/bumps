@@ -32,8 +32,10 @@ export const HillclimbPage: FunctionComponent<Props> = ({
 }) => (
   <div className="">
     <p className="text-2xl lg:text-3xl text-center mt-10">
-      {format(parseISO(event.date), "PP")} <span className="pl-2 pr-2">•</span>{" "}
-      {event.location}
+      {event.note === "Date TBD"
+        ? "Date TBD"
+        : format(parseISO(event.date), "PP")}{" "}
+      <span className="pl-2 pr-2">•</span> {event.location}
     </p>
     <div className={`text-center mt-8 mb-10`}>
       {event.registration && !event.note ? (

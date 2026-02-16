@@ -37,7 +37,9 @@ export const HillclimbLink: FunctionComponent<Props> = ({event}) => (
         </Link>
       </h3>
       <p className="hill-date  text-lg">
-        {format(parseISO(event.date), "PP")}{" "}
+        {event.note === "Date TBD"
+          ? "Date TBD"
+          : format(parseISO(event.date), "PP")}{" "}
         <span className="pl-2 pr-2">•</span> {event.location}
       </p>
     </div>

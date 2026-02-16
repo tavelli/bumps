@@ -19,8 +19,8 @@ export async function generateStaticParams() {
   const data = await request({
     query: ALL_EVENTS_QUERY,
     variables: {},
-    includeDrafts: true,
-    excludeInvalid: true,
+    includeDrafts: false,
+    excludeInvalid: false,
   });
 
   // Log this if it fails again to see the structure:
