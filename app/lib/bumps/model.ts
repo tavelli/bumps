@@ -1,6 +1,6 @@
 export interface HillclimbEvent {
   title: string;
-  active_event: boolean;
+  activeEvent: boolean;
   slug: string;
   state: string;
 

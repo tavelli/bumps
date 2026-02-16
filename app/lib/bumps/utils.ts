@@ -108,6 +108,7 @@ export const formatOrdinal = (n: number, locale = "en-US"): string => {
 
 export const ALL_EVENTS_QUERY = `query Events {
     allEvents {
+      activeEvent
       date
       location
       title

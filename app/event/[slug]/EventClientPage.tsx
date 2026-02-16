@@ -80,7 +80,7 @@ export default function EventClientPage({slug, initialDatoData}: ClientProps) {
       </header>
 
       <main className="max-w-5xl mx-auto">
-        {initialDatoData.active_event && (
+        {initialDatoData.activeEvent && (
           <HillclimbPage event={initialDatoData} />
         )}
 
