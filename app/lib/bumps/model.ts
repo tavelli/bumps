@@ -1,9 +1,12 @@
 export interface HillclimbEvent {
   title: string;
+  activeEvent: boolean;
+  slug: string;
+  state: string;
+
   blurb: string;
   date: string;
   location: string;
-  state: string;
   registration: string;
   results: string;
   note: string;
@@ -17,7 +20,6 @@ export interface HillclimbEvent {
   aiCoverPhotoAlt: {
     url: string;
   };
-  slug: string;
 }
 
 export interface PodiumRider {
@@ -42,6 +44,14 @@ export interface CourseRecords {
     race_time: string;
     year: string;
   };
+}
+
+export interface RaceData {
+  race_id: string;
+  race_date: string;
+  race_year: number;
+  event_name: string;
+  event_id: string;
 }
 
 export interface EventLegend {

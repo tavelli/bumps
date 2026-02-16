@@ -10,38 +10,17 @@ import {Footer} from "@/app/components/Footer";
 import {HillclimbEvent} from "../lib/bumps/model";
 import {categories, latestYear} from "../lib/bumps/const";
 import Link from "next/link";
+import {ACTIVE_EVENTS_QUERY} from "../lib/bumps/utils";
 
 interface HomepageQuery {
   allEvents: HillclimbEvent[];
 }
 
-const HOMEPAGE_QUERY = `query Events {
-    allEvents {
-      date
-      location
-      title
-      registration
-      results
-      note
-      category
-      gradient
-      distance
-      elevationGain
-      gradientProfile {
-        url
-      }
-      aiCoverPhotoAlt {
-        url
-      }
-      slug
-    }
-}`;
-
 const numberOfRaces = "four";
 
 async function getHomeData(): Promise<HomepageQuery> {
   const data = await request({
-    query: HOMEPAGE_QUERY,
+    query: ACTIVE_EVENTS_QUERY,
     variables: {},
     includeDrafts: true,
     excludeInvalid: true,

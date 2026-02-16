@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" className="full-height">
+    <html lang="en" className="full-height" data-scroll-behavior="smooth">
       <head>
         <link
           rel="apple-touch-icon"

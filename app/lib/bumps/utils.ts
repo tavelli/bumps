@@ -105,3 +105,48 @@ export const formatOrdinal = (n: number, locale = "en-US"): string => {
   const category = rules.select(n);
   return n + (suffix[category] || "th");
 };
+
+export const ALL_EVENTS_QUERY = `query Events {
+    allEvents {
+      activeEvent
+      date
+      location
+      title
+      registration
+      results
+      note
+      category
+      gradient
+      distance
+      elevationGain
+      gradientProfile {
+        url
+      }
+      aiCoverPhotoAlt {
+        url
+      }
+      slug
+    }
+}`;
+
+export const ACTIVE_EVENTS_QUERY = `query Events {
+    allEvents(filter: {activeEvent: {eq: "true"}}) {
+      date
+      location
+      title
+      registration
+      results
+      note
+      category
+      gradient
+      distance
+      elevationGain
+      gradientProfile {
+        url
+      }
+      aiCoverPhotoAlt {
+        url
+      }
+      slug
+    }
+}`;

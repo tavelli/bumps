@@ -6,6 +6,7 @@ import facebookLogo from "../../public/facebook.svg";
 import instagramLogo from "../../public/instagram.svg";
 import substackLogo from "../../public/substack.svg";
 import bumpsLogo from "../../public/bumps-logo-letters-2.svg";
+import Link from "next/link";
 
 interface NavigationProps {
   inverse?: boolean;
@@ -84,30 +85,33 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
           >
             ✕
           </button>
-          <a
+          <Link
             href="/leaderboard"
             className="text-lg"
             style={inverse ? {color: linkColor} : {}}
             onClick={() => setIsMenuOpen(false)}
+            prefetch={false}
           >
             Leaderboard
-          </a>
-          <a
+          </Link>
+          <Link
             href="/#events"
             className="text-lg"
             style={inverse ? {color: linkColor} : {}}
             onClick={() => setIsMenuOpen(false)}
+            prefetch={false}
           >
             Events
-          </a>
-          <a
+          </Link>
+          <Link
             href="/#info"
             className="text-lg"
             style={inverse ? {color: linkColor} : {}}
             onClick={() => setIsMenuOpen(false)}
+            prefetch={false}
           >
             Info
-          </a>
+          </Link>
           <div className="mt-6">
             <SocialLinks inverse={inverse} />
           </div>
@@ -119,24 +123,31 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
         <div className="nav-wrapper" style={inverse ? {color: linkColor} : {}}>
           <div>
             <nav className="flex gap-8">
-              <a href="/#events" className="hidden lg:inline">
+              <Link
+                href="/#events"
+                className="hidden lg:inline"
+                prefetch={false}
+              >
                 Events
-              </a>
-              <a
+              </Link>
+
+              <Link
                 href="/#info"
                 className="hidden lg:inline"
                 style={inverse ? {color: linkColor} : {}}
+                prefetch={false}
               >
                 Info
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/leaderboard"
                 className="hidden lg:inline"
                 style={inverse ? {color: linkColor} : {}}
+                prefetch={false}
               >
                 Leaderboard
-              </a>
+              </Link>
 
               <button
                 className="lg:hidden"
@@ -155,14 +166,18 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
 
           {showLogo && (
             <div className="flex justify-center">
-              <a href="/" style={inverse ? {color: linkColor} : {}}>
+              <Link
+                href="/"
+                style={inverse ? {color: linkColor} : {}}
+                prefetch={false}
+              >
                 <Image
                   src={bumpsLogo}
                   alt="Bumps logo"
                   width={128}
                   height={48}
                 />
-              </a>
+              </Link>
             </div>
           )}
           <div>
