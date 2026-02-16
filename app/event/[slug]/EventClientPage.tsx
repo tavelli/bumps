@@ -71,9 +71,7 @@ export default function EventClientPage({slug, initialDatoData}: ClientProps) {
         className="page-header flex flex-col"
       >
         <Navigation inverse={true} showLogo={true} />
-        <h1 className="h1-heading h1-heading--big text-center">
-          {initialDatoData.title}
-        </h1>
+        <h1 className="h1-heading text-center">{initialDatoData.title}</h1>
         <p className="text-gray-800 text-lg uppercase tracking-widest text-center mt-2">
           {initialDatoData.state}
         </p>
