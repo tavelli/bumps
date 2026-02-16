@@ -2,6 +2,7 @@ import {request} from "@/app/lib/datocms";
 import {ALL_EVENTS_QUERY} from "@/app/lib/bumps/utils";
 import EventClientPage from "./EventClientPage";
 import {Metadata, ResolvingMetadata} from "next";
+import {format, parseISO} from "date-fns";
 
 const EVENT_QUERY = `query Events($slug: String) {
     event(filter: {slug: {eq: $slug}}) {
@@ -49,8 +50,8 @@ export async function generateMetadata(
   });
 
   return {
-    title: data?.event?.title || "Bumps Hillclimb",
-    description: data?.event?.location || "",
+    title: `${data?.event?.title || ""} - BUMPS Hillclimb Series`,
+    description: `Challenge ${data.event?.elevationGain} ft of vertical gain at the ${data.event?.title} Hillclimb${data.event?.activeEvent ? ` ${format(parseISO(data.event.date), "PP")}` : ""} in ${data.event?.location}. See official race results, course records, and event details here.`,
   };
 }
 
