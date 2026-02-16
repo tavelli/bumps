@@ -72,7 +72,7 @@ export default function EventClientPage({slug, initialDatoData}: ClientProps) {
       >
         <Navigation inverse={true} showLogo={true} />
         <h1 className="h1-heading h1-heading--big text-center">
-          {event?.name || initialDatoData.title}
+          {initialDatoData.title}
         </h1>
         <p className="text-gray-800 text-lg uppercase tracking-widest text-center mt-2">
           {initialDatoData.state}
