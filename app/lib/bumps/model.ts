@@ -44,6 +44,14 @@ export interface CourseRecords {
   };
 }
 
+export interface RaceData {
+  race_id: string;
+  race_date: string;
+  race_year: number;
+  event_name: string;
+  event_id: string;
+}
+
 export interface EventLegend {
   rider_id: string;
   rider_name: string;
