@@ -60,9 +60,6 @@ export default function EventResults({slug, races}: ClientProps) {
 
   return (
     <div>
-      <h2 className="subcategory-heading mt-16 ml-4 lg:ml-0" id="results">
-        Results
-      </h2>
       <div className="mt-8 ml-4 lg:ml-0">
         <Filters
           years={raceYears}
