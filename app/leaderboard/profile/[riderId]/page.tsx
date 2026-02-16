@@ -148,7 +148,9 @@ export default function RiderProfilePage({params}: Props) {
       setSelectedYear(String(years[0]));
     }
 
-    document.title = `${rider?.name} - BUMPS Results` || "Race Results";
+    if (rider) {
+      document.title = `${rider.name} - BUMPS Results`;
+    }
   }, [rider]);
 
   const {availableYears, filteredResults, earliestYear, seasonStandings} =

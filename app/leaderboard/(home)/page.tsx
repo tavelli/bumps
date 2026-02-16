@@ -1,11 +1,15 @@
-"use client";
-
 import React, {Suspense} from "react";
 import {uniteaSans} from "@/app/fonts";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
 import {Navigation} from "@/app/components/Navigation";
 import {Footer} from "@/app/components/Footer";
 import {LeaderboardContent} from "./leaderboard";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "BUMPS Leaderboard",
+  description: "Official standings for the Bike Up the Mountain Point Series.",
+};
 
 export default function LeadersPage() {
   return (
