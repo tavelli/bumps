@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 import re
+import time
 from supabase import create_client, Client
 
 import os
@@ -17,6 +18,8 @@ load_dotenv(dotenv_path=dotenv_path)
 TRIAL_MODE = False 
 SUPABASE_URL = "https://odwyxdiizeyeznymzwds.supabase.co"
 SUPABASE_KEY = os.getenv('SUPBASE_SECRETY_KEY')
+REQUEST_DELAY_SECONDS = 1.0
+_last_request_at = 0.0
 
 print(f"Using Supabase Key: {SUPABASE_KEY[:8]}...")
 
@@ -38,6 +41,20 @@ EVENT_NAME_MAP = {
     "Newton": "Newton's Revenge",
     "Bird":"Mt. Washington Early Bird"
 }
+
+def polite_get(url, **kwargs):
+    """
+    Ensures website requests are spaced out so repeated fetches are polite.
+    """
+    global _last_request_at
+
+    elapsed = time.monotonic() - _last_request_at
+    if elapsed < REQUEST_DELAY_SECONDS:
+        time.sleep(REQUEST_DELAY_SECONDS - elapsed)
+
+    response = requests.get(url, **kwargs)
+    _last_request_at = time.monotonic()
+    return response
 
 def parse_to_interval(raw_time):
     if not raw_time:
@@ -78,7 +95,7 @@ def fetch_race_details(race_id):
     Returns: (date_string, dict_of_rider_times)
     """
     url = f"https://www.road-results.com/race/{race_id}"
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {'User-Agent': 'bumps-crawler'}
     rider_times = {}
     race_date = None
 
@@ -86,7 +103,7 @@ def fetch_race_details(race_id):
     TIME_COL_IDX = 5
 
     try:
-        resp = requests.get(url, headers=headers)
+        resp = polite_get(url, headers=headers)
         soup = BeautifulSoup(resp.text, 'html.parser')
         
         # 1. Extract Date
@@ -125,7 +142,7 @@ def scrape_and_upload(year, gender):
     
     url = f"https://www.road-results.com/?n=results&sn=bumps&iframe=0&y={year}&series=B{str(year)[-2:]}_{gender}"
     headers = {'User-Agent': 'Mozilla/5.0'}
-    response = requests.get(url, headers=headers)
+    response = polite_get(url, headers=headers)
     soup = BeautifulSoup(response.text, 'html.parser')
     
     table = soup.find_all('table', {'class': 'datatable1'})[1]
@@ -242,7 +259,8 @@ def scrape_and_upload(year, gender):
 
        
 if __name__ == "__main__":
-    years = [2013, 2014, 2015, 2018, 2019, 2021, 2022, 2023, 2024, 2025]
+    # years = [2013, 2014, 2015, 2018, 2019, 2021, 2022, 2023, 2024, 2025]
+    years = [2026]
 
 # The loop stays exactly the same
 for year in years:

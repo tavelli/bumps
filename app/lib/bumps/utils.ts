@@ -31,6 +31,7 @@ export const getRiderCategory = (
 };
 
 const RACES_BY_YEAR: Record<number, number> = {
+  2026: 4,
   2025: 4,
   2024: 4,
   2023: 3,
