@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
+import argparse
 import re
 import time
 from supabase import create_client, Client
@@ -89,6 +90,16 @@ def get_canonical_name(raw_name):
             return canonical
     return raw_name
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Import BUMPS race results.")
+    parser.add_argument(
+        "--start-index",
+        type=int,
+        default=0,
+        help="Zero-based race index to start from. 0 includes all races; 1 skips the first race.",
+    )
+    return parser.parse_args()
+
 def fetch_race_details(race_id):
     """
     Navigates to race page.
@@ -137,8 +148,9 @@ def fetch_race_details(race_id):
     
     return race_date, rider_times
 
-def scrape_and_upload(year, gender):
+def scrape_and_upload(year, gender, start_index=0):
     supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+    start_index = max(0, start_index)
     
     url = f"https://www.road-results.com/?n=results&sn=bumps&iframe=0&y={year}&series=B{str(year)[-2:]}_{gender}"
     headers = {'User-Agent': 'Mozilla/5.0'}
@@ -154,6 +166,7 @@ def scrape_and_upload(year, gender):
     # This will store {race_id: {rider_id: time_string}}
     race_time_lookups = {} 
     current_idx = 0
+    race_index = 0
 
     # Process Headers
     for cell in header_cells:
@@ -164,17 +177,22 @@ def scrape_and_upload(year, gender):
             raw_name = link.get('title', cell.text.strip())
             event_name = get_canonical_name(raw_name)
             
-            # Fetch date AND times for this race
-            print(f"Fetching details for: {event_name} ({race_id})...")
-            event_date, times_map = fetch_race_details(race_id)
-            race_time_lookups[race_id] = times_map
-            
-            events_to_upsert.append({"name": event_name})
-            race_column_map[current_idx] = {
-                "race_id": race_id, 
-                "event_name": event_name,
-                "event_date": event_date
-            }
+            if race_index < start_index:
+                print(f"Skipping race {race_index}: {event_name} ({race_id})...")
+            else:
+                # Fetch date AND times for this race
+                print(f"Fetching details for race {race_index}: {event_name} ({race_id})...")
+                event_date, times_map = fetch_race_details(race_id)
+                race_time_lookups[race_id] = times_map
+                
+                events_to_upsert.append({"name": event_name})
+                race_column_map[current_idx] = {
+                    "race_id": race_id, 
+                    "event_name": event_name,
+                    "event_date": event_date
+                }
+
+            race_index += 1
         current_idx += span
 
     # Handle Events (Same as before)
@@ -259,10 +277,11 @@ def scrape_and_upload(year, gender):
 
        
 if __name__ == "__main__":
+    args = parse_args()
     # years = [2013, 2014, 2015, 2018, 2019, 2021, 2022, 2023, 2024, 2025]
     years = [2026]
 
-# The loop stays exactly the same
-for year in years:
-    for gender in ["M", "W"]:
-        scrape_and_upload(year, gender)
+    # The loop stays exactly the same
+    for year in years:
+        for gender in ["M", "W"]:
+            scrape_and_upload(year, gender, start_index=args.start_index)
