@@ -92,13 +92,32 @@ def get_canonical_name(raw_name):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Import BUMPS race results.")
-    parser.add_argument(
+    race_selector = parser.add_mutually_exclusive_group()
+    race_selector.add_argument(
         "--start-index",
         type=int,
         default=0,
         help="Zero-based race index to start from. 0 includes all races; 1 skips the first race.",
     )
+    race_selector.add_argument(
+        "--race-index",
+        type=int,
+        default=None,
+        help="Zero-based race index to import. 0 imports only the first race; 1 imports only the second race.",
+    )
+    parser.add_argument(
+        "--refresh-only",
+        action="store_true",
+        help="Only refresh reporting views without scraping or uploading race data.",
+    )
     return parser.parse_args()
+
+def refresh_reporting_views(supabase):
+    try:
+        supabase.rpc('refresh_all_reporting_views_standard').execute()
+        print("Successfully triggered refresh.")
+    except Exception as e:
+        print(f"Error refreshing view: {e}")
 
 def fetch_race_details(race_id):
     """
@@ -148,12 +167,14 @@ def fetch_race_details(race_id):
     
     return race_date, rider_times
 
-def scrape_and_upload(year, gender, start_index=0):
+def scrape_and_upload(year, gender, start_index=0, race_index=None):
     supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
     start_index = max(0, start_index)
+    if race_index is not None:
+        race_index = max(0, race_index)
     
     url = f"https://www.road-results.com/?n=results&sn=bumps&iframe=0&y={year}&series=B{str(year)[-2:]}_{gender}"
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {'User-Agent': 'bumps-crawler'}
     response = polite_get(url, headers=headers)
     soup = BeautifulSoup(response.text, 'html.parser')
     
@@ -166,7 +187,7 @@ def scrape_and_upload(year, gender, start_index=0):
     # This will store {race_id: {rider_id: time_string}}
     race_time_lookups = {} 
     current_idx = 0
-    race_index = 0
+    current_race_index = 0
 
     # Process Headers
     for cell in header_cells:
@@ -177,11 +198,17 @@ def scrape_and_upload(year, gender, start_index=0):
             raw_name = link.get('title', cell.text.strip())
             event_name = get_canonical_name(raw_name)
             
-            if race_index < start_index:
-                print(f"Skipping race {race_index}: {event_name} ({race_id})...")
+            should_import_race = (
+                race_index == current_race_index
+                if race_index is not None
+                else current_race_index >= start_index
+            )
+
+            if not should_import_race:
+                print(f"Skipping race {current_race_index}: {event_name} ({race_id})...")
             else:
                 # Fetch date AND times for this race
-                print(f"Fetching details for race {race_index}: {event_name} ({race_id})...")
+                print(f"Fetching details for race {current_race_index}: {event_name} ({race_id})...")
                 event_date, times_map = fetch_race_details(race_id)
                 race_time_lookups[race_id] = times_map
                 
@@ -192,8 +219,13 @@ def scrape_and_upload(year, gender, start_index=0):
                     "event_date": event_date
                 }
 
-            race_index += 1
+            current_race_index += 1
         current_idx += span
+
+    if not race_column_map:
+        selected_index = race_index if race_index is not None else start_index
+        print(f"No races matched index {selected_index}; nothing to upload for {year} {gender}.")
+        return
 
     # Handle Events (Same as before)
     if not TRIAL_MODE:
@@ -267,21 +299,27 @@ def scrape_and_upload(year, gender, start_index=0):
             supabase.table("results").upsert(results_to_upsert[i:i+500], on_conflict="rider_id, race_id").execute()
         print("Successfully uploaded all data.")
 
-        try:
-            response = supabase.rpc('refresh_all_reporting_views_standard').execute()
-            print("Successfully triggered refresh.")
-        except Exception as e:
-            print(f"Error refreshing view: {e}")
+        refresh_reporting_views(supabase)
    
         
 
        
 if __name__ == "__main__":
     args = parse_args()
+    if args.refresh_only:
+        supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+        refresh_reporting_views(supabase)
+        raise SystemExit
+
     # years = [2013, 2014, 2015, 2018, 2019, 2021, 2022, 2023, 2024, 2025]
     years = [2026]
 
     # The loop stays exactly the same
     for year in years:
         for gender in ["M", "W"]:
-            scrape_and_upload(year, gender, start_index=args.start_index)
+            scrape_and_upload(
+                year,
+                gender,
+                start_index=args.start_index,
+                race_index=args.race_index,
+            )
