@@ -5,7 +5,7 @@ import {categories} from "@/app/lib/bumps/const";
 import {RaceData} from "@/app/lib/bumps/model";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
-import {Suspense, useState, useEffect, useMemo} from "react";
+import {Suspense, useState, useEffect, useMemo, useRef} from "react";
 
 interface ClientProps {
   slug: string;
@@ -20,6 +20,8 @@ export default function EventResults({slug, races}: ClientProps) {
 
   const [raceLoading, setRaceLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const tableHeaderRef = useRef<HTMLTableRowElement>(null);
+  const shouldScrollToTableRef = useRef(false);
   const itemsPerPage = 10;
 
   const selectedYear = searchParams.get("year");
@@ -38,6 +40,24 @@ export default function EventResults({slug, races}: ClientProps) {
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedYear, selectedCat]);
+
+  useEffect(() => {
+    if (!shouldScrollToTableRef.current) return;
+    shouldScrollToTableRef.current = false;
+
+    const tableHeader = tableHeaderRef.current;
+    if (!tableHeader) return;
+
+    const {top, bottom} = tableHeader.getBoundingClientRect();
+    if (top < 0 || bottom > window.innerHeight) {
+      tableHeader.scrollIntoView({behavior: "smooth", block: "start"});
+    }
+  }, [currentPage]);
+
+  const changePage = (page: number) => {
+    shouldScrollToTableRef.current = true;
+    setCurrentPage(page);
+  };
 
   // Logic: Fetch Paginated Results
   useEffect(() => {
@@ -67,13 +87,13 @@ export default function EventResults({slug, races}: ClientProps) {
           isLeaderboard={false}
         />
       </div>
-      {raceLoading ? (
+      {raceLoading && results.length === 0 ? (
         <div>Loading...</div>
       ) : (
         <div className="text-white rounded-lg overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-700">
+              <tr ref={tableHeaderRef} className="border-b border-gray-700">
                 <th
                   className="py-4 px-6 text-left text-sm uppercase tracking-wide"
                   style={{width: "80px"}}
@@ -149,7 +169,7 @@ export default function EventResults({slug, races}: ClientProps) {
             </div>
             <div className="flex gap-4">
               <button
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                onClick={() => changePage(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
                 className="px-3 py-2 text-sm font-bold uppercase letter-spacing-1 border border-white disabled:border-gray-600 disabled:text-gray-600 disabled:cursor-not-allowed hover:outline hover:outline-2 hover:outline-offset-2 hover:outline-white disabled:hover:outline-none"
               >
@@ -166,7 +186,7 @@ export default function EventResults({slug, races}: ClientProps) {
                   </span>
                 </span> */}
               <button
-                onClick={() => setCurrentPage((p) => p + 1)}
+                onClick={() => changePage(currentPage + 1)}
                 disabled={results.length < itemsPerPage}
                 className="px-3 py-2 text-sm font-bold uppercase letter-spacing-1 border border-white disabled:border-gray-600 disabled:text-gray-600 disabled:cursor-not-allowed hover:outline hover:outline-2 hover:outline-offset-2 hover:outline-white disabled:hover:outline-none"
               >
