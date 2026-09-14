@@ -16,10 +16,10 @@ dotenv_path = '.env.local'
 load_dotenv(dotenv_path=dotenv_path)
 
 # --- CONFIGURATION ---
-TRIAL_MODE = False 
+TRIAL_MODE = True 
 SUPABASE_URL = "https://odwyxdiizeyeznymzwds.supabase.co"
 SUPABASE_KEY = os.getenv('SUPBASE_SECRETY_KEY')
-REQUEST_DELAY_SECONDS = 1.0
+REQUEST_DELAY_SECONDS = 2.0
 _last_request_at = 0.0
 
 print(f"Using Supabase Key: {SUPABASE_KEY[:8]}...")

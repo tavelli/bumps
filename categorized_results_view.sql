@@ -16,6 +16,7 @@ WITH RankedResults AS (
         ) as race_rank,
         -- Define the "Best of X" limit for each year
         CASE 
+            WHEN res.year = '2026' THEN 4
             WHEN res.year = '2025' THEN 4
             WHEN res.year = '2024' THEN 4
             WHEN res.year = '2023' THEN 3
