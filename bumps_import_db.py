@@ -16,7 +16,7 @@ dotenv_path = '.env.local'
 load_dotenv(dotenv_path=dotenv_path)
 
 # --- CONFIGURATION ---
-TRIAL_MODE = True 
+TRIAL_MODE = False 
 SUPABASE_URL = "https://odwyxdiizeyeznymzwds.supabase.co"
 SUPABASE_KEY = os.getenv('SUPBASE_SECRETY_KEY')
 REQUEST_DELAY_SECONDS = 2.0
