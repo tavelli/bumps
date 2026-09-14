@@ -2,7 +2,7 @@
 
 import {useSearchParams} from "next/navigation";
 import Link from "next/link";
-import {Suspense, useState, useEffect} from "react";
+import {Suspense, useState, useEffect, useRef} from "react";
 import {uniteaSans} from "@/app/fonts";
 import Filters from "@/app/components/Filters";
 import leaderboardBanner from "@/public/leaderboard_banner.svg";
@@ -40,6 +40,8 @@ export default function LeaderboardContent({params}: Props) {
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const tableHeaderRef = useRef<HTMLTableRowElement>(null);
+  const shouldScrollToTableRef = useRef(false);
   const itemsPerPage = 10;
 
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
@@ -66,6 +68,24 @@ export default function LeaderboardContent({params}: Props) {
     if (!selectedYear) return;
     setCurrentPage(1);
   }, [selectedYear, selectedCat]);
+
+  useEffect(() => {
+    if (!shouldScrollToTableRef.current) return;
+    shouldScrollToTableRef.current = false;
+
+    const tableHeader = tableHeaderRef.current;
+    if (!tableHeader) return;
+
+    const {top, bottom} = tableHeader.getBoundingClientRect();
+    if (top < 0 || bottom > window.innerHeight) {
+      tableHeader.scrollIntoView({behavior: "smooth", block: "start"});
+    }
+  }, [currentPage]);
+
+  const changePage = (page: number) => {
+    shouldScrollToTableRef.current = true;
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
     if (!selectedYear) return;
@@ -132,7 +152,7 @@ export default function LeaderboardContent({params}: Props) {
           <div className="text-white rounded-lg overflow-hidden">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-700">
+                <tr ref={tableHeaderRef} className="border-b border-gray-700">
                   <th
                     className="py-4 px-6 text-left text-sm uppercase tracking-wide"
                     style={{width: "80px"}}
@@ -208,7 +228,7 @@ export default function LeaderboardContent({params}: Props) {
               </div>
               <div className="flex gap-4">
                 <button
-                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  onClick={() => changePage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
                   className="px-3 py-2 text-sm font-bold uppercase letter-spacing-1 border border-white disabled:border-gray-600 disabled:text-gray-600 disabled:cursor-not-allowed hover:outline hover:outline-2 hover:outline-offset-2 hover:outline-white disabled:hover:outline-none"
                 >
@@ -225,7 +245,7 @@ export default function LeaderboardContent({params}: Props) {
                   </span>
                 </span> */}
                 <button
-                  onClick={() => setCurrentPage((p) => p + 1)}
+                  onClick={() => changePage(currentPage + 1)}
                   disabled={results.length < itemsPerPage}
                   className="px-3 py-2 text-sm font-bold uppercase letter-spacing-1 border border-white disabled:border-gray-600 disabled:text-gray-600 disabled:cursor-not-allowed hover:outline hover:outline-2 hover:outline-offset-2 hover:outline-white disabled:hover:outline-none"
                 >
